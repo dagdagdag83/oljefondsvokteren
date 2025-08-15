@@ -1,11 +1,12 @@
-## Oljefondsvokteren – Cloud Run starter
+## Oljefondsvokteren – A Static React Application
 
-A static-only proof-of-concept application, deployed to Google Cloud Run.
+A static proof-of-concept application, built with React and Vite, and deployed to GitHub Pages.
 
 ### Stack
 
--   **Frontend**: React + Vite (static), served by Nginx
+-   **Frontend**: React + Vite
 -   **Data**: Local JSON files
+-   **Deployment**: GitHub Actions to GitHub Pages
 
 ### Local Development
 
@@ -28,7 +29,14 @@ Open the URL provided by Vite in your browser to see the application.
 
 ### Deployment
 
-This is a static site and can be deployed to any static hosting provider, including Google Cloud Run. The provided `Dockerfile` builds the static assets and serves them with Nginx.
+This project is automatically deployed to GitHub Pages upon pushing to the `main` branch, using the workflow defined in `.github/workflows/deploy.yml`.
+
+To enable deployment, you need to configure your repository's settings:
+
+1.  Go to **Settings** > **Pages**.
+2.  Under **Build and deployment**, select **GitHub Actions** as the source.
+
+The site will be available at `https://<your-username>.github.io/oljefondsvokteren/`.
 
 ---
 
