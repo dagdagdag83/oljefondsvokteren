@@ -10,9 +10,11 @@ const resources = {
 				health: 'Health',
 				overview: 'Overview',
 				companies: 'Companies',
-				browseCompanies: 'Browse companies',
+				browseCompanies: 'Browse Companies',
+				exploreCompanies: 'Explore Companies',
 				aboutNbim: 'About NBIM',
 				insights: 'Insights',
+				search: 'Search for a company',
 			},
 			landing: {
 				lead: "An AI-powered platform for analyzing the investments of the Norwegian Government Pension Fund. Each portfolio company undergoes an assessment by Gemini Deep Research based on the Fund's ethical guidelines, identifying potential environmental, social, and governance (ESG) risk factors.",
@@ -32,12 +34,15 @@ const resources = {
 				paging: { prev: 'Prev', next: 'Next' },
 			},
 			charts: {
-				byCategory: 'By Category',
-				bySector: 'By Sector',
-				topCountries: 'Top Countries',
-				ok: 'Clear',
-				monitor: 'Moderate Risk',
-				observe: 'High Risk',
+				byCategory: 'Companies by Category',
+				bySector: 'Companies by Sector',
+				topCountries: 'Top 10 Countries by Company Count',
+				topInvestments: 'Top 10 Investments by Market Value',
+				valueBySector: 'Total Investment Value by Sector',
+				valueByCountry: 'Total Investment Value by Country',
+				ok: 'OK',
+				monitor: 'Monitor',
+				observe: 'Observe',
 				exclude: 'Exclusion Candidate'
 			}
 		}
@@ -50,8 +55,10 @@ const resources = {
 				overview: 'Oversikt',
 				companies: 'Selskaper',
 				browseCompanies: 'Utforsk selskaper',
+				exploreCompanies: 'Utforsk Selskaper',
 				aboutNbim: 'Om NBIM',
 				insights: 'Innsikt',
+				search: 'Søk etter selskap',
 			},
 			landing: {
 				lead: "En plattform for AI-drevne analyser av Oljefondets investeringer. Hvert porteføljeselskap blir vurdert gjennom en Gemini Deep Research-analyse i henhold til fondets etiske retningslinjer. Tjenesten identifiserer potensielle risikoer knyttet til miljø, sosiale forhold og selskapsstyring (ESG).",
@@ -71,12 +78,15 @@ const resources = {
 				paging: { prev: 'Forrige', next: 'Neste' },
 			},
 			charts: {
-				byCategory: 'Etter kategori',
-				bySector: 'Etter sektor',
-				topCountries: 'Land (topp)',
-				ok: 'Akseptabel',
-				monitor: 'Moderat Risiko',
-				observe: 'Høy Risiko',
+				byCategory: 'Selskaper etter kategori',
+				bySector: 'Selskaper etter sektor',
+				topCountries: 'Topp 10 land etter antall selskaper',
+				topInvestments: 'Topp 10 investeringer (markedsverdi)',
+				valueBySector: 'Total investeringsverdi etter sektor',
+				valueByCountry: 'Total investeringsverdi etter land',
+				ok: 'OK',
+				monitor: 'Overvåk',
+				observe: 'Observer',
 				exclude: 'Kandidat for utelukkelse'
 			}
 		}

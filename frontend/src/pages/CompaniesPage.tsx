@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Combobox, Listbox, Transition } from '@headlessui/react'
-import { ChevronUpDownIcon, CheckIcon, MagnifyingGlassIcon, DocumentCheckIcon } from '@heroicons/react/24/outline'
+import { ChevronUpDownIcon, CheckIcon, MagnifyingGlassIcon, DocumentCheckIcon, DocumentIcon, DocumentMinusIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
 import { Company, useCompanyData } from '../shared/useCompanyData'
 
@@ -39,18 +39,20 @@ export default function CompaniesPage() {
 		return companies
 			.filter((c) => {
 				const searchLower = q.toLowerCase()
+				const concernsMatch = c.concerns ? c.concerns.toLowerCase().includes(searchLower) : false
+				const rationaleMatch = c.rationale ? c.rationale.toLowerCase().includes(searchLower) : false
+
 				return (
-					(c.name.toLowerCase().includes(searchLower) ||
-						c.concerns.toLowerCase().includes(searchLower) ||
-						c.rationale.toLowerCase().includes(searchLower)) &&
+					(c.name.toLowerCase().includes(searchLower) || concernsMatch || rationaleMatch) &&
 					(!country || c.country.toLowerCase() === country.toLowerCase()) &&
 					(!sector || c.sector.toLowerCase() === sector.toLowerCase()) &&
-					(!category || c.category.toString() === category)
+					(!category || (c.category && c.category.toString() === category))
 				)
 			})
 			.sort((a, b) => {
-				if (a.hasAiReport && !b.hasAiReport) return -1
-				if (!a.hasAiReport && b.hasAiReport) return 1
+				if (a.aiReportStatus !== b.aiReportStatus) {
+					return b.aiReportStatus - a.aiReportStatus
+				}
 				return a.name.localeCompare(b.name)
 			})
 	}, [companies, q, country, sector, category])
@@ -165,12 +167,14 @@ export default function CompaniesPage() {
 									</td>
 									<td className={td}>{c.country}</td>
 									<td className={td}>{c.sector}</td>
+									<td className={td}>{c.category ? <Badge n={c.category} /> : '-'}</td>
+									<td className={td}>{c.guideline || '-'}</td>
+									<td className={td}>{c.concerns || '-'}</td>
 									<td className={td}>
-										<Badge n={c.category} />
+										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title="Full AI Research Report" />}
+										{c.aiReportStatus === 1 && <DocumentIcon className="h-6 w-6 text-yellow-500" title="Basic AI Report" />}
+										{c.aiReportStatus === 0 && <DocumentMinusIcon className="h-6 w-6 text-gray-400" title="No AI Report" />}
 									</td>
-									<td className={td}>{c.guideline}</td>
-									<td className={td}>{c.concerns}</td>
-									<td className={td}>{c.hasAiReport && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" />}</td>
 								</tr>
 							))}
 						</tbody>
@@ -192,15 +196,16 @@ export default function CompaniesPage() {
 	)
 }
 
-function Badge({ n }: { n: number }) {
-	const base = 'inline-block px-2 py-0.5 rounded-full text-sm'
-	const cls = n >= 4
-		? `${base} bg-red-100 text-red-800`
-		: n === 3
-		? `${base} bg-orange-100 text-orange-800`
-		: n === 2
-		? `${base} bg-blue-100 text-blue-800`
-		: `${base} bg-emerald-100 text-emerald-800`
+export function Badge({ n }: { n: number }) {
+	const base = 'inline-flex items-center justify-center h-6 w-6 rounded-full text-sm font-semibold'
+	const cls =
+		n >= 4
+			? `${base} bg-red-400 text-white`
+			: n === 3
+			? `${base} bg-orange-400 text-white`
+			: n === 2
+			? `${base} bg-yellow-400 text-gray-900`
+			: `${base} bg-green-400 text-white`
 	return <span className={cls}>{n}</span>
 }
 
