@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Combobox, Listbox, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import { ChevronUpDownIcon, CheckIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { ChevronUpDownIcon, CheckIcon, MagnifyingGlassIcon, DocumentCheckIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
 import { Company, useCompanyData } from '../shared/useCompanyData'
 
@@ -49,7 +48,11 @@ export default function CompaniesPage() {
 					(!category || c.category.toString() === category)
 				)
 			})
-			.sort((a, b) => b.category - a.category || a.name.localeCompare(b.name))
+			.sort((a, b) => {
+				if (a.hasAiReport && !b.hasAiReport) return -1
+				if (!a.hasAiReport && b.hasAiReport) return 1
+				return a.name.localeCompare(b.name)
+			})
 	}, [companies, q, country, sector, category])
 
 	const pageCount = Math.ceil(filteredCompanies.length / 20)
@@ -149,6 +152,7 @@ export default function CompaniesPage() {
 								<th className={th}>{t('companies.columns.category')}</th>
 								<th className={th}>{t('companies.columns.guideline')}</th>
 								<th className={th}>{t('companies.columns.concerns')}</th>
+								<th className={th}>{t('companies.columns.ai_report')}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -166,6 +170,7 @@ export default function CompaniesPage() {
 									</td>
 									<td className={td}>{c.guideline}</td>
 									<td className={td}>{c.concerns}</td>
+									<td className={td}>{c.hasAiReport && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" />}</td>
 								</tr>
 							))}
 						</tbody>

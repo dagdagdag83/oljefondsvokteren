@@ -9,6 +9,8 @@ export interface Company {
 	guideline: string
 	category: number
 	rationale: string
+	hasAiReport?: boolean
+	detailedReport?: any
 }
 
 export function useCompanyData() {
@@ -39,6 +41,7 @@ export function useCompanyData() {
 					data.map((c: any) => ({
 						...c,
 						id: slugify(c.name),
+						hasAiReport: c.name === 'Melexis NV',
 					}))
 				)
 			} catch (error) {

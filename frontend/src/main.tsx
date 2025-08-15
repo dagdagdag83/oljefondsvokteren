@@ -5,7 +5,7 @@ import App from './App'
 import CompaniesPage from './pages/CompaniesPage'
 import CompanyDetailPage from './pages/CompanyDetailPage'
 import OverviewPage from './pages/OverviewPage'
-import { CompanyFullReport } from './pages/CompanyFullReport'
+import { CompanyFullReportPage } from './pages/CompanyFullReportPage'
 import './index.css'
 import './i18n'
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
 				{ index: true, element: <OverviewPage /> },
 				{ path: 'companies', element: <CompaniesPage /> },
 				{ path: 'companies/:id', element: <CompanyDetailPage /> },
-				{ path: 'report/melexis-nv', element: <CompanyFullReport /> },
+				{ path: 'report/:id', element: <CompanyFullReportPage /> },
 			],
 		},
 	],

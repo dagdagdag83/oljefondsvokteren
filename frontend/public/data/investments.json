@@ -1,5 +1,6 @@
 [
     {
+      "id": "raiffeisen-bank-international-ag",
       "name": "Raiffeisen Bank International AG",
       "country": "Austria",
       "sector": "Financials",
@@ -9,6 +10,7 @@
       "rationale": "Largest foreign lender in Russia; profits tripled, paying hundreds of millions in taxes to the Kremlin, directly funding the war effort. Designated an 'international sponsor of war' by Ukraine."
     },
     {
+      "id": "glencore-plc",
       "name": "Glencore PLC",
       "country": "United Kingdom",
       "sector": "Basic Materials",
@@ -18,6 +20,7 @@
       "rationale": "Already excluded on product-based coal criteria. The company has also pleaded guilty to a decade-long bribery scheme across seven countries, constituting gross corruption."
     },
     {
+      "id": "vale-sa",
       "name": "Vale SA",
       "country": "Brazil",
       "sector": "Basic Materials",
@@ -27,6 +30,7 @@
       "rationale": "Excluded by the Fund in May 2020 for severe environmental damage. The scale of the disasters represents a clear breach of the guidelines."
     },
     {
+      "id": "bae-systems-plc",
       "name": "BAE Systems PLC",
       "country": "United Kingdom",
       "sector": "Industrials",
@@ -36,6 +40,7 @@
       "rationale": "Excluded by the Fund in January 2018 for its key role in the production and upgrading of nuclear weapons, which violate fundamental humanitarian principles."
     },
     {
+      "id": "lockheed-martin-corp",
       "name": "Lockheed Martin Corp",
       "country": "United States",
       "sector": "Industrials",
@@ -45,6 +50,7 @@
       "rationale": "Excluded by the Fund in August 2013 for its involvement in the production of nuclear weapons."
     },
     {
+      "id": "airbus-se",
       "name": "Airbus SE",
       "country": "France",
       "sector": "Industrials",
@@ -54,6 +60,7 @@
       "rationale": "Excluded by the Fund in January 2006 for its involvement in the production of nuclear weapons."
     },
     {
+      "id": "hsbc-holdings-plc",
       "name": "HSBC Holdings PLC",
       "country": "United Kingdom",
       "sector": "Financials",
@@ -63,6 +70,7 @@
       "rationale": "The scale and duration of the criminal activity, admitted in a deferred prosecution agreement, represent 'gross financial crime' and a severe failure of governance."
     },
     {
+      "id": "commonwealth-bank-of-australia",
       "name": "Commonwealth Bank of Australia",
       "country": "Australia",
       "sector": "Financials",
@@ -72,6 +80,7 @@
       "rationale": "Systemic compliance failures and significant contribution to environmentally harmful projects create an unacceptable risk profile."
     },
     {
+      "id": "bhp-group-ltd",
       "name": "BHP Group Ltd",
       "country": "Australia",
       "sector": "Basic Materials",
@@ -81,6 +90,7 @@
       "rationale": "Culpability in a major environmental and human disaster, combined with coal operations that may exceed Fund thresholds, warrants observation."
     },
     {
+      "id": "johnson-and-johnson",
       "name": "Johnson & Johnson",
       "country": "United States",
       "sector": "Health Care",
@@ -90,6 +100,7 @@
       "rationale": "The alleged long-term, intentional deception regarding a product's safety, causing severe health impacts, constitutes a 'particularly serious violation of fundamental ethical norms'."
     },
     {
+      "id": "unilever-plc",
       "name": "Unilever PLC",
       "country": "United Kingdom",
       "sector": "Consumer Staples",
@@ -99,6 +110,7 @@
       "rationale": "Dual ethical risks of contributing to a war effort and severe human rights violations in the supply chain merit observation."
     },
     {
+      "id": "ryanair-holdings-plc",
       "name": "Ryanair Holdings PLC",
       "country": "Ireland",
       "sector": "Industrials",
@@ -108,6 +120,7 @@
       "rationale": "The systematic and widespread nature of the company's anti-labor practices constitutes a potential violation of the fundamental right to freedom of association."
     },
     {
+      "id": "meta-platforms-inc",
       "name": "Meta Platforms Inc.",
       "country": "United States",
       "sector": "Technology",
@@ -117,6 +130,7 @@
       "rationale": "The company's business model and governance failures pose an ongoing risk of contributing to serious human rights violations, including the right to privacy."
     },
     {
+      "id": "teva-pharmaceutical-industries-ltd",
       "name": "Teva Pharmaceutical Industries Ltd",
       "country": "Israel",
       "sector": "Health Care",
@@ -126,6 +140,7 @@
       "rationale": "The combination of a severe public health scandal and benefiting from human rights violations in an occupied territory creates a high-risk profile."
     },
     {
+      "id": "austal-ltd",
       "name": "Austal Ltd",
       "country": "Australia",
       "sector": "Industrials",
@@ -135,6 +150,7 @@
       "rationale": "The sale of military-capable vessels to states engaged in armed conflict where serious violations of international law are documented presents an unacceptable risk."
     },
     {
+      "id": "omv-ag",
       "name": "OMV AG",
       "country": "Austria",
       "sector": "Energy",
@@ -144,6 +160,7 @@
       "rationale": "The ongoing financial relationship with a state engaged in a war of aggression, despite divestment efforts, warrants formal observation."
     },
     {
+      "id": "adani-green-energy-ltd",
       "name": "Adani Green Energy Ltd",
       "country": "India",
       "sector": "Utilities",
@@ -153,6 +170,7 @@
       "rationale": "While the company has strong stated ESG policies and ratings, the serious allegations against the parent group warrant close monitoring for governance risks."
     },
     {
+      "id": "tsmc",
       "name": "TSMC",
       "country": "Taiwan",
       "sector": "Technology",
@@ -162,6 +180,7 @@
       "rationale": "Concerns over labor practices are significant and require monitoring to ensure they do not escalate into systematic violations of ILO principles."
     },
     {
+      "id": "anz-group-holdings-ltd",
       "name": "ANZ Group Holdings Ltd",
       "country": "Australia",
       "sector": "Financials",
@@ -171,6 +190,7 @@
       "rationale": "The bank has a history of ethical breaches and has implemented new policies. Ongoing monitoring is required to ensure remediation is effective and sustained."
     },
     {
+      "id": "a2-milk-co-ltd",
       "name": "a2 Milk Co Ltd/The",
       "country": "Australia",
       "sector": "Consumer Staples",
@@ -180,6 +200,7 @@
       "rationale": "The company's operations appear to be within the ethical boundaries set by the guidelines."
     },
     {
+      "id": "abacus-group",
       "name": "Abacus Group",
       "country": "Australia",
       "sector": "Real Estate",
@@ -189,6 +210,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "abacus-storage-king",
       "name": "Abacus Storage King",
       "country": "Australia",
       "sector": "Real Estate",
@@ -198,6 +220,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "accent-group-ltd",
       "name": "Accent Group Ltd",
       "country": "Australia",
       "sector": "Consumer Discretionary",
@@ -207,6 +230,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "acrow-ltd",
       "name": "Acrow Ltd",
       "country": "Australia",
       "sector": "Basic Materials",
@@ -216,6 +240,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "alkane-resources-ltd",
       "name": "Alkane Resources Ltd",
       "country": "Australia",
       "sector": "Basic Materials",
@@ -225,6 +250,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "alliance-aviation-services-ltd",
       "name": "Alliance Aviation Services Ltd",
       "country": "Australia",
       "sector": "Consumer Discretionary",
@@ -234,6 +260,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "vietnam-dairy-products-jsc",
       "name": "Vietnam Dairy Products JSC",
       "country": "Vietnam",
       "sector": "Consumer Staples",
@@ -243,6 +270,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "fpt-corp",
       "name": "FPT Corp",
       "country": "Vietnam",
       "sector": "Technology",
@@ -252,6 +280,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "mobile-world-investment-corp",
       "name": "Mobile World Investment Corp",
       "country": "Vietnam",
       "sector": "Consumer Discretionary",
@@ -261,6 +290,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "vinhomes-jsc",
       "name": "Vinhomes JSC",
       "country": "Vietnam",
       "sector": "Real Estate",
@@ -270,6 +300,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "hoa-phat-group-jsc",
       "name": "Hoa Phat Group JSC",
       "country": "Vietnam",
       "sector": "Basic Materials",
@@ -279,6 +310,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "airports-of-thailand-pcl",
       "name": "Airports of Thailand PCL",
       "country": "Thailand",
       "sector": "Industrials",
@@ -288,6 +320,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "cp-all-pcl",
       "name": "CP All PCL",
       "country": "Thailand",
       "sector": "Consumer Staples",
@@ -297,6 +330,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "ptt-pcl",
       "name": "PTT PCL",
       "country": "Thailand",
       "sector": "Energy",
@@ -306,6 +340,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "advanced-info-service-pcl",
       "name": "Advanced Info Service PCL",
       "country": "Thailand",
       "sector": "Telecommunications",
@@ -315,6 +350,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "delta-electronics-thailand-pcl",
       "name": "Delta Electronics Thailand PCL",
       "country": "Thailand",
       "sector": "Technology",
@@ -324,6 +360,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "astra-international-tbk-pt",
       "name": "Astra International Tbk PT",
       "country": "Indonesia",
       "sector": "Consumer Discretionary",
@@ -333,6 +370,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "bank-central-asia-tbk-pt",
       "name": "Bank Central Asia Tbk PT",
       "country": "Indonesia",
       "sector": "Financials",
@@ -342,6 +380,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "bank-rakyat-indonesia-persero-tbk-pt",
       "name": "Bank Rakyat Indonesia Persero Tbk PT",
       "country": "Indonesia",
       "sector": "Financials",
@@ -351,6 +390,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "telkom-indonesia-persero-tbk-pt",
       "name": "Telkom Indonesia Persero Tbk PT",
       "country": "Indonesia",
       "sector": "Telecommunications",
@@ -360,6 +400,7 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "bank-mandiri-persero-tbk-pt",
       "name": "Bank Mandiri Persero Tbk PT",
       "country": "Indonesia",
       "sector": "Financials",
@@ -369,13 +410,107 @@
       "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
     },
     {
+      "id": "melexis-nv",
       "name": "Melexis NV",
       "country": "Belgium",
       "sector": "Technology",
       "concerns": "Indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict.",
       "guideline": "§ 4c, 4d, 4h",
       "category": 2,
-      "rationale": "A significant and unmitigated risk exists from the indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict."
+      "rationale": "A significant and unmitigated risk exists from the indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict.",
+      "detailedReport": {
+        "companyProfile": {
+          "name": "Melexis NV",
+          "ticker": "MELE",
+          "exchange": "Euronext Brussels",
+          "headquarters": "Ieper, Belgium",
+          "founded": 1988,
+          "sector": "Technology / Semiconductors",
+          "businessDescription": "Melexis NV is a global micro-electronic semiconductor company specializing in the design, development, testing, and marketing of advanced integrated circuits (ICs), with a focus on sensor technologies for the automotive industry, which accounts for approximately 90% of its revenue. The company operates on a 'fabless' model, outsourcing wafer fabrication while concentrating on R&D, design, and testing. Its products are also used in alternative mobility, smart appliances, robotics, and digital health.",
+          "financials": {
+            "revenue2024": "932.8 million EUR",
+            "marketCapAug2025": "3.21 billion USD"
+          },
+          "globalFootprint": [
+            {
+              "region": "EMEA",
+              "locations": "Belgium, Bulgaria, France, Germany, Ireland, Switzerland, Ukraine"
+            },
+            {
+              "region": "APAC",
+              "locations": "China, Japan, Malaysia, Philippines, South Korea"
+            },
+            {
+              "region": "Americas",
+              "locations": "USA"
+            }
+          ]
+        },
+        "esgAssessmentSummary": {
+          "finalRiskCategory": "2 - High Risk",
+          "executiveSummary": "Melexis NV presents a bifurcated risk profile. The company demonstrates strong corporate governance, environmental policies, and a commendable ethical stance regarding Russia's war against Ukraine. However, a significant and unmitigated risk exists from the indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict. These components are sold into Israel via global distributors, making it highly probable they are used in military systems by the Israel Defense Forces. The company's reliance on a distribution model without end-user traceability renders its policies against military end-use ineffective from an ethical risk perspective, leading to the high-risk categorization.",
+          "summaryRiskTable": [
+            {
+              "criterion": "§ 4a & 4b - Serious Violations of Human Rights & Humanitarian Law",
+              "riskLevel": "High"
+            }
+          ]
+        },
+        "detailedRiskAnalysis": [
+          {
+            "criterion": "§ 4a & 4b - Serious Violations of Human Rights & Humanitarian Law",
+            "riskLevel": "High",
+            "findings": "The company's products are critical enablers for military technology used by the Israel Defense Forces in a conflict marked by severe violations of international humanitarian law. While Melexis is not directly involved, its failure to implement a robust end-user verification system for its dual-use products constitutes a significant ethical lapse, creating an unacceptable risk of contributing to these violations."
+          },
+          {
+            "criterion": "§ 4c & 4d - Sale of Weapons to Certain States",
+            "riskLevel": "Moderate",
+            "findings": "Melexis does not directly sell weapons. However, the sale of critical, enabling dual-use components to a state engaged in armed conflict (Israel) can be interpreted as a material contribution to that state's military capabilities. This creates a moderate risk of contravening the spirit and intent of these criteria."
+          },
+          {
+            "criterion": "§ 4e & 4f - Severe Environmental Damage & Unacceptable Greenhouse Gas Emissions",
+            "riskLevel": "Low",
+            "findings": "The company demonstrates a strong and proactive approach to environmental management. It holds ISO 14001 certification and has set an ambitious target to reduce Scope 1 and 2 GHG emissions per million sold ICs by 55% by 2030 (vs. 2024 baseline). Its fabless model contributes to a low direct environmental impact. The risk under this criterion is low."
+          },
+          {
+            "criterion": "§ 4g & 4h - Gross Corruption & Other Particularly Serious Violations",
+            "riskLevel": "Low",
+            "findings": "Melexis maintains a robust anti-corruption framework, including a confidential 'Speak Up' whistleblowing channel. A review of its history shows no evidence of involvement in gross corruption or bribery. Past patent litigation does not meet the threshold for a serious violation of ethical norms. The risk is assessed as low."
+          }
+        ],
+        "productAnalysis": {
+          "portfolioOverview": "Melexis's product portfolio consists of advanced mixed-signal semiconductor solutions that are critical enabling components for complex electronic systems. The main categories are: Sensors (magnetic, pressure, optical, temperature), Drivers (for motors and LEDs), and Transceivers (for system communication like LIN and CAN).",
+          "dualUseNature": "Semiconductors are a quintessential dual-use technology. Melexis's high-precision sensors are essential for guidance, navigation, and targeting systems in military hardware such as UAVs (drones), precision-guided munitions, and robotics. Many of these items are explicitly listed under multilateral export control regimes like the Wassenaar Arrangement, confirming their strategic military importance.",
+          "productBasedExclusionAnalysis": "An analysis against the GPFG's product-based criteria (§ 3) shows no grounds for exclusion. Melexis is not involved in the production of prohibited weapons, tobacco, cannabis, or thermal coal. All ethical risks derive from the company's conduct and the end-use of its products."
+        },
+        "geopoliticalExposure": {
+          "russiaUkraineConflict": {
+            "stance": "Proactive, values-aligned",
+            "actions": "Melexis has maintained its R&D center in Kyiv, Ukraine, throughout the conflict, earning a 'Bravery Award' from the European Business Association. The company has no official presence or sanctioned business activities in the Russian Federation. This conduct is a strong positive ethical signal."
+          },
+          "israeliPalestinianConflict": {
+            "stance": "Passive, legally defensive",
+            "actions": "The company relies on legal disclaimers in its terms and conditions to mitigate liability, while continuing to sell products into the region via a business model that makes military end-use a high-probability outcome. This inaction and failure to implement enhanced due diligence is a strong negative ethical signal."
+          },
+          "inconsistentEthicalPostureAnalysis": "The company's proactive, values-aligned stance on Ukraine contrasts sharply with its passive, legally defensive posture regarding the Israeli-Palestinian conflict. This suggests that ethical decision-making may be driven more by compliance with the geopolitical alignment of its primary markets (EU/US) and legal liability minimization, rather than a universally applied set of ethical principles. This inconsistency represents a significant governance risk."
+        },
+        "assessmentMetadata": {
+          "reportTitle": "Comprehensive Risk Assessment of Melexis NV for the Government Pension Fund Global",
+          "assessmentDate": "2025-08-15",
+          "assessedBy": "Gemini Deep Research",
+          "guidelineReference": "https://lovdata.no/dokument/INS/forskrift/2014-12-18-1793"
+        }
+      }
+    },
+    {
+      "id": "tsmc",
+      "name": "TSMC",
+      "country": "Taiwan",
+      "sector": "Technology",
+      "concerns": "Allegations of a harsh work culture and excessive hours that may violate labor rights standards, particularly in its overseas operations.",
+      "guideline": "§4a",
+      "category": 2,
+      "rationale": "Concerns over labor practices are significant and require monitoring to ensure they do not escalate into systematic violations of ILO principles."
     }
   ]
   

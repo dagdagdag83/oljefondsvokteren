@@ -27,7 +27,7 @@ const resources = {
 			},
 			companies: {
 				filters: { search: 'Search…', country: 'Country', sector: 'Sector', category: 'All categories' },
-				columns: { name: 'Name', country: 'Country', sector: 'Sector', category: 'Category', guideline: 'Guideline', concerns: 'Concerns' },
+				columns: { name: 'Name', country: 'Country', sector: 'Sector', category: 'Category', guideline: 'Guideline', concerns: 'Concerns', ai_report: 'AI Report' },
 				category: { all: 'All categories', c4: 'Exclusion Candidate', c3: 'High Risk', c2: 'Moderate Risk', c1: 'Clear' },
 				paging: { prev: 'Prev', next: 'Next' },
 			},
@@ -66,7 +66,7 @@ const resources = {
 			},
 			companies: {
 				filters: { search: 'Søk…', country: 'Land', sector: 'Sektor', category: 'Alle kategorier' },
-				columns: { name: 'Navn', country: 'Land', sector: 'Sektor', category: 'Kategori', guideline: 'Retningslinje', concerns: 'Bekymringer' },
+				columns: { name: 'Navn', country: 'Land', sector: 'Sektor', category: 'Kategori', guideline: 'Retningslinje', concerns: 'Bekymringer', ai_report: 'AI-rapport' },
 				category: { all: 'Alle kategorier', c4: 'Kandidat for utelukkelse', c3: 'Høy Risiko', c2: 'Moderat Risiko', c1: 'Akseptabel' },
 				paging: { prev: 'Forrige', next: 'Neste' },
 			},

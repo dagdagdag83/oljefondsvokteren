@@ -40,7 +40,7 @@ export function DetailedCompanyView({ data }: { data: any }) {
 			</p>
 			<p>{data.geopoliticalExposure.israeliPalestinianConflict.actions}</p>
 
-			<Link to="/report/melexis-nv" className="text-blue-600 hover:underline">
+			<Link to={`/report/${data.companyProfile.name.toLowerCase().replace(/ /g, '-')}`} className="text-blue-600 hover:underline">
 				View full Gemini research report
 			</Link>
 		</div>
