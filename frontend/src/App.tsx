@@ -5,6 +5,7 @@ import { MoonIcon, SunIcon, ChevronRightIcon } from '@heroicons/react/24/outline
 import { useTranslation } from 'react-i18next'
 import Flags from 'country-flag-icons/react/3x2'
 import { useCompanyData } from './shared/useCompanyData'
+import { LanguageSelector } from './shared/LanguageSelector'
 
 type HealthResponse = { status: string }
 
@@ -19,11 +20,15 @@ function Breadcrumbs() {
 		const to = `/${pathnames.slice(0, index + 1).join('/')}`
 		let label = value.charAt(0).toUpperCase() + value.slice(1)
 
-		if (value === 'companies' && params.id) {
+		if (value === 'companies') {
+			label = t('app.companies', 'Companies')
+		} else if (params.id && value === params.id) {
 			const company = companies.find((c) => c.id === params.id)
-			label = company ? company.name : params.id
-		} else if (value === 'report' && params.id) {
-			label = 'Full Report'
+			if (company) {
+				label = company.name
+			}
+		} else if (value === 'report') {
+			label = t('app.full_report', 'Full Report')
 		}
 
 		return { to, label }
@@ -83,27 +88,7 @@ export default function App() {
 							{theme === 'dark' ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
 							{theme === 'dark' ? 'Light' : 'Dark'}
 						</button>
-						<div className="relative ml-2">
-							<select
-								aria-label="Language"
-								value={i18n.language.split('-')[0]}
-								onChange={(e) => {
-									i18n.changeLanguage(e.target.value)
-									localStorage.setItem('lang', e.target.value)
-								}}
-								className="appearance-none rounded-md border border-white/30 bg-white py-1 pl-8 pr-4 text-primary focus:outline-none focus:ring-2 focus:ring-white/50"
-							>
-								<option value="en">English</option>
-								<option value="no">Norsk</option>
-							</select>
-							<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center px-2">
-								{i18n.language.startsWith('no') ? (
-									<Flags.NO title="Norsk" className="h-4 w-4" />
-								) : (
-									<Flags.GB title="English" className="h-4 w-4" />
-								)}
-							</div>
-						</div>
+						<LanguageSelector />
 					</div>
 				</div>
 			</header>

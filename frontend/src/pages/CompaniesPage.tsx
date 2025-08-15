@@ -9,20 +9,16 @@ function uniqueSorted(values: string[]): string[] {
 	return Array.from(new Set(values.filter(Boolean))).sort((a, b) => a.localeCompare(b))
 }
 
-function suggest(values: string[]) {
-	return uniqueSorted(values).slice(0, 50).map(v => (
-		<Combobox.Option key={v} value={v} className={({ active }) => `cursor-default select-none px-3 py-1 ${active ? 'bg-secondary text-gray-900' : 'text-gray-900'}`}>
-			{v}
-		</Combobox.Option>
-	))
-}
-
 function labelForCategory(val: string, t?: (k: string) => string) {
 	const tr = t ?? ((k: string) => k)
-	return val === '4' ? tr('companies.category.c4')
-		: val === '3' ? tr('companies.category.c3')
-		: val === '2' ? tr('companies.category.c2')
-		: val === '1' ? tr('companies.category.c1')
+	return val === '4'
+		? tr('companies.category.c4')
+		: val === '3'
+		? tr('companies.category.c3')
+		: val === '2'
+		? tr('companies.category.c2')
+		: val === '1'
+		? tr('companies.category.c1')
 		: tr('companies.category.all')
 }
 
@@ -31,9 +27,17 @@ export default function CompaniesPage() {
 	const { companies, loading, error } = useCompanyData()
 	const [q, setQ] = useState('')
 	const [country, setCountry] = useState('')
+	const [countryQuery, setCountryQuery] = useState('')
 	const [sector, setSector] = useState('')
+	const [sectorQuery, setSectorQuery] = useState('')
 	const [category, setCategory] = useState('')
 	const [page, setPage] = useState(1)
+
+	const countries = useMemo(() => uniqueSorted(companies.map((c) => c.country)), [companies])
+	const filteredCountries = countryQuery === '' ? countries : countries.filter((c) => c.toLowerCase().includes(countryQuery.toLowerCase()))
+
+	const sectors = useMemo(() => uniqueSorted(companies.map((c) => c.sector)), [companies])
+	const filteredSectors = sectorQuery === '' ? sectors : sectors.filter((s) => s.toLowerCase().includes(sectorQuery.toLowerCase()))
 
 	const filteredCompanies = useMemo(() => {
 		return companies
@@ -70,36 +74,63 @@ export default function CompaniesPage() {
 			<div className="grid grid-cols-1 md:grid-cols-4 gap-3">
 				<div className="relative">
 					<MagnifyingGlassIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-					<input className="w-full rounded-md border-gray-300 pl-9 pr-3 py-2 shadow-sm focus:border-primary focus:ring-primary" placeholder={t('companies.filters.search')} value={q} onChange={(e) => setQ(e.target.value)} />
+					<input
+						className="w-full rounded-md border-gray-300 bg-white pl-9 pr-3 py-2 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+						placeholder={t('companies.filters.search')}
+						value={q}
+						onChange={(e) => setQ(e.target.value)}
+					/>
 				</div>
 
-				<Combobox value={country} onChange={(v: string) => setCountry(v)}>
+				<Combobox value={country} onChange={setCountry}>
 					<div className="relative">
 						<Combobox.Input
-							className="w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-primary focus:ring-primary"
+							className="w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
 							displayValue={(v: string) => v}
 							placeholder={t('companies.filters.country')}
-							onChange={(e) => setCountry(e.target.value)}
+							onChange={(e) => setCountryQuery(e.target.value)}
 						/>
-						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-							<Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none">
-								{suggest(companies.map((i) => i.country) ?? [])}
+						<Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+							<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+						</Combobox.Button>
+						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0" afterLeave={() => setCountryQuery('')}>
+							<Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-800 dark:ring-white/10">
+								{filteredCountries.length === 0 && countryQuery !== '' ? (
+									<div className="relative cursor-default select-none py-2 px-4 text-gray-700 dark:text-gray-200">Nothing found.</div>
+								) : (
+									filteredCountries.map((c) => (
+										<Combobox.Option key={c} value={c} className={({ active }) => `cursor-default select-none px-3 py-1 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}>
+											{c}
+										</Combobox.Option>
+									))
+								)}
 							</Combobox.Options>
 						</Transition>
 					</div>
 				</Combobox>
 
-				<Combobox value={sector} onChange={(v: string) => setSector(v)}>
+				<Combobox value={sector} onChange={setSector}>
 					<div className="relative">
 						<Combobox.Input
-							className="w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-primary focus:ring-primary"
+							className="w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
 							displayValue={(v: string) => v}
 							placeholder={t('companies.filters.sector')}
-							onChange={(e) => setSector(e.target.value)}
+							onChange={(e) => setSectorQuery(e.target.value)}
 						/>
-						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-							<Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none">
-								{suggest(companies.map((i) => i.sector) ?? [])}
+						<Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+							<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+						</Combobox.Button>
+						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0" afterLeave={() => setSectorQuery('')}>
+							<Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-800 dark:ring-white/10">
+								{filteredSectors.length === 0 && sectorQuery !== '' ? (
+									<div className="relative cursor-default select-none py-2 px-4 text-gray-700 dark:text-gray-200">Nothing found.</div>
+								) : (
+									filteredSectors.map((s) => (
+										<Combobox.Option key={s} value={s} className={({ active }) => `cursor-default select-none px-3 py-1 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}>
+											{s}
+										</Combobox.Option>
+									))
+								)}
 							</Combobox.Options>
 						</Transition>
 					</div>
@@ -107,14 +138,14 @@ export default function CompaniesPage() {
 
 				<Listbox value={category} onChange={(v: string) => setCategory(v)}>
 					<div className="relative">
-						<Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-8 text-left shadow-sm focus:border-primary focus:ring-primary">
+						<Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-8 text-left shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
 							<span className="block truncate">{labelForCategory(category, t)}</span>
 							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 								<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
 							</span>
 						</Listbox.Button>
 						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-							<Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none">
+							<Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-800 dark:ring-white/10">
 								{[
 									['', t('companies.category.all')],
 									['4', t('companies.category.c4')],
@@ -122,7 +153,11 @@ export default function CompaniesPage() {
 									['2', t('companies.category.c2')],
 									['1', t('companies.category.c1')],
 								].map(([val, label]) => (
-									<Listbox.Option key={val} value={val} className={({ active }) => `relative cursor-default select-none py-2 pl-8 pr-4 ${active ? 'bg-secondary text-gray-900' : 'text-gray-900'}`}>
+									<Listbox.Option
+										key={val}
+										value={val}
+										className={({ active }) => `relative cursor-default select-none py-2 pl-8 pr-4 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}
+									>
 										{({ selected }) => (
 											<>
 												<span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{label}</span>

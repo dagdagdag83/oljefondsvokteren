@@ -18,13 +18,10 @@ const router = createBrowserRouter(
 				{ index: true, element: <OverviewPage /> },
 				{ path: 'companies', element: <CompaniesPage /> },
 				{ path: 'companies/:id', element: <CompanyDetailPage /> },
-				{ path: 'report/:id', element: <CompanyFullReportPage /> },
+				{ path: 'companies/:id/report', element: <CompanyFullReportPage /> },
 			],
 		},
-	],
-	{
-		basename: '/oljefondsvokteren/',
-	}
+	]
 )
 
 const container = document.getElementById('root')!

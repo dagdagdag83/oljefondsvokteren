@@ -101,7 +101,7 @@ export default function CompanyDetailPage() {
 							<p className="mb-4">A deep-dive AI analysis has been conducted for this company.</p>
 							<div className="flex justify-end">
 								<Link
-									to={`/report/${company.id}`}
+									to={`/companies/${company.id}/report`}
 									className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-primary/80"
 								>
 									View Full Report
