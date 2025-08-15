@@ -19,7 +19,7 @@ export function useCompanyData() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const response = await fetch('/data/investments.json')
+				const response = await fetch(`${import.meta.env.BASE_URL}data/investments.json`)
 				if (!response.ok) {
 					throw new Error('Network response was not ok')
 				}

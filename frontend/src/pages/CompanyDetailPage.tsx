@@ -16,7 +16,7 @@ export default function CompanyDetailPage() {
 	useEffect(() => {
 		// Attempt to load detailed analysis
 		if (id === 'melexis-nv') {
-			fetch(`/mel.json`)
+			fetch(`${import.meta.env.BASE_URL}mel.json`)
 				.then((r) => r.json())
 				.then(setDetailedData)
 				.catch(() => {
@@ -37,54 +37,51 @@ export default function CompanyDetailPage() {
 				← Back to companies
 			</Link>
 
+			<h2 className="text-2xl font-semibold tracking-tight">{company.name}</h2>
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-gray-600 dark:text-gray-300">
+				<div>
+					<span className="font-medium text-gray-900 dark:text-gray-100">Country:</span>
+					<span className="ml-2 flex items-center">
+						{FlagComponent && <FlagComponent className="h-4 w-4 mr-2" />}
+						{company.country}
+					</span>
+				</div>
+				<div>
+					<span className="font-medium text-gray-900 dark:text-gray-100">Sector:</span> {company.sector}
+				</div>
+				<div>
+					<span className="font-medium text-gray-900 dark:text-gray-100">Category:</span> {company.category}
+				</div>
+			</div>
+			<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
+				<h3 className="text-lg font-medium mb-1">Guideline</h3>
+				<p className="text-gray-800 dark:text-gray-100">{company.guideline}</p>
+			</div>
+			<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
+				<h3 className="text-lg font-medium mb-1">Concerns</h3>
+				<p className="text-gray-800 dark:text-gray-100">{company.concerns}</p>
+			</div>
+			<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
+				<h3 className="text-lg font-medium mb-1">Rationale</h3>
+				<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">{company.rationale}</p>
+			</div>
+
 			{detailedData ? (
 				<DetailedCompanyView data={detailedData} />
 			) : (
-				<>
-					<div className="rounded-md bg-yellow-50 p-4 dark:bg-yellow-900/20">
-						<div className="flex">
-							<div className="flex-shrink-0">
-								<InformationCircleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />
-							</div>
-							<div className="ml-3">
-								<h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
-									Deep AI Analysis Not Completed
-								</h3>
-								<div className="mt-2 text-sm text-yellow-700 dark:text-yellow-100">
-									<p>The information shown below is a summary. A full analysis for this company is pending.</p>
-								</div>
+				<div className="rounded-md bg-yellow-50 p-4 dark:bg-yellow-900/20">
+					<div className="flex">
+						<div className="flex-shrink-0">
+							<InformationCircleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />
+						</div>
+						<div className="ml-3">
+							<h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">Deep AI Analysis Not Completed</h3>
+							<div className="mt-2 text-sm text-yellow-700 dark:text-yellow-100">
+								<p>A full analysis for this company is pending.</p>
 							</div>
 						</div>
 					</div>
-					<h2 className="text-2xl font-semibold tracking-tight">{company.name}</h2>
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-gray-600 dark:text-gray-300">
-						<div>
-							<span className="font-medium text-gray-900 dark:text-gray-100">Country:</span>
-							<span className="ml-2 flex items-center">
-								{FlagComponent && <FlagComponent className="h-4 w-4 mr-2" />}
-								{company.country}
-							</span>
-						</div>
-						<div>
-							<span className="font-medium text-gray-900 dark:text-gray-100">Sector:</span> {company.sector}
-						</div>
-						<div>
-							<span className="font-medium text-gray-900 dark:text-gray-100">Category:</span> {company.category}
-						</div>
-					</div>
-					<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
-						<h3 className="text-lg font-medium mb-1">Guideline</h3>
-						<p className="text-gray-800 dark:text-gray-100">{company.guideline}</p>
-					</div>
-					<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
-						<h3 className="text-lg font-medium mb-1">Concerns</h3>
-						<p className="text-gray-800 dark:text-gray-100">{company.concerns}</p>
-					</div>
-					<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
-						<h3 className="text-lg font-medium mb-1">Rationale</h3>
-						<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">{company.rationale}</p>
-					</div>
-				</>
+				</div>
 			)}
 		</div>
 	)

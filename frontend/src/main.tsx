@@ -5,22 +5,27 @@ import App from './App'
 import CompaniesPage from './pages/CompaniesPage'
 import CompanyDetailPage from './pages/CompanyDetailPage'
 import OverviewPage from './pages/OverviewPage'
-import { MelexisFullReport } from './pages/MelexisFullReport'
+import { CompanyFullReport } from './pages/CompanyFullReport'
 import './index.css'
 import './i18n'
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+	[
+		{
+			path: '/',
+			element: <App />,
+			children: [
+				{ index: true, element: <OverviewPage /> },
+				{ path: 'companies', element: <CompaniesPage /> },
+				{ path: 'companies/:id', element: <CompanyDetailPage /> },
+				{ path: 'report/melexis-nv', element: <CompanyFullReport /> },
+			],
+		},
+	],
 	{
-		path: '/',
-		element: <App />,
-		children: [
-			{ index: true, element: <OverviewPage /> },
-			{ path: 'companies', element: <CompaniesPage /> },
-			{ path: 'companies/:id', element: <CompanyDetailPage /> },
-			{ path: 'companies/melexis-nv/full-report', element: <MelexisFullReport /> },
-		],
-	},
-])
+		basename: '/oljefondsvokteren/',
+	}
+)
 
 const container = document.getElementById('root')!
 const root = createRoot(container)

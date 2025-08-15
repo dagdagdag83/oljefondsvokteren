@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, Outlet, NavLink } from 'react-router-dom'
-import { useApiBase } from './shared/useApiBase'
 import { useTheme } from './shared/useTheme'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
@@ -10,7 +9,6 @@ import { useCompanyData } from './shared/useCompanyData'
 type HealthResponse = { status: string }
 
 export default function App() {
-	const apiBase = useApiBase()
 	const [error, setError] = useState<string>('')
 	const [theme, toggleTheme] = useTheme()
 	const { t, i18n } = useTranslation()
@@ -25,11 +23,11 @@ export default function App() {
 
 	return (
 		<div className="min-h-screen bg-secondary text-gray-900 dark:bg-slate-950 dark:text-slate-100">
-			<header className="border-b border-primary/20 bg-primary text-white dark:border-slate-800">
-				<div className="container flex items-center gap-6 py-4">
-					<Link to="/" className="text-inherit no-underline flex items-center gap-3">
-						<img src="/ov_logo.png" alt="Oljefondet Vakten" className="h-12 w-auto object-contain" />
-						<h1 className="m-0 text-xl font-semibold tracking-tight">{t('app.title')}</h1>
+			<header className="bg-primary shadow-md">
+				<div className="container py-3 flex items-center">
+					<Link to="/" className="flex items-center gap-3">
+						<img src={`${import.meta.env.BASE_URL}ov_logo.png`} alt="Oljefondsvokteren" className="h-28 object-contain" />
+						<span className="text-xl font-semibold tracking-tight text-white">{t('app.title')}</span>
 					</Link>
 					<nav className="flex gap-4">
 						<NavLink to="/" end className={({ isActive }) => (isActive ? 'text-white font-semibold' : 'text-white/80 hover:text-white')}>

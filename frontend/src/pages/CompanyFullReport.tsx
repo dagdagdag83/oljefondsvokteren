@@ -1,46 +1,52 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export function MelexisFullReport() {
+export function CompanyFullReport() {
 	return (
-		<div className="flex">
-			<aside className="w-1/4 sticky top-8 self-start pr-8">
-				<nav>
-					<h3 className="font-semibold text-lg mb-4">Contents</h3>
-					<ul className="space-y-2">
-						<li>
-							<a href="#summary" className="text-blue-600 hover:underline">
-								Executive Summary
-							</a>
-						</li>
-						<li>
-							<a href="#profile" className="text-blue-600 hover:underline">
-								Corporate Profile
-							</a>
-						</li>
-						<li>
-							<a href="#product-criteria" className="text-blue-600 hover:underline">
-								Product-Based Criteria (§ 3)
-							</a>
-						</li>
-						<li>
-							<a href="#conduct-criteria" className="text-blue-600 hover:underline">
-								Conduct-Based Criteria (§ 4)
-							</a>
-						</li>
-						<li>
-							<a href="#geopolitical" className="text-blue-600 hover:underline">
-								Geopolitical Risk
-							</a>
-						</li>
-						<li>
-							<a href="#synthesis" className="text-blue-600 hover:underline">
-								Final Synthesis
-							</a>
-						</li>
-					</ul>
-				</nav>
+		<div className="grid lg:grid-cols-4 gap-8">
+			<aside className="lg:col-span-1">
+				<div className="sticky top-24">
+					<nav>
+						<h3 className="font-semibold text-lg mb-4">Contents</h3>
+						<ul className="space-y-2">
+							<li>
+								<a href="#summary" className="text-blue-600 hover:underline dark:text-blue-400">
+									Executive Summary
+								</a>
+							</li>
+							<li>
+								<a href="#profile" className="text-blue-600 hover:underline dark:text-blue-400">
+									Corporate Profile
+								</a>
+							</li>
+							<li>
+								<a href="#product-criteria" className="text-blue-600 hover:underline dark:text-blue-400">
+									Product-Based Criteria (§ 3)
+								</a>
+							</li>
+							<li>
+								<a href="#conduct-criteria" className="text-blue-600 hover:underline dark:text-blue-400">
+									Conduct-Based Criteria (§ 4)
+								</a>
+							</li>
+							<li>
+								<a href="#geopolitical" className="text-blue-600 hover:underline dark:text-blue-400">
+									Geopolitical Risk
+								</a>
+							</li>
+							<li>
+								<a href="#synthesis" className="text-blue-600 hover:underline dark:text-blue-400">
+									Final Synthesis
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<Link to="/companies/melexis-nv" className="inline-block mt-6 text-sm text-blue-700 hover:underline dark:text-blue-400">
+						← Back to Company Summary
+					</Link>
+				</div>
 			</aside>
-			<main className="w-3/4 prose max-w-none dark:prose-invert">
+			<main className="lg:col-span-3 prose max-w-none dark:prose-invert">
 				<section id="summary">
 					<h2>I. Executive Summary</h2>
 					<h3>Purpose and Scope</h3>

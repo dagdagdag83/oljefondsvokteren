@@ -20,6 +20,10 @@ const resources = {
 				companies: 'Companies',
 				sectors: 'Sectors',
 				countries: 'Countries',
+				banner: {
+					text: 'This site is a proof-of-concept and has not analyzed all 7,000+ holdings of the fund.',
+					dismiss: 'Dismiss',
+				},
 			},
 			companies: {
 				filters: { search: 'Search…', country: 'Country', sector: 'Sector', category: 'All categories' },
@@ -55,6 +59,10 @@ const resources = {
 				companies: 'Selskaper',
 				sectors: 'Sektorer',
 				countries: 'Land',
+				banner: {
+					text: 'Denne siden er en konsepttest og har ikke analysert alle fondets over 7000 beholdninger.',
+					dismiss: 'Lukk',
+				},
 			},
 			companies: {
 				filters: { search: 'Søk…', country: 'Land', sector: 'Sektor', category: 'Alle kategorier' },

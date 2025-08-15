@@ -60,32 +60,39 @@ export default function OverviewPage() {
 					</div>
 				</div>
 			)}
-			<section className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary to-[#00143a] text-white">
-				<div className="absolute inset-0 bg-[url(/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-				<div className="container py-10 grid md:grid-cols-2 items-center gap-6">
+			<section className="relative overflow-hidden rounded-xl bg-primary text-white">
+				<div className="absolute inset-0 bg-grid-slate-100/[0.05] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+				<div className="container relative py-10 grid md:grid-cols-2 items-center gap-6">
 					<div className="prose prose-invert max-w-none">
 						<h1 className="m-0">{t('app.title')}</h1>
 						<p>{t('landing.lead')}</p>
-						<div className="flex flex-wrap gap-3">
-							<Link to="/companies" className="inline-flex items-center rounded-md bg-white/95 px-4 py-2 text-primary font-medium hover:bg-white">{t('app.browseCompanies')}</Link>
-							<a href="https://www.nbim.no" target="_blank" rel="noreferrer" className="inline-flex items-center rounded-md border border-white/40 px-4 py-2 text-white hover:bg-white/10">{t('app.aboutNbim')}</a>
-						</div>
 					</div>
-					<div className="hidden md:block">
-						<div className="rounded-lg border border-white/20 bg-white/10 p-4">
-							<p className="text-sm uppercase tracking-wide text-white/80 mb-2">{t('landing.snapshot')}</p>
-							<div className="grid grid-cols-3 gap-4 text-center">
-								<div>
-									<p className="text-3xl font-semibold">{stats?.total ?? '—'}</p>
-									<p className="text-xs text-white/80">{t('landing.companies')}</p>
-								</div>
-								<div>
-									<p className="text-3xl font-semibold">{Object.keys(stats?.by_sector ?? {}).length}</p>
-									<p className="text-xs text-white/80">{t('landing.sectors')}</p>
-								</div>
-								<div>
-									<p className="text-3xl font-semibold">{Object.keys(stats?.by_country ?? {}).length}</p>
-									<p className="text-xs text-white/80">{t('landing.countries')}</p>
+
+					<div className="flex flex-col items-start gap-6">
+						<div className="flex flex-wrap gap-3">
+							<Link to="/companies" className="inline-block rounded-md bg-white px-4 py-2 text-sm font-semibold text-primary shadow-md hover:bg-gray-200">
+								{t('app.browseCompanies')}
+							</Link>
+							<a href="https://www.nbim.no" target="_blank" rel="noopener noreferrer" className="inline-block rounded-md bg-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/30">
+								{t('app.aboutNbim')}
+							</a>
+						</div>
+						<div className="hidden md:block w-full">
+							<div className="rounded-lg border border-white/20 bg-white/10 p-4">
+								<p className="text-sm uppercase tracking-wide text-white/80 mb-2">{t('landing.snapshot')}</p>
+								<div className="grid grid-cols-3 gap-4 text-center">
+									<div>
+										<p className="text-3xl font-semibold">{stats?.total ?? '—'}</p>
+										<p className="text-xs text-white/80">{t('landing.companies')}</p>
+									</div>
+									<div>
+										<p className="text-3xl font-semibold">{Object.keys(stats?.by_sector ?? {}).length}</p>
+										<p className="text-xs text-white/80">{t('landing.sectors')}</p>
+									</div>
+									<div>
+										<p className="text-3xl font-semibold">{Object.keys(stats?.by_country ?? {}).length}</p>
+										<p className="text-xs text-white/80">{t('landing.countries')}</p>
+									</div>
 								</div>
 							</div>
 						</div>

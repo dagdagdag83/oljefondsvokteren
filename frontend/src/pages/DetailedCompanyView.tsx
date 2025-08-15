@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 export function DetailedCompanyView({ data }: { data: any }) {
 	return (
 		<div className="prose dark:prose-invert max-w-none">
-			<h1>{data.companyProfile.name}</h1>
-			<p>{data.companyProfile.businessDescription}</p>
-
 			<h2>ESG Assessment Summary</h2>
 			<p>
 				<strong>Final Risk Category:</strong> {data.esgAssessmentSummary.finalRiskCategory}
@@ -43,7 +40,7 @@ export function DetailedCompanyView({ data }: { data: any }) {
 			</p>
 			<p>{data.geopoliticalExposure.israeliPalestinianConflict.actions}</p>
 
-			<Link to="/companies/melexis-nv/full-report" className="text-blue-600 hover:underline">
+			<Link to="/report/melexis-nv" className="text-blue-600 hover:underline">
 				View full Gemini research report
 			</Link>
 		</div>
