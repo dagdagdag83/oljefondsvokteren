@@ -1,0 +1,15 @@
+export const countryCodeMap: Record<string, string> = {
+	Austria: 'AT',
+	Australia: 'AU',
+	Brazil: 'BR',
+	France: 'FR',
+	India: 'IN',
+	Indonesia: 'ID',
+	Ireland: 'IE',
+	Israel: 'IL',
+	Taiwan: 'TW',
+	Thailand: 'TH',
+	'United Kingdom': 'GB',
+	'United States': 'US',
+	Vietnam: 'VN',
+}

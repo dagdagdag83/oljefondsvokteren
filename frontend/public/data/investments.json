@@ -1,0 +1,381 @@
+[
+    {
+      "name": "Raiffeisen Bank International AG",
+      "country": "Austria",
+      "sector": "Financials",
+      "concerns": "Extensive operations and tax payments in Russia post-invasion, financing an aggressor state.",
+      "guideline": "§4b, §4h",
+      "category": 4,
+      "rationale": "Largest foreign lender in Russia; profits tripled, paying hundreds of millions in taxes to the Kremlin, directly funding the war effort. Designated an 'international sponsor of war' by Ukraine."
+    },
+    {
+      "name": "Glencore PLC",
+      "country": "United Kingdom",
+      "sector": "Basic Materials",
+      "concerns": "Excluded for coal, but also has a record of gross corruption (guilty pleas, $1.1B+ fine) and severe human rights/environmental abuses in Colombia and Peru.",
+      "guideline": "§3c, §4e, §4g",
+      "category": 4,
+      "rationale": "Already excluded on product-based coal criteria. The company has also pleaded guilty to a decade-long bribery scheme across seven countries, constituting gross corruption."
+    },
+    {
+      "name": "Vale SA",
+      "country": "Brazil",
+      "sector": "Basic Materials",
+      "concerns": "Two catastrophic tailings dam failures (Mariana and Brumadinho) causing hundreds of deaths and massive environmental destruction.",
+      "guideline": "§4a, §4e",
+      "category": 4,
+      "rationale": "Excluded by the Fund in May 2020 for severe environmental damage. The scale of the disasters represents a clear breach of the guidelines."
+    },
+    {
+      "name": "BAE Systems PLC",
+      "country": "United Kingdom",
+      "sector": "Industrials",
+      "concerns": "Production of key components for Trident and Minuteman III nuclear missile systems.",
+      "guideline": "§3a",
+      "category": 4,
+      "rationale": "Excluded by the Fund in January 2018 for its key role in the production and upgrading of nuclear weapons, which violate fundamental humanitarian principles."
+    },
+    {
+      "name": "Lockheed Martin Corp",
+      "country": "United States",
+      "sector": "Industrials",
+      "concerns": "Production and maintenance of nuclear weapons systems.",
+      "guideline": "§3a",
+      "category": 4,
+      "rationale": "Excluded by the Fund in August 2013 for its involvement in the production of nuclear weapons."
+    },
+    {
+      "name": "Airbus SE",
+      "country": "France",
+      "sector": "Industrials",
+      "concerns": "Involvement in the production of nuclear missiles for the French military through joint ventures.",
+      "guideline": "§3a",
+      "category": 4,
+      "rationale": "Excluded by the Fund in January 2006 for its involvement in the production of nuclear weapons."
+    },
+    {
+      "name": "HSBC Holdings PLC",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "concerns": "Systemic anti-money laundering failures, resulting in a $1.9 billion fine for laundering money for drug cartels and sanctioned states.",
+      "guideline": "§4g",
+      "category": 3,
+      "rationale": "The scale and duration of the criminal activity, admitted in a deferred prosecution agreement, represent 'gross financial crime' and a severe failure of governance."
+    },
+    {
+      "name": "Commonwealth Bank of Australia",
+      "country": "Australia",
+      "sector": "Financials",
+      "concerns": "Massive anti-money laundering breaches ($700M fine); financing of environmentally damaging fossil fuel projects.",
+      "guideline": "§4g, §4e",
+      "category": 3,
+      "rationale": "Systemic compliance failures and significant contribution to environmentally harmful projects create an unacceptable risk profile."
+    },
+    {
+      "name": "BHP Group Ltd",
+      "country": "Australia",
+      "sector": "Basic Materials",
+      "concerns": "Joint venture partner in the Mariana dam disaster; significant thermal coal production; other environmental and human rights issues.",
+      "guideline": "§4a, §4e, §3c",
+      "category": 3,
+      "rationale": "Culpability in a major environmental and human disaster, combined with coal operations that may exceed Fund thresholds, warrants observation."
+    },
+    {
+      "name": "Johnson & Johnson",
+      "country": "United States",
+      "sector": "Health Care",
+      "concerns": "Tens of thousands of lawsuits and allegations of a decades-long cover-up regarding asbestos in talc-based baby powder, leading to cancer.",
+      "guideline": "§4h",
+      "category": 3,
+      "rationale": "The alleged long-term, intentional deception regarding a product's safety, causing severe health impacts, constitutes a 'particularly serious violation of fundamental ethical norms'."
+    },
+    {
+      "name": "Unilever PLC",
+      "country": "United Kingdom",
+      "sector": "Consumer Staples",
+      "concerns": "Continued operations in Russia and compliance with conscription laws; allegations of sexual abuse in Kenyan supply chain.",
+      "guideline": "§4h, §4a",
+      "category": 3,
+      "rationale": "Dual ethical risks of contributing to a war effort and severe human rights violations in the supply chain merit observation."
+    },
+    {
+      "name": "Ryanair Holdings PLC",
+      "country": "Ireland",
+      "sector": "Industrials",
+      "concerns": "Documented history of anti-union behavior, punitive actions against striking workers, and violation of local labor laws across Europe.",
+      "guideline": "§4a",
+      "category": 3,
+      "rationale": "The systematic and widespread nature of the company's anti-labor practices constitutes a potential violation of the fundamental right to freedom of association."
+    },
+    {
+      "name": "Meta Platforms Inc.",
+      "country": "United States",
+      "sector": "Technology",
+      "concerns": "Systemic data privacy violations (Cambridge Analytica, GDPR fine); significant role in the spread of misinformation.",
+      "guideline": "§4a, §4h",
+      "category": 3,
+      "rationale": "The company's business model and governance failures pose an ongoing risk of contributing to serious human rights violations, including the right to privacy."
+    },
+    {
+      "name": "Teva Pharmaceutical Industries Ltd",
+      "country": "Israel",
+      "sector": "Health Care",
+      "concerns": "Major role in the US opioid crisis (settled for $4.25B); economic exploitation of the captive Palestinian market due to the occupation.",
+      "guideline": "§4h, §4a",
+      "category": 3,
+      "rationale": "The combination of a severe public health scandal and benefiting from human rights violations in an occupied territory creates a high-risk profile."
+    },
+    {
+      "name": "Austal Ltd",
+      "country": "Australia",
+      "sector": "Industrials",
+      "concerns": "Sale of patrol boats and naval vessels to countries involved in conflict or with poor human rights records (e.g., Yemen).",
+      "guideline": "§4c",
+      "category": 3,
+      "rationale": "The sale of military-capable vessels to states engaged in armed conflict where serious violations of international law are documented presents an unacceptable risk."
+    },
+    {
+      "name": "OMV AG",
+      "country": "Austria",
+      "sector": "Energy",
+      "concerns": "Has taken steps to divest from Russia but continues to purchase Russian gas under long-term contracts, providing revenue to the state.",
+      "guideline": "§4h",
+      "category": 3,
+      "rationale": "The ongoing financial relationship with a state engaged in a war of aggression, despite divestment efforts, warrants formal observation."
+    },
+    {
+      "name": "Adani Green Energy Ltd",
+      "country": "India",
+      "sector": "Utilities",
+      "concerns": "Part of a conglomerate facing allegations of stock manipulation and accounting fraud; specific environmental and community concerns related to large-scale projects.",
+      "guideline": "§4g",
+      "category": 2,
+      "rationale": "While the company has strong stated ESG policies and ratings, the serious allegations against the parent group warrant close monitoring for governance risks."
+    },
+    {
+      "name": "TSMC",
+      "country": "Taiwan",
+      "sector": "Technology",
+      "concerns": "Allegations of a harsh work culture and excessive hours that may violate labor rights standards, particularly in its overseas operations.",
+      "guideline": "§4a",
+      "category": 2,
+      "rationale": "Concerns over labor practices are significant and require monitoring to ensure they do not escalate into systematic violations of ILO principles."
+    },
+    {
+      "name": "ANZ Group Holdings Ltd",
+      "country": "Australia",
+      "sector": "Financials",
+      "concerns": "History of scandals including manipulation of interest rates, child labor in its financed projects, and a lawsuit alleging racism.",
+      "guideline": "§4g, §4a",
+      "category": 2,
+      "rationale": "The bank has a history of ethical breaches and has implemented new policies. Ongoing monitoring is required to ensure remediation is effective and sustained."
+    },
+    {
+      "name": "a2 Milk Co Ltd/The",
+      "country": "Australia",
+      "sector": "Consumer Staples",
+      "concerns": "No significant ethical concerns identified in the provided research.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "The company's operations appear to be within the ethical boundaries set by the guidelines."
+    },
+    {
+      "name": "Abacus Group",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Abacus Storage King",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Accent Group Ltd",
+      "country": "Australia",
+      "sector": "Consumer Discretionary",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Acrow Ltd",
+      "country": "Australia",
+      "sector": "Basic Materials",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Alkane Resources Ltd",
+      "country": "Australia",
+      "sector": "Basic Materials",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Alliance Aviation Services Ltd",
+      "country": "Australia",
+      "sector": "Consumer Discretionary",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Vietnam Dairy Products JSC",
+      "country": "Vietnam",
+      "sector": "Consumer Staples",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "FPT Corp",
+      "country": "Vietnam",
+      "sector": "Technology",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Mobile World Investment Corp",
+      "country": "Vietnam",
+      "sector": "Consumer Discretionary",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Vinhomes JSC",
+      "country": "Vietnam",
+      "sector": "Real Estate",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Hoa Phat Group JSC",
+      "country": "Vietnam",
+      "sector": "Basic Materials",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Airports of Thailand PCL",
+      "country": "Thailand",
+      "sector": "Industrials",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "CP All PCL",
+      "country": "Thailand",
+      "sector": "Consumer Staples",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "PTT PCL",
+      "country": "Thailand",
+      "sector": "Energy",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Advanced Info Service PCL",
+      "country": "Thailand",
+      "sector": "Telecommunications",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Delta Electronics Thailand PCL",
+      "country": "Thailand",
+      "sector": "Technology",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Astra International Tbk PT",
+      "country": "Indonesia",
+      "sector": "Consumer Discretionary",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Bank Central Asia Tbk PT",
+      "country": "Indonesia",
+      "sector": "Financials",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Bank Rakyat Indonesia Persero Tbk PT",
+      "country": "Indonesia",
+      "sector": "Financials",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Telkom Indonesia Persero Tbk PT",
+      "country": "Indonesia",
+      "sector": "Telecommunications",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Bank Mandiri Persero Tbk PT",
+      "country": "Indonesia",
+      "sector": "Financials",
+      "concerns": "Awaiting detailed analysis.",
+      "guideline": "N/A",
+      "category": 1,
+      "rationale": "This is a placeholder classification. A full ethical audit has not been performed on this specific holding."
+    },
+    {
+      "name": "Melexis NV",
+      "country": "Belgium",
+      "sector": "Technology",
+      "concerns": "Indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict.",
+      "guideline": "§ 4c, 4d, 4h",
+      "category": 2,
+      "rationale": "A significant and unmitigated risk exists from the indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict."
+    }
+  ]
+  

@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App-specific tweaks */
+.container {
+	@apply max-w-6xl mx-auto px-4;
+}
+
+

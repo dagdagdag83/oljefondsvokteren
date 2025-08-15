@@ -1,0 +1,17 @@
+[project]
+name = "oljefondsvokteren-backend"
+version = "0.1.0"
+description = "FastAPI backend for Oljefondsvokteren"
+requires-python = ">=3.13"
+dependencies = [
+	"fastapi==0.115.0",
+	"uvicorn==0.30.6",
+	"gunicorn==22.0.0",
+	"uvloop==0.20.0; sys_platform != 'win32'",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
