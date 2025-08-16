@@ -61,7 +61,7 @@ export function useCompanyData() {
 				const enrichData = await enrichRes.json()
 
 				// Create a map of enrichment data for quick lookup
-				const enrichmentMap = new Map(enrichData.map((item: any) => [item.name, item]))
+				const enrichmentMap = new Map(enrichData.map((item: any) => [item.id, item]))
 
 				// Parse the CSV
 				Papa.parse(holdingsCsv, {
@@ -74,10 +74,11 @@ export function useCompanyData() {
 								const name = row['Name']
 								if (!name) return null // Skip rows without a name
 
-								const enriched = enrichmentMap.get(name) || {}
+								const id = slugify(name)
+								const enriched = enrichmentMap.get(id) || {}
 
 								return {
-									id: slugify(name),
+									id: id,
 									name: name,
 									country: row['Country'],
 									sector: row['Industry'],
@@ -86,7 +87,7 @@ export function useCompanyData() {
 									voting: parseRobustFloat(row['Voting']),
 									incorporationCountry: row['Incorporation Country'],
 									...enriched,
-									aiReportStatus: enriched.detailedReport ? 2 : enriched.name ? 1 : 0,
+									aiReportStatus: enriched.aiReportStatus ?? (enriched.detailedReport ? 2 : enriched.name ? 1 : 0),
 								}
 							})
 							.filter((c) => c !== null) as Company[] // Filter out any nulls

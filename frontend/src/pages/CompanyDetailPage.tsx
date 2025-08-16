@@ -6,6 +6,7 @@ import { Company, useCompanyData } from '../shared/useCompanyData'
 import { Badge } from './CompaniesPage.tsx'
 import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
+import { useTranslation } from 'react-i18next'
 
 countries.registerLocale(enLocale)
 
@@ -34,6 +35,7 @@ const getCountryCode = (countryName: string): string | undefined => {
 export default function CompanyDetailPage() {
 	const { id } = useParams<{ id: string }>()
 	const { companies, loading, error } = useCompanyData()
+	const { t } = useTranslation()
 
 	const company = companies.find((c) => c.id === id)
 
@@ -84,7 +86,7 @@ export default function CompanyDetailPage() {
 						)}
 					</div>
 					<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
-						<h3 className="text-lg font-medium mb-1">Guideline</h3>
+						<h3 className="text-lg font-medium mb-1">{t('company.guideline', 'Ethic Council Guidelines')}</h3>
 						<p className="text-gray-800 dark:text-gray-100">{company.guideline}</p>
 					</div>
 					<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">

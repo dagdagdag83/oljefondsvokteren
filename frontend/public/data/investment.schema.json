@@ -1,0 +1,268 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Investment",
+  "description": "Schema for an investment entry in the Oljefondsvokteren project.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "sector": {
+      "type": "string"
+    },
+    "concerns": {
+      "type": "string"
+    },
+    "guideline": {
+      "type": "string"
+    },
+    "category": {
+      "type": "integer"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "detailedReport": {
+      "type": "object",
+      "properties": {
+        "companyProfile": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "ticker": {
+              "type": "string"
+            },
+            "exchange": {
+              "type": "string"
+            },
+            "headquarters": {
+              "type": "string"
+            },
+            "founded": {
+              "type": "integer"
+            },
+            "sector": {
+              "type": "string"
+            },
+            "businessDescription": {
+              "type": "string"
+            },
+            "financials": {
+              "type": "object",
+              "properties": {
+                "revenue2024": {
+                  "type": "string"
+                },
+                "marketCapAug2025": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "revenue2024",
+                "marketCapAug2025"
+              ]
+            },
+            "globalFootprint": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "region": {
+                    "type": "string"
+                  },
+                  "locations": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "region",
+                  "locations"
+                ]
+              }
+            }
+          },
+          "required": [
+            "name",
+            "ticker",
+            "exchange",
+            "headquarters",
+            "founded",
+            "sector",
+            "businessDescription",
+            "financials",
+            "globalFootprint"
+          ]
+        },
+        "esgAssessmentSummary": {
+          "type": "object",
+          "properties": {
+            "finalRiskCategory": {
+              "type": "string"
+            },
+            "executiveSummary": {
+              "type": "string"
+            },
+            "summaryRiskTable": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "criterion": {
+                    "type": "string"
+                  },
+                  "riskLevel": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "criterion",
+                  "riskLevel"
+                ]
+              }
+            }
+          },
+          "required": [
+            "finalRiskCategory",
+            "executiveSummary",
+            "summaryRiskTable"
+          ]
+        },
+        "detailedRiskAnalysis": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "criterion": {
+                "type": "string"
+              },
+              "riskLevel": {
+                "type": "string"
+              },
+              "findings": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "criterion",
+              "riskLevel",
+              "findings"
+            ]
+          }
+        },
+        "productAnalysis": {
+          "type": "object",
+          "properties": {
+            "portfolioOverview": {
+              "type": "string"
+            },
+            "dualUseNature": {
+              "type": "string"
+            },
+            "productBasedExclusionAnalysis": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "portfolioOverview",
+            "dualUseNature",
+            "productBasedExclusionAnalysis"
+          ]
+        },
+        "geopoliticalExposure": {
+          "type": "object",
+          "properties": {
+            "russiaUkraineConflict": {
+              "type": "object",
+              "properties": {
+                "stance": {
+                  "type": "string"
+                },
+                "actions": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "stance",
+                "actions"
+              ]
+            },
+            "israeliPalestinianConflict": {
+              "type": "object",
+              "properties": {
+                "stance": {
+                  "type": "string"
+                },
+                "actions": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "stance",
+                "actions"
+              ]
+            },
+            "inconsistentEthicalPostureAnalysis": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "russiaUkraineConflict",
+            "israeliPalestinianConflict",
+            "inconsistentEthicalPostureAnalysis"
+          ]
+        },
+        "assessmentMetadata": {
+          "type": "object",
+          "properties": {
+            "reportTitle": {
+              "type": "string"
+            },
+            "assessmentDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "assessedBy": {
+              "type": "string"
+            },
+            "guidelineReference": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "reportTitle",
+            "assessmentDate",
+            "assessedBy",
+            "guidelineReference"
+          ]
+        }
+      },
+      "required": [
+        "companyProfile",
+        "esgAssessmentSummary",
+        "detailedRiskAnalysis",
+        "productAnalysis",
+        "geopoliticalExposure",
+        "assessmentMetadata"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "country",
+    "sector",
+    "concerns",
+    "guideline",
+    "category",
+    "rationale",
+    "detailedReport"
+  ]
+}

@@ -1,306 +1,524 @@
 [
-    {
-      "id": "raiffeisen-bank-international-ag",
-      "name": "Raiffeisen Bank International AG",
-      "country": "Austria",
-      "sector": "Financials",
-      "concerns": "Extensive operations and tax payments in Russia post-invasion, financing an aggressor state.",
-      "guideline": "§4b, §4h",
-      "category": 4,
-      "rationale": "Largest foreign lender in Russia; profits tripled, paying hundreds of millions in taxes to the Kremlin, directly funding the war effort. Designated an 'international sponsor of war' by Ukraine."
-    },
-    {
-      "id": "glencore-plc",
-      "name": "Glencore PLC",
-      "country": "United Kingdom",
-      "sector": "Basic Materials",
-      "concerns": "Excluded for coal, but also has a record of gross corruption (guilty pleas, $1.1B+ fine) and severe human rights/environmental abuses in Colombia and Peru.",
-      "guideline": "§3c, §4e, §4g",
-      "category": 4,
-      "rationale": "Already excluded on product-based coal criteria. The company has also pleaded guilty to a decade-long bribery scheme across seven countries, constituting gross corruption."
-    },
-    {
-      "id": "vale-sa",
-      "name": "Vale SA",
-      "country": "Brazil",
-      "sector": "Basic Materials",
-      "concerns": "Two catastrophic tailings dam failures (Mariana and Brumadinho) causing hundreds of deaths and massive environmental destruction.",
-      "guideline": "§4a, §4e",
-      "category": 4,
-      "rationale": "Excluded by the Fund in May 2020 for severe environmental damage. The scale of the disasters represents a clear breach of the guidelines."
-    },
-    {
-      "id": "bae-systems-plc",
-      "name": "BAE Systems PLC",
-      "country": "United Kingdom",
-      "sector": "Industrials",
-      "concerns": "Production of key components for Trident and Minuteman III nuclear missile systems.",
-      "guideline": "§3a",
-      "category": 4,
-      "rationale": "Excluded by the Fund in January 2018 for its key role in the production and upgrading of nuclear weapons, which violate fundamental humanitarian principles."
-    },
-    {
-      "id": "lockheed-martin-corp",
-      "name": "Lockheed Martin Corp",
-      "country": "United States",
-      "sector": "Industrials",
-      "concerns": "Production and maintenance of nuclear weapons systems.",
-      "guideline": "§3a",
-      "category": 4,
-      "rationale": "Excluded by the Fund in August 2013 for its involvement in the production of nuclear weapons."
-    },
-    {
-      "id": "airbus-se",
-      "name": "Airbus SE",
-      "country": "France",
-      "sector": "Industrials",
-      "concerns": "Involvement in the production of nuclear missiles for the French military through joint ventures.",
-      "guideline": "§3a",
-      "category": 4,
-      "rationale": "Excluded by the Fund in January 2006 for its involvement in the production of nuclear weapons."
-    },
-    {
-      "id": "hsbc-holdings-plc",
-      "name": "HSBC Holdings PLC",
-      "country": "United Kingdom",
-      "sector": "Financials",
-      "concerns": "Systemic anti-money laundering failures, resulting in a $1.9 billion fine for laundering money for drug cartels and sanctioned states.",
-      "guideline": "§4g",
-      "category": 3,
-      "rationale": "The scale and duration of the criminal activity, admitted in a deferred prosecution agreement, represent 'gross financial crime' and a severe failure of governance."
-    },
-    {
-      "id": "commonwealth-bank-of-australia",
-      "name": "Commonwealth Bank of Australia",
-      "country": "Australia",
-      "sector": "Financials",
-      "concerns": "Massive anti-money laundering breaches ($700M fine); financing of environmentally damaging fossil fuel projects.",
-      "guideline": "§4g, §4e",
-      "category": 3,
-      "rationale": "Systemic compliance failures and significant contribution to environmentally harmful projects create an unacceptable risk profile."
-    },
-    {
-      "id": "bhp-group-ltd",
-      "name": "BHP Group Ltd",
-      "country": "Australia",
-      "sector": "Basic Materials",
-      "concerns": "Joint venture partner in the Mariana dam disaster; significant thermal coal production; other environmental and human rights issues.",
-      "guideline": "§4a, §4e, §3c",
-      "category": 3,
-      "rationale": "Culpability in a major environmental and human disaster, combined with coal operations that may exceed Fund thresholds, warrants observation."
-    },
-    {
-      "id": "johnson-and-johnson",
-      "name": "Johnson & Johnson",
-      "country": "United States",
-      "sector": "Health Care",
-      "concerns": "Tens of thousands of lawsuits and allegations of a decades-long cover-up regarding asbestos in talc-based baby powder, leading to cancer.",
-      "guideline": "§4h",
-      "category": 3,
-      "rationale": "The alleged long-term, intentional deception regarding a product's safety, causing severe health impacts, constitutes a 'particularly serious violation of fundamental ethical norms'."
-    },
-    {
-      "id": "unilever-plc",
-      "name": "Unilever PLC",
-      "country": "United Kingdom",
-      "sector": "Consumer Staples",
-      "concerns": "Continued operations in Russia and compliance with conscription laws; allegations of sexual abuse in Kenyan supply chain.",
-      "guideline": "§4h, §4a",
-      "category": 3,
-      "rationale": "Dual ethical risks of contributing to a war effort and severe human rights violations in the supply chain merit observation."
-    },
-    {
-      "id": "ryanair-holdings-plc",
-      "name": "Ryanair Holdings PLC",
-      "country": "Ireland",
-      "sector": "Industrials",
-      "concerns": "Documented history of anti-union behavior, punitive actions against striking workers, and violation of local labor laws across Europe.",
-      "guideline": "§4a",
-      "category": 3,
-      "rationale": "The systematic and widespread nature of the company's anti-labor practices constitutes a potential violation of the fundamental right to freedom of association."
-    },
-    {
-      "id": "meta-platforms-inc",
-      "name": "Meta Platforms Inc.",
-      "country": "United States",
-      "sector": "Technology",
-      "concerns": "Systemic data privacy violations (Cambridge Analytica, GDPR fine); significant role in the spread of misinformation.",
-      "guideline": "§4a, §4h",
-      "category": 3,
-      "rationale": "The company's business model and governance failures pose an ongoing risk of contributing to serious human rights violations, including the right to privacy."
-    },
-    {
-      "id": "teva-pharmaceutical-industries-ltd",
-      "name": "Teva Pharmaceutical Industries Ltd",
-      "country": "Israel",
-      "sector": "Health Care",
-      "concerns": "Major role in the US opioid crisis (settled for $4.25B); economic exploitation of the captive Palestinian market due to the occupation.",
-      "guideline": "§4h, §4a",
-      "category": 3,
-      "rationale": "The combination of a severe public health scandal and benefiting from human rights violations in an occupied territory creates a high-risk profile."
-    },
-    {
-      "id": "austal-ltd",
-      "name": "Austal Ltd",
-      "country": "Australia",
-      "sector": "Industrials",
-      "concerns": "Sale of patrol boats and naval vessels to countries involved in conflict or with poor human rights records (e.g., Yemen).",
-      "guideline": "§4c",
-      "category": 3,
-      "rationale": "The sale of military-capable vessels to states engaged in armed conflict where serious violations of international law are documented presents an unacceptable risk."
-    },
-    {
-      "id": "omv-ag",
-      "name": "OMV AG",
-      "country": "Austria",
-      "sector": "Energy",
-      "concerns": "Has taken steps to divest from Russia but continues to purchase Russian gas under long-term contracts, providing revenue to the state.",
-      "guideline": "§4h",
-      "category": 3,
-      "rationale": "The ongoing financial relationship with a state engaged in a war of aggression, despite divestment efforts, warrants formal observation."
-    },
-    {
-      "id": "adani-green-energy-ltd",
-      "name": "Adani Green Energy Ltd",
-      "country": "India",
-      "sector": "Utilities",
-      "concerns": "Part of a conglomerate facing allegations of stock manipulation and accounting fraud; specific environmental and community concerns related to large-scale projects.",
-      "guideline": "§4g",
-      "category": 2,
-      "rationale": "While the company has strong stated ESG policies and ratings, the serious allegations against the parent group warrant close monitoring for governance risks."
-    },
-    {
-      "id": "tsmc",
-      "name": "TSMC",
-      "country": "Taiwan",
-      "sector": "Technology",
-      "concerns": "Allegations of a harsh work culture and excessive hours that may violate labor rights standards, particularly in its overseas operations.",
-      "guideline": "§4a",
-      "category": 2,
-      "rationale": "Concerns over labor practices are significant and require monitoring to ensure they do not escalate into systematic violations of ILO principles."
-    },
-    {
-      "id": "anz-group-holdings-ltd",
-      "name": "ANZ Group Holdings Ltd",
-      "country": "Australia",
-      "sector": "Financials",
-      "concerns": "History of scandals including manipulation of interest rates, child labor in its financed projects, and a lawsuit alleging racism.",
-      "guideline": "§4g, §4a",
-      "category": 2,
-      "rationale": "The bank has a history of ethical breaches and has implemented new policies. Ongoing monitoring is required to ensure remediation is effective and sustained."
-    },
-    {
-      "id": "a2-milk-co-ltd",
-      "name": "a2 Milk Co Ltd/The",
-      "country": "Australia",
-      "sector": "Consumer Staples",
-      "concerns": "No significant ethical concerns identified in the provided research.",
-      "guideline": "N/A",
-      "category": 1,
-      "rationale": "The company's operations appear to be within the ethical boundaries set by the guidelines."
-    },
-    {
-      "id": "melexis-nv",
-      "name": "Melexis NV",
-      "country": "Belgium",
-      "sector": "Technology",
-      "concerns": "Indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict.",
-      "guideline": "§ 4c, 4d, 4h",
-      "category": 2,
-      "rationale": "A significant and unmitigated risk exists from the indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict.",
-      "detailedReport": {
-        "companyProfile": {
-          "name": "Melexis NV",
-          "ticker": "MELE",
-          "exchange": "Euronext Brussels",
-          "headquarters": "Ieper, Belgium",
-          "founded": 1988,
-          "sector": "Technology / Semiconductors",
-          "businessDescription": "Melexis NV is a global micro-electronic semiconductor company specializing in the design, development, testing, and marketing of advanced integrated circuits (ICs), with a focus on sensor technologies for the automotive industry, which accounts for approximately 90% of its revenue. The company operates on a 'fabless' model, outsourcing wafer fabrication while concentrating on R&D, design, and testing. Its products are also used in alternative mobility, smart appliances, robotics, and digital health.",
-          "financials": {
-            "revenue2024": "932.8 million EUR",
-            "marketCapAug2025": "3.21 billion USD"
+  {
+    "id": "raiffeisen-bank-international-ag",
+    "name": "Raiffeisen Bank International AG",
+    "country": "Austria",
+    "sector": "Financials",
+    "concerns": "Extensive operations and tax payments in Russia post-invasion, financing an aggressor state.",
+    "guideline": "§4b, §4h",
+    "category": 4,
+    "rationale": "Largest foreign lender in Russia; profits tripled, paying hundreds of millions in taxes to the Kremlin, directly funding the war effort. Designated an 'international sponsor of war' by Ukraine."
+  },
+  {
+    "id": "glencore-plc",
+    "name": "Glencore PLC",
+    "country": "United Kingdom",
+    "sector": "Basic Materials",
+    "concerns": "Excluded for coal, but also has a record of gross corruption (guilty pleas, $1.1B+ fine) and severe human rights/environmental abuses in Colombia and Peru.",
+    "guideline": "§3c, §4e, §4g",
+    "category": 4,
+    "rationale": "Already excluded on product-based coal criteria. The company has also pleaded guilty to a decade-long bribery scheme across seven countries, constituting gross corruption."
+  },
+  {
+    "id": "vale-sa",
+    "name": "Vale SA",
+    "country": "Brazil",
+    "sector": "Basic Materials",
+    "concerns": "Two catastrophic tailings dam failures (Mariana and Brumadinho) causing hundreds of deaths and massive environmental destruction.",
+    "guideline": "§4a, §4e",
+    "category": 4,
+    "rationale": "Excluded by the Fund in May 2020 for severe environmental damage. The scale of the disasters represents a clear breach of the guidelines."
+  },
+  {
+    "id": "bae-systems-plc",
+    "name": "BAE Systems PLC",
+    "country": "United Kingdom",
+    "sector": "Industrials",
+    "concerns": "Production of key components for Trident and Minuteman III nuclear missile systems.",
+    "guideline": "§3a",
+    "category": 4,
+    "rationale": "Excluded by the Fund in January 2018 for its key role in the production and upgrading of nuclear weapons, which violate fundamental humanitarian principles."
+  },
+  {
+    "id": "lockheed-martin-corp",
+    "name": "Lockheed Martin Corp",
+    "country": "United States",
+    "sector": "Industrials",
+    "concerns": "Production and maintenance of nuclear weapons systems.",
+    "guideline": "§3a",
+    "category": 4,
+    "rationale": "Excluded by the Fund in August 2013 for its involvement in the production of nuclear weapons."
+  },
+  {
+    "id": "airbus-se",
+    "name": "Airbus SE",
+    "country": "France",
+    "sector": "Industrials",
+    "concerns": "Involvement in the production of nuclear missiles for the French military through joint ventures.",
+    "guideline": "§3a",
+    "category": 4,
+    "rationale": "Excluded by the Fund in January 2006 for its involvement in the production of nuclear weapons."
+  },
+  {
+    "id": "hsbc-holdings-plc",
+    "name": "HSBC Holdings PLC",
+    "country": "United Kingdom",
+    "sector": "Financials",
+    "concerns": "Systemic anti-money laundering failures, resulting in a $1.9 billion fine for laundering money for drug cartels and sanctioned states.",
+    "guideline": "§4g",
+    "category": 3,
+    "rationale": "The scale and duration of the criminal activity, admitted in a deferred prosecution agreement, represent 'gross financial crime' and a severe failure of governance."
+  },
+  {
+    "id": "commonwealth-bank-of-australia",
+    "name": "Commonwealth Bank of Australia",
+    "country": "Australia",
+    "sector": "Financials",
+    "concerns": "Massive anti-money laundering breaches ($700M fine); financing of environmentally damaging fossil fuel projects.",
+    "guideline": "§4g, §4e",
+    "category": 3,
+    "rationale": "Systemic compliance failures and significant contribution to environmentally harmful projects create an unacceptable risk profile."
+  },
+  {
+    "id": "bhp-group-ltd",
+    "name": "BHP Group Ltd",
+    "country": "Australia",
+    "sector": "Basic Materials",
+    "concerns": "Joint venture partner in the Mariana dam disaster; significant thermal coal production; other environmental and human rights issues.",
+    "guideline": "§4a, §4e, §3c",
+    "category": 3,
+    "rationale": "Culpability in a major environmental and human disaster, combined with coal operations that may exceed Fund thresholds, warrants observation."
+  },
+  {
+    "id": "johnson-and-johnson",
+    "name": "Johnson & Johnson",
+    "country": "United States",
+    "sector": "Health Care",
+    "concerns": "Tens of thousands of lawsuits and allegations of a decades-long cover-up regarding asbestos in talc-based baby powder, leading to cancer.",
+    "guideline": "§4h",
+    "category": 3,
+    "rationale": "The alleged long-term, intentional deception regarding a product's safety, causing severe health impacts, constitutes a 'particularly serious violation of fundamental ethical norms'."
+  },
+  {
+    "id": "unilever-plc",
+    "name": "Unilever PLC",
+    "country": "United Kingdom",
+    "sector": "Consumer Staples",
+    "concerns": "Continued operations in Russia and compliance with conscription laws; allegations of sexual abuse in Kenyan supply chain.",
+    "guideline": "§4h, §4a",
+    "category": 3,
+    "rationale": "Dual ethical risks of contributing to a war effort and severe human rights violations in the supply chain merit observation."
+  },
+  {
+    "id": "ryanair-holdings-plc",
+    "name": "Ryanair Holdings PLC",
+    "country": "Ireland",
+    "sector": "Industrials",
+    "concerns": "Documented history of anti-union behavior, punitive actions against striking workers, and violation of local labor laws across Europe.",
+    "guideline": "§4a",
+    "category": 3,
+    "rationale": "The systematic and widespread nature of the company's anti-labor practices constitutes a potential violation of the fundamental right to freedom of association."
+  },
+  {
+    "id": "meta-platforms-inc",
+    "name": "Meta Platforms Inc.",
+    "country": "United States",
+    "sector": "Technology",
+    "concerns": "Systemic data privacy violations (Cambridge Analytica, GDPR fine); significant role in the spread of misinformation.",
+    "guideline": "§4a, §4h",
+    "category": 3,
+    "rationale": "The company's business model and governance failures pose an ongoing risk of contributing to serious human rights violations, including the right to privacy."
+  },
+  {
+    "id": "teva-pharmaceutical-industries-ltd",
+    "name": "Teva Pharmaceutical Industries Ltd",
+    "country": "Israel",
+    "sector": "Health Care",
+    "concerns": "Major role in the US opioid crisis (settled for $4.25B); economic exploitation of the captive Palestinian market due to the occupation.",
+    "guideline": "§4h, §4a",
+    "category": 3,
+    "rationale": "The combination of a severe public health scandal and benefiting from human rights violations in an occupied territory creates a high-risk profile."
+  },
+  {
+    "id": "austal-ltd",
+    "name": "Austal Ltd",
+    "country": "Australia",
+    "sector": "Industrials",
+    "concerns": "Sale of patrol boats and naval vessels to countries involved in conflict or with poor human rights records (e.g., Yemen).",
+    "guideline": "§4c",
+    "category": 3,
+    "rationale": "The sale of military-capable vessels to states engaged in armed conflict where serious violations of international law are documented presents an unacceptable risk."
+  },
+  {
+    "id": "omv-ag",
+    "name": "OMV AG",
+    "country": "Austria",
+    "sector": "Energy",
+    "concerns": "Has taken steps to divest from Russia but continues to purchase Russian gas under long-term contracts, providing revenue to the state.",
+    "guideline": "§4h",
+    "category": 3,
+    "rationale": "The ongoing financial relationship with a state engaged in a war of aggression, despite divestment efforts, warrants formal observation."
+  },
+  {
+    "id": "adani-green-energy-ltd",
+    "name": "Adani Green Energy Ltd",
+    "country": "India",
+    "sector": "Utilities",
+    "concerns": "Part of a conglomerate facing allegations of stock manipulation and accounting fraud; specific environmental and community concerns related to large-scale projects.",
+    "guideline": "§4g",
+    "category": 2,
+    "rationale": "While the company has strong stated ESG policies and ratings, the serious allegations against the parent group warrant close monitoring for governance risks."
+  },
+  {
+    "id": "tsmc",
+    "name": "TSMC",
+    "country": "Taiwan",
+    "sector": "Technology",
+    "concerns": "Allegations of a harsh work culture and excessive hours that may violate labor rights standards, particularly in its overseas operations.",
+    "guideline": "§4a",
+    "category": 2,
+    "rationale": "Concerns over labor practices are significant and require monitoring to ensure they do not escalate into systematic violations of ILO principles."
+  },
+  {
+    "id": "anz-group-holdings-ltd",
+    "name": "ANZ Group Holdings Ltd",
+    "country": "Australia",
+    "sector": "Financials",
+    "concerns": "History of scandals including manipulation of interest rates, child labor in its financed projects, and a lawsuit alleging racism.",
+    "guideline": "§4g, §4a",
+    "category": 2,
+    "rationale": "The bank has a history of ethical breaches and has implemented new policies. Ongoing monitoring is required to ensure remediation is effective and sustained."
+  },
+  {
+    "id": "a2-milk-co-ltd",
+    "name": "a2 Milk Co Ltd/The",
+    "country": "Australia",
+    "sector": "Consumer Staples",
+    "concerns": "No significant ethical concerns identified in the provided research.",
+    "guideline": "N/A",
+    "category": 1,
+    "rationale": "The company's operations appear to be within the ethical boundaries set by the guidelines."
+  },
+  {
+    "id": "melexis-nv",
+    "name": "Melexis NV",
+    "country": "Belgium",
+    "sector": "Technology",
+    "concerns": "Indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict.",
+    "guideline": "§ 4c, 4d, 4h",
+    "category": 2,
+    "rationale": "A significant and unmitigated risk exists from the indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict.",
+    "detailedReport": {
+      "companyProfile": {
+        "name": "Melexis NV",
+        "ticker": "MELE",
+        "exchange": "Euronext Brussels",
+        "headquarters": "Ieper, Belgium",
+        "founded": 1988,
+        "sector": "Technology / Semiconductors",
+        "businessDescription": "Melexis NV is a global micro-electronic semiconductor company specializing in the design, development, testing, and marketing of advanced integrated circuits (ICs), with a focus on sensor technologies for the automotive industry, which accounts for approximately 90% of its revenue. The company operates on a 'fabless' model, outsourcing wafer fabrication while concentrating on R&D, design, and testing. Its products are also used in alternative mobility, smart appliances, robotics, and digital health.",
+        "financials": {
+          "revenue2024": "932.8 million EUR",
+          "marketCapAug2025": "3.21 billion USD"
+        },
+        "globalFootprint": [
+          {
+            "region": "EMEA",
+            "locations": "Belgium, Bulgaria, France, Germany, Ireland, Switzerland, Ukraine"
           },
-          "globalFootprint": [
-            {
-              "region": "EMEA",
-              "locations": "Belgium, Bulgaria, France, Germany, Ireland, Switzerland, Ukraine"
-            },
-            {
-              "region": "APAC",
-              "locations": "China, Japan, Malaysia, Philippines, South Korea"
-            },
-            {
-              "region": "Americas",
-              "locations": "USA"
-            }
-          ]
-        },
-        "esgAssessmentSummary": {
-          "finalRiskCategory": "2 - High Risk",
-          "executiveSummary": "Melexis NV presents a bifurcated risk profile. The company demonstrates strong corporate governance, environmental policies, and a commendable ethical stance regarding Russia's war against Ukraine. However, a significant and unmitigated risk exists from the indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict. These components are sold into Israel via global distributors, making it highly probable they are used in military systems by the Israel Defense Forces. The company's reliance on a distribution model without end-user traceability renders its policies against military end-use ineffective from an ethical risk perspective, leading to the high-risk categorization.",
-          "summaryRiskTable": [
-            {
-              "criterion": "§ 4a & 4b - Serious Violations of Human Rights & Humanitarian Law",
-              "riskLevel": "High"
-            }
-          ]
-        },
-        "detailedRiskAnalysis": [
+          {
+            "region": "APAC",
+            "locations": "China, Japan, Malaysia, Philippines, South Korea"
+          },
+          {
+            "region": "Americas",
+            "locations": "USA"
+          }
+        ]
+      },
+      "esgAssessmentSummary": {
+        "finalRiskCategory": "2 - High Risk",
+        "executiveSummary": "Melexis NV presents a bifurcated risk profile. The company demonstrates strong corporate governance, environmental policies, and a commendable ethical stance regarding Russia's war against Ukraine. However, a significant and unmitigated risk exists from the indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict. These components are sold into Israel via global distributors, making it highly probable they are used in military systems by the Israel Defense Forces. The company's reliance on a distribution model without end-user traceability renders its policies against military end-use ineffective from an ethical risk perspective, leading to the high-risk categorization.",
+        "summaryRiskTable": [
           {
             "criterion": "§ 4a & 4b - Serious Violations of Human Rights & Humanitarian Law",
-            "riskLevel": "High",
-            "findings": "The company's products are critical enablers for military technology used by the Israel Defense Forces in a conflict marked by severe violations of international humanitarian law. While Melexis is not directly involved, its failure to implement a robust end-user verification system for its dual-use products constitutes a significant ethical lapse, creating an unacceptable risk of contributing to these violations."
-          },
+            "riskLevel": "High"
+          }
+        ]
+      },
+      "detailedRiskAnalysis": [
+        {
+          "criterion": "§ 4a & 4b - Serious Violations of Human Rights & Humanitarian Law",
+          "riskLevel": "High",
+          "findings": "The company's products are critical enablers for military technology used by the Israel Defense Forces in a conflict marked by severe violations of international humanitarian law. While Melexis is not directly involved, its failure to implement a robust end-user verification system for its dual-use products constitutes a significant ethical lapse, creating an unacceptable risk of contributing to these violations."
+        },
+        {
+          "criterion": "§ 4c & 4d - Sale of Weapons to Certain States",
+          "riskLevel": "Moderate",
+          "findings": "Melexis does not directly sell weapons. However, the sale of critical, enabling dual-use components to a state engaged in armed conflict (Israel) can be interpreted as a material contribution to that state's military capabilities. This creates a moderate risk of contravening the spirit and intent of these criteria."
+        },
+        {
+          "criterion": "§ 4e & 4f - Severe Environmental Damage & Unacceptable Greenhouse Gas Emissions",
+          "riskLevel": "Low",
+          "findings": "The company demonstrates a strong and proactive approach to environmental management. It holds ISO 14001 certification and has set an ambitious target to reduce Scope 1 and 2 GHG emissions per million sold ICs by 55% by 2030 (vs. 2024 baseline). Its fabless model contributes to a low direct environmental impact. The risk under this criterion is low."
+        },
+        {
+          "criterion": "§ 4g & 4h - Gross Corruption & Other Particularly Serious Violations",
+          "riskLevel": "Low",
+          "findings": "Melexis maintains a robust anti-corruption framework, including a confidential 'Speak Up' whistleblowing channel. A review of its history shows no evidence of involvement in gross corruption or bribery. Past patent litigation does not meet the threshold for a serious violation of ethical norms. The risk is assessed as low."
+        }
+      ],
+      "productAnalysis": {
+        "portfolioOverview": "Melexis's product portfolio consists of advanced mixed-signal semiconductor solutions that are critical enabling components for complex electronic systems. The main categories are: Sensors (magnetic, pressure, optical, temperature), Drivers (for motors and LEDs), and Transceivers (for system communication like LIN and CAN).",
+        "dualUseNature": "Semiconductors are a quintessential dual-use technology. Melexis's high-precision sensors are essential for guidance, navigation, and targeting systems in military hardware such as UAVs (drones), precision-guided munitions, and robotics. Many of these items are explicitly listed under multilateral export control regimes like the Wassenaar Arrangement, confirming their strategic military importance.",
+        "productBasedExclusionAnalysis": "An analysis against the GPFG's product-based criteria (§ 3) shows no grounds for exclusion. Melexis is not involved in the production of prohibited weapons, tobacco, cannabis, or thermal coal. All ethical risks derive from the company's conduct and the end-use of its products."
+      },
+      "geopoliticalExposure": {
+        "russiaUkraineConflict": {
+          "stance": "Proactive, values-aligned",
+          "actions": "Melexis has maintained its R&D center in Kyiv, Ukraine, throughout the conflict, earning a 'Bravery Award' from the European Business Association. The company has no official presence or sanctioned business activities in the Russian Federation. This conduct is a strong positive ethical signal."
+        },
+        "israeliPalestinianConflict": {
+          "stance": "Passive, legally defensive",
+          "actions": "The company relies on legal disclaimers in its terms and conditions to mitigate liability, while continuing to sell products into the region via a business model that makes military end-use a high-probability outcome. This inaction and failure to implement enhanced due diligence is a strong negative ethical signal."
+        },
+        "inconsistentEthicalPostureAnalysis": "The company's proactive, values-aligned stance on Ukraine contrasts sharply with its passive, legally defensive posture regarding the Israeli-Palestinian conflict. This suggests that ethical decision-making may be driven more by compliance with the geopolitical alignment of its primary markets (EU/US) and legal liability minimization, rather than a universally applied set of ethical principles. This inconsistency represents a significant governance risk."
+      },
+      "assessmentMetadata": {
+        "reportTitle": "Comprehensive Risk Assessment of Melexis NV for the Government Pension Fund Global",
+        "assessmentDate": "2025-08-15",
+        "assessedBy": "Gemini Deep Research",
+        "guidelineReference": "https://lovdata.no/dokument/INS/forskrift/2014-12-18-1793"
+      }
+    }
+  },
+  {
+    "id": "tsmc",
+    "name": "TSMC",
+    "country": "Taiwan",
+    "sector": "Technology",
+    "concerns": "Allegations of a harsh work culture and excessive hours that may violate labor rights standards, particularly in its overseas operations.",
+    "guideline": "§4a",
+    "category": 2,
+    "rationale": "Concerns over labor practices are significant and require monitoring to ensure they do not escalate into systematic violations of ILO principles."
+  },
+  {
+    "category": 2,
+    "concerns": "Indirect contribution to serious violations of the rights of individuals in situations of war or conflict, a legacy of severe environmental damage, and business dealings in Russia.",
+    "country": "Turkey",
+    "detailedReport": {
+      "assessmentMetadata": {
+        "assessedBy": "Oljefondsvokteren Project Analyst",
+        "assessmentDate": "2025-08-15",
+        "guidelineReference": "Guidelines for observation and exclusion from the Norwegian Government Pension Fund Global (GPFG)",
+        "reportTitle": "Ethical Risk Assessment: Aksa Akrilik Kimya Sanayii A.Ş. - An Analysis Based on the Guidelines for the Norwegian Government Pension Fund Global"
+      },
+      "companyProfile": {
+        "businessDescription": "Aksa Akrilik Kimya Sanayii A.Ş. is the world's largest acrylic fiber manufacturer and a key subsidiary of Akkök Holding. The company produces artificial and synthetic fibers for various industries and is strategically expanding into advanced materials like carbon fiber.",
+        "exchange": "Borsa Istanbul (BIST)",
+        "financials": {
+          "marketCapAug2025": "Not specified in report",
+          "revenue2024": "$785 million (trailing twelve-month as of March 2025)"
+        },
+        "founded": 1968,
+        "globalFootprint": [
           {
-            "criterion": "§ 4c & 4d - Sale of Weapons to Certain States",
-            "riskLevel": "Moderate",
-            "findings": "Melexis does not directly sell weapons. However, the sale of critical, enabling dual-use components to a state engaged in armed conflict (Israel) can be interpreted as a material contribution to that state's military capabilities. This creates a moderate risk of contravening the spirit and intent of these criteria."
-          },
-          {
-            "criterion": "§ 4e & 4f - Severe Environmental Damage & Unacceptable Greenhouse Gas Emissions",
-            "riskLevel": "Low",
-            "findings": "The company demonstrates a strong and proactive approach to environmental management. It holds ISO 14001 certification and has set an ambitious target to reduce Scope 1 and 2 GHG emissions per million sold ICs by 55% by 2030 (vs. 2024 baseline). Its fabless model contributes to a low direct environmental impact. The risk under this criterion is low."
-          },
-          {
-            "criterion": "§ 4g & 4h - Gross Corruption & Other Particularly Serious Violations",
-            "riskLevel": "Low",
-            "findings": "Melexis maintains a robust anti-corruption framework, including a confidential 'Speak Up' whistleblowing channel. A review of its history shows no evidence of involvement in gross corruption or bribery. Past patent litigation does not meet the threshold for a serious violation of ethical norms. The risk is assessed as low."
+            "locations": "Exports to over 400 customers in more than 50 countries across five continents.",
+            "region": "Global"
           }
         ],
-        "productAnalysis": {
-          "portfolioOverview": "Melexis's product portfolio consists of advanced mixed-signal semiconductor solutions that are critical enabling components for complex electronic systems. The main categories are: Sensors (magnetic, pressure, optical, temperature), Drivers (for motors and LEDs), and Transceivers (for system communication like LIN and CAN).",
-          "dualUseNature": "Semiconductors are a quintessential dual-use technology. Melexis's high-precision sensors are essential for guidance, navigation, and targeting systems in military hardware such as UAVs (drones), precision-guided munitions, and robotics. Many of these items are explicitly listed under multilateral export control regimes like the Wassenaar Arrangement, confirming their strategic military importance.",
-          "productBasedExclusionAnalysis": "An analysis against the GPFG's product-based criteria (§ 3) shows no grounds for exclusion. Melexis is not involved in the production of prohibited weapons, tobacco, cannabis, or thermal coal. All ethical risks derive from the company's conduct and the end-use of its products."
+        "headquarters": "Yalova, Turkey",
+        "name": "Aksa Akrilik Kimya Sanayii A.Ş.",
+        "sector": "Chemicals",
+        "ticker": "AKSA"
+      },
+      "detailedRiskAnalysis": [
+        {
+          "criterion": "§3b: Serious violations of the rights of individuals in situations of war or conflict",
+          "findings": "The company's parent, Akkök Holding, owns Epsilon Composite, a direct supplier of parts for military drones (e.g., ANKA, TB-2) used by the Turkish Armed Forces. These military operations in Syria, Iraq, and southeastern Turkey are credibly linked by international organizations like Amnesty International to civilian deaths and potential war crimes, creating an unacceptable risk of contribution to these violations.",
+          "riskLevel": "High"
         },
-        "geopoliticalExposure": {
-          "russiaUkraineConflict": {
-            "stance": "Proactive, values-aligned",
-            "actions": "Melexis has maintained its R&D center in Kyiv, Ukraine, throughout the conflict, earning a 'Bravery Award' from the European Business Association. The company has no official presence or sanctioned business activities in the Russian Federation. This conduct is a strong positive ethical signal."
-          },
-          "israeliPalestinianConflict": {
-            "stance": "Passive, legally defensive",
-            "actions": "The company relies on legal disclaimers in its terms and conditions to mitigate liability, while continuing to sell products into the region via a business model that makes military end-use a high-probability outcome. This inaction and failure to implement enhanced due diligence is a strong negative ethical signal."
-          },
-          "inconsistentEthicalPostureAnalysis": "The company's proactive, values-aligned stance on Ukraine contrasts sharply with its passive, legally defensive posture regarding the Israeli-Palestinian conflict. This suggests that ethical decision-making may be driven more by compliance with the geopolitical alignment of its primary markets (EU/US) and legal liability minimization, rather than a universally applied set of ethical principles. This inconsistency represents a significant governance risk."
+        {
+          "criterion": "§3c: Severe environmental damage",
+          "findings": "The company was responsible for a 1999 plant leak of approximately 6,500 tons of carcinogenic acrylonitrile, which caused widespread human exposure, animal deaths, and a documented 80% increase in local cancer rates. This historical event represents a clear instance of severe environmental damage with lasting health impacts.",
+          "riskLevel": "High"
         },
-        "assessmentMetadata": {
-          "reportTitle": "Comprehensive Risk Assessment of Melexis NV for the Government Pension Fund Global",
-          "assessmentDate": "2025-08-15",
-          "assessedBy": "Gemini Deep Research",
-          "guidelineReference": "https://lovdata.no/dokument/INS/forskrift/2014-12-18-1793"
+        {
+          "criterion": "§3e: Other particularly serious violations of fundamental ethical norms",
+          "findings": "The company maintains a commercial presence in Russia and expresses a desire for continued partnership post-2022 invasion of Ukraine. This follows a historical partnership (via DowAksa) with Russian state-owned RUSNANO, indicating a tolerance for geopolitical and ethical risks misaligned with GPFG values.",
+          "riskLevel": "Moderate"
+        },
+        {
+          "criterion": "§3d: Gross corruption (related to governance standards)",
+          "findings": "A significant discrepancy exists between the company's high domestic corporate governance ratings and its low S&P Global ESG Score of 34/100, which includes a 'Low' disclosure rate. This suggests a gap in transparency and governance practices when measured against international standards.",
+          "riskLevel": "Moderate"
         }
+      ],
+      "esgAssessmentSummary": {
+        "executiveSummary": "The assessment concludes that Aksa Akrilik Kimya Sanayii A.Ş. presents a significant ethical risk profile. The primary driver is the company's indirect contribution to serious violations of human rights in war through its parent company's defense industry supplier, Epsilon Composite. This risk is compounded by a legacy of severe environmental damage and a demonstrated tolerance for geopolitical risk through business in Russia, leading to a High Risk classification.",
+        "finalRiskCategory": "2 - High Risk",
+        "summaryRiskTable": [
+          {
+            "criterion": "Indirect Supply to Turkish Military (§3b)",
+            "riskLevel": "High"
+          },
+          {
+            "criterion": "Historical Environmental Disaster (§3c)",
+            "riskLevel": "High"
+          },
+          {
+            "criterion": "Business Ties to Russia (§3e)",
+            "riskLevel": "Moderate"
+          },
+          {
+            "criterion": "ESG Transparency Discrepancy (§3d)",
+            "riskLevel": "Moderate"
+          }
+        ]
+      },
+      "geopoliticalExposure": {
+        "inconsistentEthicalPostureAnalysis": "There is a major inconsistency between Aksa's public commitment to sustainability and the UN Global Compact, and its actions. The company's integration into a corporate structure supplying military end-users implicated in human rights violations, coupled with its continued business pursuits in Russia post-2022, fundamentally contradicts its stated ethical posture.",
+        "israeliPalestinianConflict": {
+          "actions": "No evidence of direct or indirect business operations in Israel or the Palestinian territories was found. The company is unrelated to the French insurer AXA, which has been subject to boycott campaigns.",
+          "stance": "An Akkök Holding executive message acknowledges the 'Israel-Hamas War' as a regional risk, but no specific company stance or link to the conflict has been identified."
+        },
+        "russiaUkraineConflict": {
+          "actions": "Maintains a commercial presence in Russia through a dedicated Russian-language website soliciting 'long-term and fruitful partnership' with Russian companies, following the full-scale 2022 invasion. Historically, its venture DowAksa partnered with state-owned RUSNANO.",
+          "stance": "The company's actions demonstrate a willingness to continue and expand business in Russia, indicating a corporate risk appetite that is misaligned with the ethical foundations of the GPFG and Norwegian foreign policy."
+        }
+      },
+      "productAnalysis": {
+        "dualUseNature": "The company's carbon fiber and advanced composite products are critical dual-use materials. While not weapons themselves, their properties make them essential components for modern military platforms, including UAVs and combat aircraft, as demonstrated by the activities of its sister company, Epsilon Composite.",
+        "portfolioOverview": "Aksa's core products are acrylic and carbon fibers. These products are not classified as weapons that violate humanitarian principles through normal use, nor are they tobacco products.",
+        "productBasedExclusionAnalysis": "The company's products do not trigger direct exclusion under the GPFG's product-based criteria (§2). The ethical risk is entirely conduct-based, stemming from the end-use of its dual-use materials by military actors linked to human rights violations."
       }
     },
-    {
-      "id": "tsmc",
-      "name": "TSMC",
-      "country": "Taiwan",
-      "sector": "Technology",
-      "concerns": "Allegations of a harsh work culture and excessive hours that may violate labor rights standards, particularly in its overseas operations.",
-      "guideline": "§4a",
-      "category": 2,
-      "rationale": "Concerns over labor practices are significant and require monitoring to ensure they do not escalate into systematic violations of ILO principles."
-    }
-  ]
-  
+    "guideline": "§3b: Serious violations of the rights of individuals in situations of war or conflict; §3c: Severe environmental damage",
+    "id": "aksa-akrilik-kimya-sanayii-as",
+    "name": "Aksa Akrilik Kimya Sanayii A.Ş.",
+    "rationale": "The company is assigned a High Risk category due to its indirect but material contribution to serious violations of human rights in armed conflict. This arises from its parent company's (Akkök Holding) ownership of Epsilon Composite, a supplier to the Turkish defense industry. This primary risk is compounded by a history of severe environmental damage and ongoing business activities in Russia.",
+    "sector": "Chemicals"
+  },
+  {
+    "category": 1,
+    "concerns": "Intentional and strategic supply of military-grade materials, an opaque and high-risk posture regarding business with Russia in the context of the war in Ukraine, and a pattern of significant governance and operational failures.",
+    "country": "India",
+    "detailedReport": {
+      "assessmentMetadata": {
+        "assessedBy": "Oljefondsvokteren Project Analyst",
+        "assessmentDate": "2025-08-15",
+        "guidelineReference": "Norwegian 'Guidelines for observation and exclusion from the Government Pension Fund Global'",
+        "reportTitle": "Risk Assessment Report: Aarti Industries Ltd."
+      },
+      "companyProfile": {
+        "businessDescription": "Aarti Industries Ltd. (AIL) is a prominent Indian manufacturer of specialty chemicals with a core competency in benzene-based chemistry. Its product portfolio serves a wide array of downstream industries, including agrochemicals, pharmaceuticals, polymers, additives, surfactants, pigments, and dyes. The company explicitly markets a 'Defence' product line.",
+        "exchange": "National Stock Exchange of India (NSE), BSE Ltd.",
+        "financials": {
+          "marketCapAug2025": "Not specified in report",
+          "revenue2024": "Not specified in report"
+        },
+        "founded": 1984,
+        "globalFootprint": [
+          {
+            "locations": "Exports to over 60 countries, servicing more than 400 export customers.",
+            "region": "Global"
+          },
+          {
+            "locations": "India (48% of sales)",
+            "region": "India"
+          },
+          {
+            "locations": "Middle East (18% of sales)",
+            "region": "Middle East"
+          },
+          {
+            "locations": "North America (10% of sales)",
+            "region": "North America"
+          },
+          {
+            "locations": "Europe (6% of sales)",
+            "region": "Europe"
+          }
+        ],
+        "headquarters": "Gujarat and Maharashtra, India (manufacturing locations)",
+        "name": "Aarti Industries Ltd.",
+        "sector": "Specialty Chemicals",
+        "ticker": "AARTIIND"
+      },
+      "detailedRiskAnalysis": [
+        {
+          "criterion": "§ 3 (b) Serious violations of the rights of individuals in situations of war or conflict",
+          "findings": "The company intentionally produces military-grade explosives and rocket propellants. It also has a high-risk involvement in the Ukraine conflict through contradictory statements and a lack of transparency regarding business with Russia post-2022, suggesting it contributes to the economic resilience of a state engaged in a war of aggression.",
+          "riskLevel": "High"
+        },
+        {
+          "criterion": "§ 2 (1) (c) Sell weapons or military materiel to states...",
+          "findings": "While direct sales to states at war are not confirmed, the combination of producing military materials, its formal status as an Indian Offset Partner (IOP), and opaque business with Russia creates an unacceptable risk of violating the spirit of this criterion.",
+          "riskLevel": "High"
+        },
+        {
+          "criterion": "§ 3 (a) Serious or systematic human rights violations",
+          "findings": "A history of fatal industrial accidents at a closely affiliated company (Aarti Drugs) due to negligence indicates systemic failures in protecting the right to life and safe working conditions. The persistent leadership overlap suggests these risks are relevant to AIL.",
+          "riskLevel": "Moderate to High"
+        },
+        {
+          "criterion": "§ 3 (c) Severe environmental damage",
+          "findings": "A regulatory-enforced plant closure for pollution at a closely affiliated company (Aarti Pharmalabs) and self-admitted errors in past ESG data undermine the credibility of AIL's environmental reporting and suggest a high potential for unreported damage.",
+          "riskLevel": "Moderate to High"
+        },
+        {
+          "criterion": "§ 3 (d) Gross corruption...",
+          "findings": "An administrative warning from the securities regulator (SEBI) to an affiliated company for failures in implementing internal codes of conduct contributes to a pattern of weak governance across the broader Aarti group.",
+          "riskLevel": "Low to Moderate"
+        }
+      ],
+      "esgAssessmentSummary": {
+        "executiveSummary": "The analysis reveals that Aarti Industries Ltd. (AIL) presents a convergence of multiple, severe risks. The primary findings indicate that AIL is an intentional and strategic supplier of military-grade materials, maintains an opaque and high-risk posture regarding business with Russia, and exhibits a pattern of significant governance and operational failures. The cumulative weight of this evidence leads to the conclusion that there is an unacceptable risk that the company contributes to or is responsible for serious violations of fundamental ethical norms, making it a candidate for exclusion.",
+        "finalRiskCategory": "1 - Exclusion Candidate",
+        "summaryRiskTable": [
+          {
+            "criterion": "§ 3 (b) Serious violations of the rights of individuals in situations of war or conflict",
+            "riskLevel": "High"
+          },
+          {
+            "criterion": "§ 2 (1) (c) Sell weapons or military materiel to states...",
+            "riskLevel": "High"
+          },
+          {
+            "criterion": "§ 3 (a) Serious or systematic human rights violations",
+            "riskLevel": "Moderate to High"
+          },
+          {
+            "criterion": "§ 3 (c) Severe environmental damage",
+            "riskLevel": "Moderate to High"
+          },
+          {
+            "criterion": "§ 3 (d) Gross corruption...",
+            "riskLevel": "Low to Moderate"
+          }
+        ]
+      },
+      "geopoliticalExposure": {
+        "inconsistentEthicalPostureAnalysis": "Despite a comprehensive ESG framework on paper, evidence indicates these measures are insufficient and function as a 'check-the-box' exercise. Stated policies failed to prevent environmental violations, governance lapses, and fatal accidents within the corporate group. The framework provides no transparency on critical risks like end-user due diligence for defence products and its business with Russia, demonstrating a significant gap between stated policy and actual practice.",
+        "israeliPalestinianConflict": {
+          "actions": "The company's operations have been indirectly affected by logistical disruptions due to regional instability. Given its extensive export network and dual-use products, there is a latent risk of chemicals being diverted to military end-users in the region. The company provides no public information on its due diligence processes to prevent such diversion.",
+          "stance": "There is no direct evidence of sales to Israeli or Palestinian entities. The company has acknowledged 'deferred export shipments... due to the Israel-Iran conflict'."
+        },
+        "russiaUkraineConflict": {
+          "actions": "The company has made irreconcilable statements about its business with Russia. A March 2022 statement claimed sales were 'minimal' (0.3%), but an August 2024 analyst report cited 'support from MMA exports to Russia' as a material factor for achieving profitability targets. This suggests AIL has capitalized on trade realignments to supply Russia's industrial base.",
+          "stance": "The contradictory statements and lack of transparency represent a major governance failure and create an unacceptable risk of contributing to the economic resilience of a state engaged in a war of aggression."
+        }
+      },
+      "productAnalysis": {
+        "dualUseNature": "AIL manufactures a wide range of chemicals with dual-use potential, particularly nitroaromatic and chlorinated compounds that can serve as precursors for explosives. Many of these chemicals fall under India's SCOMET (Special Chemicals, Organisms, Materials, Equipment, and Technologies) export control list, requiring licenses for export.",
+        "portfolioOverview": "AIL has a dedicated 'Defence' product category featuring chemicals with direct military applications. This includes high explosives like TATB and PETN, and essential components for solid rocket propellants such as HTPB and Ammonium Perchlorate. This demonstrates an intentional and strategic focus on the defence sector.",
+        "productBasedExclusionAnalysis": "The company's strategic involvement is confirmed by its official designation as an 'Indian Offset Partner' (IOP) by the Indian Ministry of Defence. This elevates AIL from a commercial supplier to a strategic partner of the Indian defence establishment, making it highly probable its 'Defence' products are supplied to military programs and increasing the risk of contribution to serious violations of the rights of individuals in war or conflict under § 3 (b)."
+      }
+    },
+    "guideline": "§ 3 (b) Serious violations of the rights of individuals in situations of war or conflict",
+    "id": "aarti-industries-ltd",
+    "name": "Aarti Industries Ltd.",
+    "rationale": "The recommendation for exclusion is based on the cumulative and interconnected nature of identified risks. The primary drivers are the direct and intentional contribution to military capability through the production of military-grade materials, and the high-risk involvement in the Ukraine conflict by supplying Russia's industrial base. These risks are amplified by a pattern of fatal accidents, environmental non-compliance, and governance lapses, demonstrating a weak and ineffective risk management culture.",
+    "sector": "Chemicals"
+  }
+]

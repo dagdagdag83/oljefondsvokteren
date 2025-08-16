@@ -43,8 +43,11 @@ const resources = {
 				ok: 'OK',
 				monitor: 'Monitor',
 				observe: 'Observe',
-				exclude: 'Exclusion Candidate'
-			}
+				exclude: 'Exclusion Candidate',
+			},
+			company: {
+				guideline: 'Ethic Council Guidelines',
+			},
 		}
 	},
 	no: {
@@ -87,8 +90,11 @@ const resources = {
 				ok: 'OK',
 				monitor: 'Overvåk',
 				observe: 'Observer',
-				exclude: 'Kandidat for utelukkelse'
-			}
+				exclude: 'Kandidat for utelukkelse',
+			},
+			company: {
+				guideline: 'Etikkrådet retningslinjer',
+			},
 		}
 	},
 }

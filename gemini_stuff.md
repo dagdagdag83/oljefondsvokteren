@@ -1,3 +1,8 @@
+# Deep research JSON prompt
+
+create a json response based on the linked report. make sure to generate an id, example "aarti-industries-ltd". DO NOT SKIP any required fields!
+
+
 # Deep research prompt
 
 The norwegian oljefondet has invested in company Melexis NV in Belgium. Provide a comprehensive risk assessment report using the guidelines from https://lovdata.no/dokument/INS/forskrift/2014-12-18-1793?q=Retningslinjer%20for%20observasjon%20og%20utelukkelse. you must provide a final risk category from the following: 1 - Exclusion Candidate, 2 - high risk, 3 - moderate risk 4 - acceptable risk. Make sure to cross-reference the risk all current global conflicts which Norwegian ethics would view as problematic, for instance russia's unjust war against ukraine and israel's unjust war against palestine.

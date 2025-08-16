@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { marked, slugify, stripMarkdownFormatting } from '../shared/marked'
 
 export function CompanyFullReportPage() {
 	const { id } = useParams<{ id: string }>()
 	const [reportHtml, setReportHtml] = useState('')
+	const [headings, setHeadings] = useState<{ text: string; slug: string }[]>([])
 	const [error, setError] = useState('')
 
 	useEffect(() => {
@@ -11,11 +13,23 @@ export function CompanyFullReportPage() {
 
 		async function fetchReport() {
 			try {
-				const response = await fetch(`${import.meta.env.BASE_URL}full-reports/${id}.html`)
+				const response = await fetch(`${import.meta.env.BASE_URL}reports/${id}.md`)
 				if (!response.ok) {
 					throw new Error('Report not found')
 				}
-				const html = await response.text()
+				const markdown = await response.text()
+
+				// Extract H2 headings for Table of Contents
+				const headingRegex = /^## (.*$)/gim
+				const extractedHeadings = []
+				let match
+				while ((match = headingRegex.exec(markdown)) !== null) {
+					const cleanText = stripMarkdownFormatting(match[1])
+					extractedHeadings.push({ text: cleanText, slug: slugify(cleanText) })
+				}
+				setHeadings(extractedHeadings)
+
+				const html = await marked(markdown)
 				setReportHtml(html)
 			} catch (err) {
 				setError((err as Error).message)
@@ -41,45 +55,24 @@ export function CompanyFullReportPage() {
 			<Link to={`/companies/${id}`} className="text-blue-700 hover:underline dark:text-blue-400">
 				← Back to Company Summary
 			</Link>
-			<div className="grid grid-cols-4 gap-8">
+			<div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 				<aside className="col-span-1 sticky top-24 self-start">
 					<nav>
 						<h3 className="font-semibold text-lg mb-4">Contents</h3>
 						<ul className="space-y-2">
-							<li>
-								<a href="#summary" className="hover:underline">
-									Executive Summary
-								</a>
-							</li>
-							<li>
-								<a href="#profile" className="hover:underline">
-									Corporate Profile
-								</a>
-							</li>
-							<li>
-								<a href="#product-criteria" className="hover:underline">
-									Product-Based Criteria (§ 3)
-								</a>
-							</li>
-							<li>
-								<a href="#conduct-criteria" className="hover:underline">
-									Conduct-Based Criteria (§ 4)
-								</a>
-							</li>
-							<li>
-								<a href="#geopolitical" className="hover:underline">
-									Geopolitical Risk
-								</a>
-							</li>
-							<li>
-								<a href="#synthesis" className="hover:underline">
-									Final Synthesis
-								</a>
-							</li>
+							{headings.map((heading) => (
+								<li key={heading.slug}>
+									<a href={`#${heading.slug}`} className="hover:underline text-gray-700 dark:text-gray-300">
+										{heading.text}
+									</a>
+								</li>
+							))}
 						</ul>
 					</nav>
 				</aside>
-				<main className="col-span-3" dangerouslySetInnerHTML={{ __html: reportHtml }} />
+				<main className="col-span-3">
+					<div className="prose dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: reportHtml }} />
+				</main>
 			</div>
 		</div>
 	)
