@@ -95,21 +95,22 @@ export default function OverviewPage() {
 			const valueByCountry: Record<string, number> = {}
 
 			for (const c of companies) {
-				if (c.category) {
-					byCategory[c.category] = (byCategory[c.category] || 0) + 1
+				const category = c.shallowReport?.riskAssessment?.category
+				if (category) {
+					byCategory[category] = (byCategory[category] || 0) + 1
 				}
 				byCountry[c.country] = (byCountry[c.country] || 0) + 1
 				bySector[c.sector] = (bySector[c.sector] || 0) + 1
-				if (c.marketValue) {
-					valueBySector[c.sector] = (valueBySector[c.sector] || 0) + c.marketValue
-					valueByCountry[c.country] = (valueByCountry[c.country] || 0) + c.marketValue
+				if (c.marketValueNok) {
+					valueBySector[c.sector] = (valueBySector[c.sector] || 0) + c.marketValueNok
+					valueByCountry[c.country] = (valueByCountry[c.country] || 0) + c.marketValueNok
 				}
 			}
 
 			const topInvestments = [...companies]
-				.sort((a, b) => (b.marketValue || 0) - (a.marketValue || 0))
+				.sort((a, b) => (b.marketValueNok || 0) - (a.marketValueNok || 0))
 				.slice(0, 10)
-				.map((c) => ({ name: c.name, value: c.marketValue || 0 }))
+				.map((c) => ({ name: c.name, value: c.marketValueNok || 0 }))
 
 			setStats({
 				total: companies.length,
@@ -298,11 +299,11 @@ function ValueBars({
 function CategoryDonut({ title, data }: { title: string; data: Record<string, number> }) {
 	const { t } = useTranslation()
 	const mapping: Record<string, { key: string; color: string }> = {
-		'1': { key: 'ok', color: '#16a34a' },
-		'2': { key: 'monitor', color: '#2563eb' },
-		'3': { key: 'observe', color: '#ea580c' },
-		'4': { key: 'exclude', color: '#b91c1c' },
-		'undefined': { key: 'undefined', color: '#64748b' },
+		'1': { key: 'exclude', color: '#b91c1c' }, // red-700
+		'2': { key: 'observe', color: '#ea580c' }, // orange-600
+		'3': { key: 'monitor', color: '#facc15' }, // yellow-400
+		'4': { key: 'ok', color: '#16a34a' }, // green-600
+		'undefined': { key: 'undefined', color: '#64748b' }, // slate-500
 	}
 	const entries = Object.entries(data)
 		.filter(([k]) => k !== 'undefined')

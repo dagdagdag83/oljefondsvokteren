@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import * as Flags from 'country-flag-icons/react/3x2'
 import { InformationCircleIcon } from '@heroicons/react/24/outline'
-import { Company, useCompanyData } from '../shared/useCompanyData'
+import { Company, useCompanyData, ShallowReport, DeepReport } from '../shared/useCompanyData'
 import { Badge } from './CompaniesPage.tsx'
 import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
@@ -29,7 +29,229 @@ const formatToHumanMonetary = (value: number) => {
 const getCountryCode = (countryName: string): string | undefined => {
 	if (countryName === 'United States') return 'US'
 	if (countryName === 'United Kingdom') return 'GB'
+	if (countryName.toLowerCase().includes('hong kong')) return 'HK'
 	return countries.getAlpha2Code(countryName, 'en')
+}
+
+const isDeepReportProfile = (
+	profile: DeepReport['companyProfile'] | ShallowReport['companyProfile'],
+): profile is DeepReport['companyProfile'] => {
+	return 'businessModelAndMarketPosition' in profile
+}
+
+const DataPoint: React.FC<{ label: string; value: React.ReactNode }> = ({ label, value }) => (
+	<div>
+		<p className="text-sm text-gray-500">{label}</p>
+		<p className="text-lg font-semibold">{value || '-'}</p>
+	</div>
+)
+
+const Section: React.FC<{ title: string; children: React.ReactNode; className?: string }> = ({
+	title,
+	children,
+	className,
+}) => (
+	<div className={`rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70 ${className}`}>
+		<h3 className="text-lg font-medium mb-2">{title}</h3>
+		{children}
+	</div>
+)
+
+const CompanyProfile: React.FC<{ company: Company }> = ({ company }) => {
+	const profile = company.deepReport?.companyProfile || company.shallowReport?.companyProfile
+	if (!profile) return null
+
+	const countryCode = getCountryCode(company.country)
+	const FlagComponent = countryCode ? Flags[countryCode as keyof typeof Flags] : null
+
+	const incorporationCountryCode = company.incorporationCountry && getCountryCode(company.incorporationCountry)
+	const IncorporationFlagComponent = incorporationCountryCode
+		? Flags[incorporationCountryCode as keyof typeof Flags]
+		: null
+
+	return (
+		<Section title="Company Profile" className="md:col-span-2">
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 dark:text-gray-300">
+				<DataPoint
+					label="Country"
+					value={
+						<span className="flex items-center">
+							{FlagComponent && <FlagComponent className="h-4 w-4 mr-2" />}
+							{company.country}
+						</span>
+					}
+				/>
+				<DataPoint
+					label="Incorporation Country"
+					value={
+						<span className="flex items-center">
+							{IncorporationFlagComponent && <IncorporationFlagComponent className="h-4 w-4 mr-2" />}
+							{company.incorporationCountry}
+						</span>
+					}
+				/>
+				<DataPoint label="Sector" value={company.sector} />
+				<DataPoint label="Founded" value={profile.founded} />
+			</div>
+			<div className="mt-4 space-y-4">
+				<div>
+					<h4 className="font-medium text-gray-900 dark:text-gray-100">Business Description</h4>
+					<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">{profile.businessDescription}</p>
+				</div>
+				{isDeepReportProfile(profile) && (
+					<>
+						<div>
+							<h4 className="font-medium text-gray-900 dark:text-gray-100">Business Model & Market Position</h4>
+							<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">
+								{profile.businessModelAndMarketPosition}
+							</p>
+						</div>
+						<div>
+							<h4 className="font-medium text-gray-900 dark:text-gray-100">
+								Global Footprint & Strategic Alliances
+							</h4>
+							<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">
+								{profile.globalFootprintAndStrategicAlliances}
+							</p>
+						</div>
+						<div>
+							<h4 className="font-medium text-gray-900 dark:text-gray-100">Product Portfolio Analysis</h4>
+							<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">
+								{profile.productPortfolioAnalysis}
+							</p>
+						</div>
+					</>
+				)}
+			</div>
+		</Section>
+	)
+}
+
+const RiskAssessment: React.FC<{ report: ShallowReport | DeepReport }> = ({ report }) => {
+	const { t } = useTranslation()
+	const risk = report.riskAssessment
+	const category = risk.category ? parseInt(risk.category, 10) : undefined
+
+	return (
+		<Section title="Risk Assessment" className="md:col-span-2">
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+				<DataPoint label="Category" value={category ? <Badge n={category} /> : '-'} />
+				<DataPoint label="Guidelines" value={risk.guidelines?.join(', ') || 'N/A'} />
+			</div>
+
+			<div className="space-y-4">
+				<div>
+					<h4 className="font-medium text-gray-900 dark:text-gray-100">Concerns</h4>
+					<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">{risk.concerns}</p>
+				</div>
+				<div>
+					<h4 className="font-medium text-gray-900 dark:text-gray-100">Rationale</h4>
+					<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">{risk.rationale}</p>
+				</div>
+
+				{'executiveSummary' in risk && (
+					<>
+						<h4 className="text-md font-medium mt-4 mb-1">Executive Summary</h4>
+						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+							<p>
+								<strong>Purpose & Scope:</strong> {risk.executiveSummary.purposeAndScope}
+							</p>
+							<p>
+								<strong>Key Findings:</strong> {risk.executiveSummary.keyFindings}
+							</p>
+							<p>
+								<strong>Recommendation:</strong> {risk.executiveSummary.recommendation}
+							</p>
+						</div>
+					</>
+				)}
+
+				{'productBasedAssessment' in risk && (
+					<>
+						<h4 className="text-md font-medium mt-4 mb-1">Product-Based Assessment</h4>
+						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+							<p>
+								<strong>Summary:</strong> {risk.productBasedAssessment.summary}
+							</p>
+							<p>
+								<strong>Weapons Violation Risk:</strong> {risk.productBasedAssessment.weaponsViolationRisk}
+							</p>
+							<p>
+								<strong>Cannabis Risk:</strong> {risk.productBasedAssessment.cannabisRisk}
+							</p>
+							<p>
+								<strong>Thermal Coal Risk:</strong> {risk.productBasedAssessment.thermalCoalRisk}
+							</p>
+							<p>
+								<strong>Tobacco Production Risk:</strong> {risk.productBasedAssessment.tobaccoProductionRisk}
+							</p>
+						</div>
+					</>
+				)}
+
+				{'conductBasedAssessment' in risk && (
+					<>
+						<h4 className="text-md font-medium mt-4 mb-1">Conduct-Based Assessment</h4>
+						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+							<p>
+								<strong>Human Rights Violations:</strong> {risk.conductBasedAssessment.humanRightsViolations}
+							</p>
+							<p>
+								<strong>Rights in War or Conflict:</strong> {risk.conductBasedAssessment.rightsInWarOrConflict}
+							</p>
+							<p>
+								<strong>Environmental Damage:</strong> {risk.conductBasedAssessment.environmentalDamage}
+							</p>
+							<p>
+								<strong>Weapons Sales:</strong> {risk.conductBasedAssessment.weaponsSales}
+							</p>
+							<p>
+								<strong>Corruption & Ethical Norms:</strong> {risk.conductBasedAssessment.corruptionAndEthicalNorms}
+							</p>
+						</div>
+					</>
+				)}
+
+				{'geopoliticalRiskExposure' in risk && (
+					<>
+						<h4 className="text-md font-medium mt-4 mb-1">Geopolitical Risk Exposure</h4>
+						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+							<p>
+								<strong>Russia-Ukraine Conflict:</strong> {risk.geopoliticalRiskExposure.russiaUkraineConflict}
+							</p>
+							<p>
+								<strong>Israeli-Palestinian Conflict:</strong> {risk.geopoliticalRiskExposure.israeliPalestinianConflict}
+							</p>
+							<p>
+								<strong>Supply Chain (China) Exposure:</strong> {risk.geopoliticalRiskExposure.supplyChainChinaExposure}
+							</p>
+							<p>
+								<strong>Inconsistent Ethical Postures:</strong> {risk.geopoliticalRiskExposure.inconsistentEthicalPostures}
+							</p>
+						</div>
+					</>
+				)}
+
+				{'finalRiskSynthesis' in risk && (
+					<>
+						<h4 className="text-md font-medium mt-4 mb-1">Final Risk Synthesis</h4>
+						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+							<p>
+								<strong>Synthesis of Findings:</strong> {risk.finalRiskSynthesis.synthesisOfFindings}
+							</p>
+							<p>
+								<strong>Weighing of Factors:</strong> {risk.finalRiskSynthesis.weighingOfFactors}
+							</p>
+							<p>
+								<strong>Final Categorization Justification:</strong>{' '}
+								{risk.finalRiskSynthesis.finalCategorizationJustification}
+							</p>
+						</div>
+					</>
+				)}
+			</div>
+		</Section>
+	)
 }
 
 export default function CompanyDetailPage() {
@@ -43,73 +265,61 @@ export default function CompanyDetailPage() {
 	if (error) return <p className="text-red-600">Error: {error.message}</p>
 	if (!company) return <p className="text-red-600">Company not found</p>
 
-	const countryCode = getCountryCode(company.country)
-	const FlagComponent = countryCode ? Flags[countryCode as keyof typeof Flags] : null
+	const report = company.deepReport || company.shallowReport
+	const profile = company.deepReport?.companyProfile || company.shallowReport?.companyProfile
 
 	return (
-		<div className="grid gap-4">
+		<div className="space-y-8">
 			<div className="flex justify-between items-center">
 				<Link className="text-blue-700 hover:underline dark:text-blue-400" to="/companies">
 					← Back to companies
 				</Link>
 			</div>
 
+			<h2 className="text-3xl font-bold tracking-tight">{company.name}</h2>
+
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<div className="md:col-span-2 space-y-4">
-					<h2 className="text-2xl font-semibold tracking-tight">{company.name}</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-600 dark:text-gray-300">
-						<div className="flex items-center">
-							<span className="font-medium text-gray-900 dark:text-gray-100">Country:</span>
-							<span className="ml-2 flex items-center">
-								{FlagComponent && <FlagComponent className="h-4 w-4 mr-2" />}
-								{company.country}
-							</span>
-						</div>
-						<div className="flex items-center">
-							<span className="font-medium text-gray-900 dark:text-gray-100">Sector:</span>
-							<span className="ml-2">{company.sector}</span>
-						</div>
-						<div className="flex items-center">
-							<span className="font-medium text-gray-900 dark:text-gray-100">Category:</span>
-							<span className="ml-2">{company.category ? <Badge n={company.category} /> : '-'}</span>
-						</div>
-						{company.incorporationCountry && (
-							<div className="flex items-center">
-								<span className="font-medium text-gray-900 dark:text-gray-100">Incorporation Country:</span>
-								<span className="ml-2 flex items-center">
-									{company.incorporationCountry && getCountryCode(company.incorporationCountry) && Flags[getCountryCode(company.incorporationCountry) as keyof typeof Flags] && (
-										React.createElement(Flags[getCountryCode(company.incorporationCountry) as keyof typeof Flags], { className: 'h-4 w-4 mr-2' })
-									)}
-									{company.incorporationCountry}
-								</span>
+				<div className="md:col-span-2 space-y-8">
+					<CompanyProfile company={company} />
+					{report && <RiskAssessment report={report} />}
+				</div>
+
+				<div className="space-y-4">
+					<Section title="Investment Snapshot">
+						<div className="space-y-4">
+							<DataPoint
+								label="Market Value (NOK)"
+								value={`${new Intl.NumberFormat('nb-NO').format(company.marketValueNok)} (${formatToHumanMonetary(
+									company.marketValueNok,
+								)})`}
+							/>
+							<div className="grid grid-cols-2 gap-4">
+								<DataPoint label="Ownership %" value={`${company.ownership}%`} />
+								{company.voting && <DataPoint label="Voting %" value={`${company.voting}%`} />}
 							</div>
-						)}
-					</div>
-					<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
-						<h3 className="text-lg font-medium mb-1">{t('company.guideline', 'Ethic Council Guidelines')}</h3>
-						<p className="text-gray-800 dark:text-gray-100">{company.guideline}</p>
-					</div>
-					<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
-						<h3 className="text-lg font-medium mb-1">Concerns</h3>
-						<p className="text-gray-800 dark:text-gray-100">{company.concerns}</p>
-					</div>
-					<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
-						<h3 className="text-lg font-medium mb-1">Rationale</h3>
-						<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">{company.rationale}</p>
-					</div>
-					{company.detailedReport ? (
-						<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
-							<h3 className="text-lg font-medium mb-2">Deep Research Report</h3>
+							{profile && (
+								<div className="grid grid-cols-2 gap-4">
+									<DataPoint label="Ticker" value={profile.ticker} />
+									<DataPoint label="Exchange" value={profile.exchange} />
+								</div>
+							)}
+						</div>
+					</Section>
+
+					{company.deepReport ? (
+						<Section title="Deep Research Report">
 							<p className="mb-4">A deep-dive AI analysis has been conducted for this company.</p>
 							<div className="flex justify-end">
-								<Link
-									to={`/companies/${company.id}/report`}
+								<a
+									href={`/reports/${company.id}.pdf`}
+									target="_blank"
+									rel="noopener noreferrer"
 									className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-primary/80"
 								>
-									View Full Report
-								</Link>
+									View Full Report (PDF)
+								</a>
 							</div>
-						</div>
+						</Section>
 					) : (
 						<div className="rounded-md bg-yellow-50 p-4 dark:bg-yellow-900/20">
 							<div className="flex">
@@ -117,7 +327,9 @@ export default function CompanyDetailPage() {
 									<InformationCircleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />
 								</div>
 								<div className="ml-3">
-									<h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">Deep AI Analysis Not Completed</h3>
+									<h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
+										Deep AI Analysis Not Completed
+									</h3>
 									<div className="mt-2 text-sm text-yellow-700 dark:text-yellow-100">
 										<p>A full analysis for this company is pending.</p>
 									</div>
@@ -125,29 +337,6 @@ export default function CompanyDetailPage() {
 							</div>
 						</div>
 					)}
-				</div>
-				<div className="space-y-4">
-					<div className="rounded-lg border border-white/40 bg-white/80 p-4 dark:bg-slate-900/70">
-						<h3 className="text-lg font-medium mb-2">Investment Snapshot</h3>
-						<div className="space-y-2">
-							<div>
-								<p className="text-sm text-gray-500">Market Value (NOK)</p>
-								<p className="text-xl font-semibold">
-									{new Intl.NumberFormat('nb-NO').format(company.marketValue)} ({formatToHumanMonetary(company.marketValue)})
-								</p>
-							</div>
-							<div>
-								<p className="text-sm text-gray-500">Ownership %</p>
-								<p className="text-xl font-semibold">{company.ownership}%</p>
-							</div>
-							{company.voting && (
-								<div>
-									<p className="text-sm text-gray-500">Voting %</p>
-									<p className="text-xl font-semibold">{company.voting}%</p>
-								</div>
-							)}
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

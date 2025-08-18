@@ -1,0 +1,128 @@
+{
+  "title": "Comprehensive Risk Assessment Report",
+  "description": "A structured JSON schema for a detailed risk assessment of a company based on GPFG guidelines.",
+  "type": "object",
+  "properties": {
+    "companyName": {
+      "description": "The name of the company being assessed.",
+      "type": "string"
+    },
+    "assessmentDate": {
+      "description": "The date the assessment was conducted.",
+      "type": "string",
+      "format": "date"
+    },
+    "companyProfile": {
+      "description": "Detailed profile of the company's operations.",
+      "type": "object",
+      "properties": {
+        "businessModelAndMarketPosition": { "type": "string" },
+        "productPortfolioAnalysis": { "type": "string" },
+        "globalFootprintAndStrategicAlliances": { "type": "string" },
+        "ticker": { "type": "string" },
+        "exchange": { "type": "string" },
+        "headquarters": { "type": "string" },
+        "founded": { "type": "integer" },
+        "sector": { "type": "string" },
+        "businessDescription": { "type": "string" }
+      },
+      "required": ["businessModelAndMarketPosition", "productPortfolioAnalysis", "globalFootprintAndStrategicAlliances"]
+    },
+    "riskAssessment": {
+      "description": "The full, detailed risk assessment.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The final assessed risk category for the company.",
+          "type": "string",
+          "enum": ["1", "2", "3", "4"]
+        },
+        "concerns": {
+          "description": "A brief summary of the primary ethical concerns.",
+          "type": "string"
+        },
+        "guidelines": {
+          "description": "The specific GPFG guideline criteria that are relevant to the assessment.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rationale": {
+          "description": "A concise justification for the final risk category.",
+          "type": "string"
+        },
+        "executiveSummary": {
+          "description": "High-level summary of the risk assessment.",
+          "type": "object",
+          "properties": {
+            "purposeAndScope": { "type": "string" },
+            "keyFindings": { "type": "string" },
+            "recommendation": { "type": "string" }
+          },
+          "required": ["purposeAndScope", "keyFindings", "recommendation"]
+        },
+        "productBasedAssessment": {
+          "description": "Assessment against GPFG product-based exclusion criteria (§ 3).",
+          "type": "object",
+          "properties": {
+            "weaponsViolationRisk": { "type": "string" },
+            "tobaccoProductionRisk": { "type": "string" },
+            "cannabisRisk": { "type": "string" },
+            "thermalCoalRisk": { "type": "string" },
+            "summary": { "type": "string" }
+          },
+          "required": ["weaponsViolationRisk", "tobaccoProductionRisk", "cannabisRisk", "thermalCoalRisk", "summary"]
+        },
+        "conductBasedAssessment": {
+          "description": "Assessment against GPFG conduct-based exclusion criteria (§ 4).",
+          "type": "object",
+          "properties": {
+            "humanRightsViolations": { "type": "string" },
+            "rightsInWarOrConflict": { "type": "string" },
+            "weaponsSales": { "type": "string" },
+            "environmentalDamage": { "type": "string" },
+            "corruptionAndEthicalNorms": { "type": "string" }
+          },
+          "required": ["humanRightsViolations", "rightsInWarOrConflict", "weaponsSales", "environmentalDamage", "corruptionAndEthicalNorms"]
+        },
+        "geopoliticalRiskExposure": {
+          "description": "Analysis of the company's exposure and posture in key geopolitical conflicts.",
+          "type": "object",
+          "properties": {
+            "russiaUkraineConflict": { "type": "string" },
+            "israeliPalestinianConflict": { "type": "string" },
+            "supplyChainChinaExposure": { "type": "string" },
+            "inconsistentEthicalPostures": { "type": "string" }
+          },
+          "required": ["russiaUkraineConflict", "israeliPalestinianConflict", "supplyChainChinaExposure", "inconsistentEthicalPostures"]
+        },
+        "finalRiskSynthesis": {
+          "description": "The final synthesis and justification for the risk categorization.",
+          "type": "object",
+          "properties": {
+            "synthesisOfFindings": { "type": "string" },
+            "weighingOfFactors": { "type": "string" },
+            "finalCategorizationJustification": { "type": "string" }
+          },
+          "required": ["synthesisOfFindings", "weighingOfFactors", "finalCategorizationJustification"]
+        }
+      },
+      "required": [
+        "category",
+        "concerns",
+        "guidelines",
+        "rationale",
+        "executiveSummary",
+        "productBasedAssessment",
+        "conductBasedAssessment",
+        "geopoliticalRiskExposure",
+        "finalRiskSynthesis"
+      ]
+    }
+  },
+  "required": [
+    "companyName",
+    "assessmentDate",
+    "companyProfile",
+    "riskAssessment"
+  ]
+}

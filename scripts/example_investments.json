@@ -1,0 +1,34 @@
+[
+    {
+        "id": "example-company-inc",
+        "industry": "Technology",
+        "region": "North America",
+        "country": "USA",
+        "name": "Example Company Inc.",
+        "marketValueNok": "1000000000",
+        "marketValueUsd": "100000000",
+        "voting": "0.5",
+        "ownership": "0.5",
+        "incorporationCountry": "USA",
+        "shallowReport": {
+            "riskAssessment": {
+                "category": 2,
+                "concerns": "Indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict.",
+                "guidelines": [
+                    "4c,",
+                    "4d",
+                    "4h"
+                ],
+                "rationale": "A significant and unmitigated risk exists from the indirect contribution of its dual-use semiconductor products to the Israeli-Palestinian conflict."
+            },
+            "companyProfile": {
+                "ticker": "EXMPL",
+                "exchange": "NASDAQ",
+                "headquarters": "Example City, USA",
+                "founded": 2000,
+                "sector": "Technology / Software",
+                "businessDescription": "Develops example software."
+            }
+        }
+    }
+]

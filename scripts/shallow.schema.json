@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ShallowReportList",
+  "description": "A list of shallow reports on investments.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "riskAssessment": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": ["1", "2", "3", "4"]
+          },
+          "concerns": {
+            "type": "string"
+          },
+          "guidelines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rationale": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "category",
+          "concerns",
+          "guidelines",
+          "rationale"
+        ]
+      },
+      "companyProfile": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string"
+          },
+          "exchange": {
+            "type": "string"
+          },
+          "headquarters": {
+            "type": "string"
+          },
+          "founded": {
+            "type": "integer"
+          },
+          "sector": {
+            "type": "string"
+          },
+          "businessDescription": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "required": [
+      "riskAssessment",
+      "companyProfile"
+    ]
+  }
+}

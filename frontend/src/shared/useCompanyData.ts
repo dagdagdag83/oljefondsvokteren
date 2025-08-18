@@ -1,42 +1,99 @@
 import { useState, useEffect } from 'react'
-import Papa from 'papaparse'
-
-// Utility to generate a slug from a name
-const slugify = (text: string) =>
-	text
-		.toString()
-		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.toLowerCase()
-		.trim()
-		.replace(/\s+/g, '-')
-		.replace(/[^\w-]+/g, '')
-		.replace(/--+/g, '-')
-
-// New robust parsing function
-const parseRobustFloat = (value: string | undefined | null): number => {
-	if (!value) return 0
-	const cleanedString = String(value).replace(/ /g, '').replace(',', '.')
-	if (cleanedString === '') return 0
-	const num = parseFloat(cleanedString)
-	return isNaN(num) ? 0 : num
-}
 
 export interface Company {
 	id: string
 	name: string
 	country: string
 	sector: string
-	marketValue: number
+	marketValueNok: number
 	ownership: number
 	voting?: number
 	incorporationCountry?: string
-	concerns?: string
-	guideline?: string
+	state: string
+	shallowReport?: ShallowReport
+	deepReport?: DeepReport
+	aiReportStatus: number
 	category?: number
-	rationale?: string
-	aiReportStatus: number // 0: none, 1: basic, 2: full
-	detailedReport?: any
+}
+
+export interface ShallowReport {
+	companyProfile: {
+		headquarters: string
+		ticker: string
+		founded: number
+		sector: string
+		exchange: string
+		businessDescription: string
+	}
+	riskAssessment: {
+		category: string
+		concerns: string
+		guidelines: string[]
+		rationale: string
+	}
+}
+
+export interface DeepReport {
+	assessmentDate: string
+	riskAssessment: {
+		productBasedAssessment: {
+			cannabisRisk: string
+			summary: string
+			thermalCoalRisk: string
+			weaponsViolationRisk: string
+			tobaccoProductionRisk: string
+		}
+		executiveSummary: {
+			keyFindings: string
+			recommendation: string
+			purposeAndScope: string
+		}
+		geopoliticalRiskExposure: {
+			inconsistentEthicalPostures: string
+			russiaUkraineConflict: string
+			supplyChainChinaExposure: string
+			israeliPalestinianConflict: string
+		}
+		rationale: string
+		conductBasedAssessment: {
+			rightsInWarOrConflict: string
+			weaponsSales: string
+			environmentalDamage: string
+			humanRightsViolations: string
+			corruptionAndEthicalNorms: string
+		}
+		category: string
+		concerns: string
+		guidelines: string[]
+		finalRiskSynthesis: {
+			finalCategorizationJustification: string
+			weighingOfFactors: string
+			synthesisOfFindings: string
+		}
+	}
+	companyProfile: {
+		ticker: string
+		founded: number
+		sector: string
+		businessModelAndMarketPosition: string
+		globalFootprintAndStrategicAlliances: string
+		headquarters: string
+		productPortfolioAnalysis: string
+		businessDescription: string
+		exchange: string
+	}
+	companyName: string
+}
+
+// Helper to determine AI report status
+const getAiReportStatus = (company: any): number => {
+	if (company.state === 'done_deep' && company.deepReport) {
+		return 2 // Full report
+	}
+	if (company.state === 'done_shallow' && company.shallowReport) {
+		return 1 // Shallow report
+	}
+	return 0 // No report
 }
 
 export function useCompanyData() {
@@ -47,57 +104,45 @@ export function useCompanyData() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				// Fetch both files
-				const [holdingsRes, enrichRes] = await Promise.all([
-					fetch(`${import.meta.env.BASE_URL}data/EQ_2025_06_30_Industry.csv`),
-					fetch(`${import.meta.env.BASE_URL}data/investments.json`),
-				])
+				const res = await fetch(`${import.meta.env.BASE_URL}data/investments_exported.json`)
 
-				if (!holdingsRes.ok || !enrichRes.ok) {
+				if (!res.ok) {
 					throw new Error('Network response was not ok')
 				}
 
-				const holdingsCsv = await holdingsRes.text()
-				const enrichData = await enrichRes.json()
+				const data = await res.json()
 
-				// Create a map of enrichment data for quick lookup
-				const enrichmentMap = new Map(enrichData.map((item: any) => [item.id, item]))
+				const transformedCompanies = data.map(
+					(item: any): Company => {
+						const shallowReport = item.shallowReport
+						const deepReport = item.deepReport
 
-				// Parse the CSV
-				Papa.parse(holdingsCsv, {
-					header: true,
-					skipEmptyLines: true,
-					delimiter: ';',
-					complete: (results) => {
-						const holdings = results.data
-							.map((row: any) => {
-								const name = row['Name']
-								if (!name) return null // Skip rows without a name
+						let category: number | undefined
+						if (deepReport && deepReport.riskAssessment) {
+							category = parseInt(deepReport.riskAssessment.category, 10)
+						} else if (shallowReport && shallowReport.riskAssessment) {
+							category = parseInt(shallowReport.riskAssessment.category, 10)
+						}
 
-								const id = slugify(name)
-								const enriched = enrichmentMap.get(id) || {}
-
-								return {
-									id: id,
-									name: name,
-									country: row['Country'],
-									sector: row['Industry'],
-									marketValue: parseRobustFloat(row['Market Value(NOK)']),
-									ownership: parseRobustFloat(row['Ownership']),
-									voting: parseRobustFloat(row['Voting']),
-									incorporationCountry: row['Incorporation Country'],
-									...enriched,
-									aiReportStatus: enriched.aiReportStatus ?? (enriched.detailedReport ? 2 : enriched.name ? 1 : 0),
-								}
-							})
-							.filter((c) => c !== null) as Company[] // Filter out any nulls
-
-						setCompanies(holdings)
+						return {
+							id: item.id,
+							name: item.name,
+							country: item.country,
+							sector: item.industry, // Assuming 'industry' maps to 'sector'
+							marketValueNok: parseFloat(String(item.marketValueNok).replace(/ /g, '')) || 0,
+							ownership: parseFloat(String(item.ownership).replace(',', '.')) || 0,
+							voting: parseFloat(String(item.voting).replace(',', '.')) || 0,
+							incorporationCountry: item.incorporationCountry,
+							state: item.state,
+							shallowReport: shallowReport,
+							deepReport: deepReport,
+							aiReportStatus: getAiReportStatus(item),
+							category: category,
+						}
 					},
-					error: (err) => {
-						setError(err as Error)
-					},
-				})
+				)
+
+				setCompanies(transformedCompanies)
 			} catch (error) {
 				setError(error as Error)
 			} finally {

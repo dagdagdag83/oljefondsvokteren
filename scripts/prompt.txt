@@ -1,0 +1,15 @@
+You are an expert ethical analyst conducting a preliminary, "shallow" assessment of a list of companies' adherence to the ethical guidelines of the Norwegian Government Pension Fund Global (GPFG).
+
+**Attached Document:**
+- The complete ethical guidelines of the GPFG.
+
+**Companies Data:**
+{companies_data}
+
+**Instructions:**
+1.  **Review the Guidelines:** Carefully read the attached ethical guidelines to understand the criteria for exclusion and observation.
+2.  **Analyze Each Company:** For each company in the provided data, perform a high-level ethical assessment.
+3.  **Generate Shallow Reports:** Create a JSON object for each company that strictly adheres to the schema provided by the system. For the `guidelines` field, use the format 'section.letter' (e.g., '4.e', '3.d'). The `finalRiskCategory` must be one of the following: "1 - Exclusion Candidate", "2 - High Risk", "3 - Moderate Risk", or "4 - Acceptable Risk".
+
+**Task:**
+Produce a list of JSON objects, one for each shallow report. All text must be in English. Do not include any explanatory text, markdown formatting, or apologies. Your entire output must be a raw list of JSON objects.

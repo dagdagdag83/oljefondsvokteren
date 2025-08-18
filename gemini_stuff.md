@@ -5,7 +5,8 @@ create a json response based on the linked report. make sure to generate an id, 
 
 # Deep research prompt
 
-The norwegian oljefondet has invested in company Melexis NV in Belgium. Provide a comprehensive risk assessment report using the guidelines from https://lovdata.no/dokument/INS/forskrift/2014-12-18-1793?q=Retningslinjer%20for%20observasjon%20og%20utelukkelse. you must provide a final risk category from the following: 1 - Exclusion Candidate, 2 - high risk, 3 - moderate risk 4 - acceptable risk. Make sure to cross-reference the risk all current global conflicts which Norwegian ethics would view as problematic, for instance russia's unjust war against ukraine and israel's unjust war against palestine.
+The norwegian oljefondet has invested in company COMPANY_NAME in COUNTRY. Provide a comprehensive risk assessment report using the attached guidelines - focus on product-based and conduct-based risk as well as key geopolitical conflicts risk exposure. You must provide a final risk category from the following: 1 - Exclusion Candidate, 2 - high risk, 3 - moderate risk 4 - acceptable risk.
+
 
 # Logo prompt
 Create a modern, minimalist logo for a website providing an ethical audit of the Norwegian Government Pension Fund. The concept is "Vakten" (The Guard), symbolizing oversight, protection, and ethical integrity.

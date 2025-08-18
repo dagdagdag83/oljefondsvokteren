@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Investment",
+  "description": "Schema for an investment entry in the Oljefondsvokteren project.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "industry": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "marketValueNok": {
+      "type": "string"
+    },
+    "marketValueUsd": {
+      "type": "string"
+    },
+    "voting": {
+      "type": "string"
+    },
+    "ownership": {
+      "type": "string"
+    },
+    "incorporationCountry": {
+      "type": "string"
+    },
+    "shallowReport": {
+      "type": "object",
+      "properties": {
+        "riskAssessment": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "integer"
+            },
+            "concerns": {
+              "type": "string"
+            },
+            "guidelines": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rationale": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "category",
+            "concerns",
+            "guidelines",
+            "rationale"
+          ]
+        },
+        "companyProfile": {
+          "type": "object",
+          "properties": {
+            "ticker": {
+              "type": "string"
+            },
+            "exchange": {
+              "type": "string"
+            },
+            "headquarters": {
+              "type": "string"
+            },
+            "founded": {
+              "type": "integer"
+            },
+            "sector": {
+              "type": "string"
+            },
+            "businessDescription": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "riskAssessment",
+        "companyProfile"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "industry",
+    "region",
+    "country",
+    "name",
+    "marketValueNok",
+    "marketValueUsd",
+    "voting",
+    "ownership",
+    "incorporationCountry",
+    "shallowReport"
+  ]
+}

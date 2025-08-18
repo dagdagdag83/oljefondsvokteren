@@ -5,7 +5,6 @@ import App from './App.tsx'
 import CompaniesPage from './pages/CompaniesPage.tsx'
 import CompanyDetailPage from './pages/CompanyDetailPage.tsx'
 import OverviewPage from './pages/OverviewPage'
-import { CompanyFullReportPage } from './pages/CompanyFullReportPage'
 import './index.css'
 import './i18n'
 
@@ -18,7 +17,6 @@ const router = createBrowserRouter(
 				{ index: true, element: <OverviewPage /> },
 				{ path: 'companies', element: <CompaniesPage /> },
 				{ path: 'companies/:id', element: <CompanyDetailPage /> },
-				{ path: 'companies/:id/report', element: <CompanyFullReportPage /> },
 			],
 		},
 	]

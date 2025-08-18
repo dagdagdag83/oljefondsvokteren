@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Combobox, Listbox, Transition } from '@headlessui/react'
 import { ChevronUpDownIcon, CheckIcon, MagnifyingGlassIcon, DocumentCheckIcon, DocumentIcon, DocumentMinusIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
@@ -22,16 +22,25 @@ function labelForCategory(val: string, t?: (k: string) => string) {
 		: tr('companies.category.all')
 }
 
+function truncate(str: string, length: number): string {
+	if (str.length <= length) {
+		return str
+	}
+	return str.slice(0, length) + '…'
+}
+
 export default function CompaniesPage() {
 	const { t } = useTranslation()
 	const { companies, loading, error } = useCompanyData()
-	const [q, setQ] = useState('')
-	const [country, setCountry] = useState('')
+	const [searchParams, setSearchParams] = useSearchParams()
+
+	const [q, setQ] = useState(searchParams.get('q') || '')
+	const [country, setCountry] = useState(searchParams.get('country') || '')
 	const [countryQuery, setCountryQuery] = useState('')
-	const [sector, setSector] = useState('')
+	const [sector, setSector] = useState(searchParams.get('sector') || '')
 	const [sectorQuery, setSectorQuery] = useState('')
-	const [category, setCategory] = useState('')
-	const [page, setPage] = useState(1)
+	const [category, setCategory] = useState(searchParams.get('category') || '')
+	const [page, setPage] = useState(parseInt(searchParams.get('page') || '1', 10))
 
 	const countries = useMemo(() => uniqueSorted(companies.map((c) => c.country)), [companies])
 	const filteredCountries = countryQuery === '' ? countries : countries.filter((c) => c.toLowerCase().includes(countryQuery.toLowerCase()))
@@ -43,8 +52,10 @@ export default function CompaniesPage() {
 		return companies
 			.filter((c) => {
 				const searchLower = q.toLowerCase()
-				const concernsMatch = c.concerns ? c.concerns.toLowerCase().includes(searchLower) : false
-				const rationaleMatch = c.rationale ? c.rationale.toLowerCase().includes(searchLower) : false
+				// Safely access nested properties for searching
+				const shallowReport = c.shallowReport?.riskAssessment
+				const concernsMatch = shallowReport?.concerns?.toLowerCase().includes(searchLower) ?? false
+				const rationaleMatch = shallowReport?.rationale?.toLowerCase().includes(searchLower) ?? false
 
 				return (
 					(c.name.toLowerCase().includes(searchLower) || concernsMatch || rationaleMatch) &&
@@ -54,15 +65,35 @@ export default function CompaniesPage() {
 				)
 			})
 			.sort((a, b) => {
+				// 1. Sort by aiReportStatus descending (2, 1, 0)
 				if (a.aiReportStatus !== b.aiReportStatus) {
 					return b.aiReportStatus - a.aiReportStatus
 				}
+				// 2. Sort by category ascending (1, 2, 3, 4)
+				const categoryA = a.category ?? 99
+				const categoryB = b.category ?? 99
+				if (categoryA !== categoryB) {
+					return categoryA - categoryB
+				}
+				// 3. Sort by name alphabetically
 				return a.name.localeCompare(b.name)
 			})
 	}, [companies, q, country, sector, category])
 
-	const pageCount = Math.ceil(filteredCompanies.length / 20)
-	const paginatedCompanies = filteredCompanies.slice((page - 1) * 20, page * 20)
+	const ITEMS_PER_PAGE = 50
+	const pageCount = Math.ceil(filteredCompanies.length / ITEMS_PER_PAGE)
+	const paginatedCompanies = filteredCompanies.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
+
+	useEffect(() => {
+		// Update URL params when filters change
+		const params = new URLSearchParams()
+		if (q) params.set('q', q)
+		if (country) params.set('country', country)
+		if (sector) params.set('sector', sector)
+		if (category) params.set('category', category)
+		if (page > 1) params.set('page', page.toString())
+		setSearchParams(params)
+	}, [q, country, sector, category, page, setSearchParams])
 
 	useEffect(() => {
 		setPage(1)
@@ -203,8 +234,15 @@ export default function CompaniesPage() {
 									<td className={td}>{c.country}</td>
 									<td className={td}>{c.sector}</td>
 									<td className={td}>{c.category ? <Badge n={c.category} /> : '-'}</td>
-									<td className={td}>{c.guideline || '-'}</td>
-									<td className={td}>{c.concerns || '-'}</td>
+									<td className={td}>
+										{truncate(
+											(c.deepReport?.riskAssessment?.guidelines || c.shallowReport?.riskAssessment?.guidelines)?.join(', ') || '-',
+											100,
+										)}
+									</td>
+									<td className={td}>
+										{truncate(c.deepReport?.riskAssessment?.concerns || c.shallowReport?.riskAssessment?.concerns || '-', 100)}
+									</td>
 									<td className={td}>
 										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title="Full AI Research Report" />}
 										{c.aiReportStatus === 1 && <DocumentIcon className="h-6 w-6 text-yellow-500" title="Basic AI Report" />}
@@ -234,11 +272,11 @@ export default function CompaniesPage() {
 export function Badge({ n }: { n: number }) {
 	const base = 'inline-flex items-center justify-center h-6 w-6 rounded-full text-sm font-semibold'
 	const cls =
-		n >= 4
+		n === 1
 			? `${base} bg-red-400 text-white`
-			: n === 3
-			? `${base} bg-orange-400 text-white`
 			: n === 2
+			? `${base} bg-orange-400 text-white`
+			: n === 3
 			? `${base} bg-yellow-400 text-gray-900`
 			: `${base} bg-green-400 text-white`
 	return <span className={cls}>{n}</span>
