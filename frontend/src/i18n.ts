@@ -17,14 +17,14 @@ const resources = {
 				search: 'Search for a company',
 			},
 			landing: {
-				lead: "An AI-powered platform for analyzing the investments of the Norwegian Government Pension Fund. Each portfolio company undergoes an assessment by Gemini Deep Research based on the Fund's ethical guidelines, identifying potential environmental, social, and governance (ESG) risk factors.",
-				snapshot: 'Snapshot',
+				lead: 'An unofficial dashboard for monitoring the ethical status of the investments in the Norwegian Government Pension Fund Global (Oljefondet).',
+				snapshot: 'Portfolio at a glance',
 				companies: 'Companies',
 				sectors: 'Sectors',
 				countries: 'Countries',
 				banner: {
-					text: 'This site is a proof-of-concept and has not analyzed all 7,000+ holdings of the fund.',
-					dismiss: 'Dismiss',
+					title: 'This is a proof-of-concept',
+					text: 'This site is a proof-of-concept and has not analyzed all 8,000+ holdings of the Norwegian Oljefondet. Only a selection has been analyzed with Google Gemini.',
 				},
 			},
 			companies: {
@@ -35,9 +35,10 @@ const resources = {
 			},
 			charts: {
 				byCategory: 'Companies by Category',
+				byCategoryRisk: 'Companies by Risk Category',
 				bySector: 'Companies by Sector',
 				topCountries: 'Top 10 Countries by Company Count',
-				topInvestments: 'Top 10 Investments by Market Value',
+				topInvestments: 'Top 10 Investments by Market Value (NOK)',
 				valueBySector: 'Total Investment Value by Sector',
 				valueByCountry: 'Total Investment Value by Country',
 				ok: 'OK',
@@ -47,6 +48,20 @@ const resources = {
 			},
 			company: {
 				guideline: 'Ethic Council Guidelines',
+			},
+			overview: {
+				title: 'Norwegian Government Pension Fund Global (Oljefondet)',
+				description: 'This is an unofficial dashboard for monitoring the ethical status of the investments.',
+				assets_total: 'Total Assets',
+				assets_equity: 'Equity',
+				assets_fixed_income: 'Fixed Income',
+				assets_real_estate: 'Real Estate',
+				warning: {
+					title: 'This is a proof-of-concept',
+					text: 'This site is a proof-of-concept and has not analyzed all 8,000+ holdings of the Norwegian Oljefondet. Only a selection has been analyzed with Google Gemini.',
+				},
+				'by-category': 'By Category',
+				'by-country': 'By Country',
 			},
 		}
 	},

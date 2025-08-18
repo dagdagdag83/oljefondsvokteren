@@ -95,7 +95,7 @@ export default function OverviewPage() {
 			const valueByCountry: Record<string, number> = {}
 
 			for (const c of companies) {
-				const category = c.shallowReport?.riskAssessment?.category
+				const category = c.category?.toString()
 				if (category) {
 					byCategory[category] = (byCategory[category] || 0) + 1
 				}
@@ -182,7 +182,7 @@ export default function OverviewPage() {
 			{stats && (
 				<div className="grid gap-6">
 					<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-						<CategoryDonut title={t('charts.byCategory')} data={stats.by_category} />
+						<CategoryDonut title={t('charts.byCategoryRisk')} data={stats.by_category} />
 						<Bars title={t('charts.bySector')} data={stats.by_sector} max={8} />
 						<Bars title={t('charts.topCountries')} data={stats.by_country} max={10} />
 					</div>
@@ -306,7 +306,7 @@ function CategoryDonut({ title, data }: { title: string; data: Record<string, nu
 		'undefined': { key: 'undefined', color: '#64748b' }, // slate-500
 	}
 	const entries = Object.entries(data)
-		.filter(([k]) => k !== 'undefined')
+		.filter(([k]) => k !== 'undefined' && k !== '4')
 		.sort((a, b) => Number(a[0]) - Number(b[0]))
 
 	const chartData = entries.map(([k, v]) => ({

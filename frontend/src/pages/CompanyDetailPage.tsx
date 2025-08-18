@@ -269,7 +269,7 @@ export default function CompanyDetailPage() {
 	const profile = company.deepReport?.companyProfile || company.shallowReport?.companyProfile
 
 	return (
-		<div className="space-y-8">
+		<div className="space-y-8 px-8 sm:px-12 lg:px-16">
 			<div className="flex justify-between items-center">
 				<Link className="text-blue-700 hover:underline dark:text-blue-400" to="/companies">
 					← Back to companies

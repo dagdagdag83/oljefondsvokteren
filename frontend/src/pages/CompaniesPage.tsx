@@ -4,9 +4,21 @@ import { Combobox, Listbox, Transition } from '@headlessui/react'
 import { ChevronUpDownIcon, CheckIcon, MagnifyingGlassIcon, DocumentCheckIcon, DocumentIcon, DocumentMinusIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
 import { Company, useCompanyData } from '../shared/useCompanyData'
+import * as Flags from 'country-flag-icons/react/3x2'
+import countries from 'i18n-iso-countries'
+import enLocale from 'i18n-iso-countries/langs/en.json'
+
+countries.registerLocale(enLocale)
 
 function uniqueSorted(values: string[]): string[] {
 	return Array.from(new Set(values.filter(Boolean))).sort((a, b) => a.localeCompare(b))
+}
+
+const getCountryCode = (countryName: string): string | undefined => {
+	if (countryName === 'United States') return 'US'
+	if (countryName === 'United Kingdom') return 'GB'
+	if (countryName.toLowerCase().includes('hong kong')) return 'HK'
+	return countries.getAlpha2Code(countryName, 'en')
 }
 
 function labelForCategory(val: string, t?: (k: string) => string) {
@@ -100,7 +112,7 @@ export default function CompaniesPage() {
 	}, [q, country, sector, category])
 
 	return (
-		<div className="grid gap-6">
+		<div className="grid gap-6 px-8 sm:px-12 lg:px-16">
 			<h2 className="text-2xl font-semibold tracking-tight">{t('app.companies')}</h2>
 			<div className="grid grid-cols-1 md:grid-cols-4 gap-3">
 				<div className="relative">
@@ -231,17 +243,24 @@ export default function CompaniesPage() {
 											{c.name}
 										</Link>
 									</td>
-									<td className={td}>{c.country}</td>
+									<td className={td}>
+										<span className="flex items-center">
+											{React.createElement(Flags[getCountryCode(c.country) as keyof typeof Flags], {
+												className: 'h-4 w-4 mr-2',
+											})}
+											{c.country}
+										</span>
+									</td>
 									<td className={td}>{c.sector}</td>
 									<td className={td}>{c.category ? <Badge n={c.category} /> : '-'}</td>
 									<td className={td}>
 										{truncate(
 											(c.deepReport?.riskAssessment?.guidelines || c.shallowReport?.riskAssessment?.guidelines)?.join(', ') || '-',
-											100,
+											200,
 										)}
 									</td>
 									<td className={td}>
-										{truncate(c.deepReport?.riskAssessment?.concerns || c.shallowReport?.riskAssessment?.concerns || '-', 100)}
+										{truncate(c.deepReport?.riskAssessment?.concerns || c.shallowReport?.riskAssessment?.concerns || '-', 200)}
 									</td>
 									<td className={td}>
 										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title="Full AI Research Report" />}

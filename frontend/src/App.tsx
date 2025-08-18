@@ -56,6 +56,8 @@ export default function App() {
 	const [theme, toggleTheme] = useTheme()
 	const { t, i18n } = useTranslation()
 	const { loading: companiesLoading, error: companiesError } = useCompanyData()
+	const location = useLocation()
+	const isCompaniesPage = location.pathname.startsWith('/companies')
 
 	useEffect(() => {
 		// Health check is no longer needed, but we can check for data loading errors
@@ -93,7 +95,7 @@ export default function App() {
 				</div>
 			</header>
 
-			<main className="container py-6 text-gray-900 dark:text-slate-100">
+			<main className={`${isCompaniesPage ? '' : 'container'} py-6 text-gray-900 dark:text-slate-100`}>
 				<Outlet />
 			</main>
 
