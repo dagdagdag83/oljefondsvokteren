@@ -17,7 +17,7 @@ const resources = {
 				search: 'Search for a company',
 			},
 			landing: {
-				lead: 'An unofficial dashboard for monitoring the ethical status of the investments in the Norwegian Government Pension Fund Global (Oljefondet).',
+				lead: "A platform for AI-driven analyses of the Norwegian Government Pension Fund Global (Oljefondet) investments. Each portfolio company is assessed through a Gemini Deep Research analysis in accordance with the fund's ethical guidelines. The service identifies potential risks related to environmental, social, and corporate governance (ESG).",
 				snapshot: 'Portfolio at a glance',
 				companies: 'Companies',
 				sectors: 'Sectors',
