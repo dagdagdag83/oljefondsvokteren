@@ -8,42 +8,12 @@ import * as Flags from 'country-flag-icons/react/3x2'
 import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
 import { CategoryBadge } from '../shared/CategoryBadge'
+import { getCountryCode, shortenSector, truncate, labelForCategory as labelForCategoryUtil } from '../shared/utils'
 
 countries.registerLocale(enLocale)
 
-const shortenSector = (sector: string) => {
-	return sector === 'Consumer Discretionary' ? 'Consumer Disc.' : sector
-}
-
 function uniqueSorted(values: string[]): string[] {
 	return Array.from(new Set(values.filter(Boolean))).sort((a, b) => a.localeCompare(b))
-}
-
-const getCountryCode = (countryName: string): string | undefined => {
-	if (countryName === 'United States') return 'US'
-	if (countryName === 'United Kingdom') return 'GB'
-	if (countryName.toLowerCase().includes('hong kong')) return 'HK'
-	return countries.getAlpha2Code(countryName, 'en')
-}
-
-function labelForCategory(val: string, t?: (k: string) => string) {
-	const tr = t ?? ((k: string) => k)
-	return val === '1'
-		? tr('companies.category.c1')
-		: val === '2'
-		? tr('companies.category.c2')
-		: val === '3'
-		? tr('companies.category.c3')
-		: val === '4'
-		? tr('companies.category.c4')
-		: tr('companies.category.all')
-}
-
-function truncate(str: string, length: number): string {
-	if (str.length <= length) {
-		return str
-	}
-	return str.slice(0, length) + '…'
 }
 
 export default function CompaniesPage() {
@@ -52,9 +22,9 @@ export default function CompaniesPage() {
 	const [searchParams, setSearchParams] = useSearchParams()
 
 	const [q, setQ] = useState(searchParams.get('q') || '')
-	const [country, setCountry] = useState(searchParams.get('country') || '')
+	const [country, setCountry] = useState<string | null>(searchParams.get('country') || '')
 	const [countryQuery, setCountryQuery] = useState('')
-	const [sector, setSector] = useState(searchParams.get('sector') || '')
+	const [sector, setSector] = useState<string | null>(searchParams.get('sector') || '')
 	const [sectorQuery, setSectorQuery] = useState('')
 	const [category, setCategory] = useState(searchParams.get('category') || '')
 	const [reportType, setReportType] = useState(searchParams.get('reportType') || '')
@@ -133,7 +103,7 @@ export default function CompaniesPage() {
 					/>
 				</div>
 
-				<Combobox value={country} onChange={setCountry}>
+				<Combobox value={country || ''} onChange={(v) => setCountry(v || null)}>
 					<div className="relative">
 						<Combobox.Input
 							className="w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
@@ -160,7 +130,7 @@ export default function CompaniesPage() {
 					</div>
 				</Combobox>
 
-				<Combobox value={sector} onChange={setSector}>
+				<Combobox value={sector || ''} onChange={(v) => setSector(v || null)}>
 					<div className="relative">
 						<Combobox.Input
 							className="w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
@@ -190,7 +160,7 @@ export default function CompaniesPage() {
 				<Listbox value={category} onChange={(v: string) => setCategory(v)}>
 					<div className="relative">
 						<Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-8 text-left shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
-							<span className="block truncate">{labelForCategory(category, t)}</span>
+							<span className="block truncate">{labelForCategoryUtil(category, t)}</span>
 							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 								<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
 							</span>

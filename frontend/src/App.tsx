@@ -3,7 +3,6 @@ import { Link, Outlet, useLocation, useParams } from 'react-router-dom'
 import { useTheme } from './shared/useTheme'
 import { MoonIcon, SunIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
-import Flags from 'country-flag-icons/react/3x2'
 import { useCompanyData } from './shared/useCompanyData'
 import { LanguageSelector } from './shared/LanguageSelector'
 

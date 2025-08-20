@@ -14,38 +14,7 @@ import { useCompanyData, Company } from '../shared/useCompanyData'
 import { useBreakpoint } from '../shared/useBreakpoint'
 import { CategoryBadge } from '../shared/CategoryBadge'
 import * as Flags from 'country-flag-icons/react/3x2'
-import countries from 'i18n-iso-countries'
-import enLocale from 'i18n-iso-countries/langs/en.json'
-
-countries.registerLocale(enLocale)
-
-const getCountryCode = (countryName: string): string | undefined => {
-	if (countryName === 'United States') return 'US'
-	if (countryName === 'United Kingdom') return 'GB'
-	if (countryName.toLowerCase().includes('hong kong')) return 'HK'
-	return countries.getAlpha2Code(countryName, 'en')
-}
-
-const shortenSector = (sector: string) => {
-	return sector === 'Consumer Discretionary' ? 'Consumer Disc.' : sector
-}
-
-// New custom monetary formatting function
-const formatToHumanMonetary = (value: number) => {
-	if (Math.abs(value) >= 1e12) {
-		return `${(value / 1e12).toFixed(1).replace(/\.0$/, '')}Tn`
-	}
-	if (Math.abs(value) >= 1e9) {
-		return `${(value / 1e9).toFixed(1).replace(/\.0$/, '')}Bn`
-	}
-	if (Math.abs(value) >= 1e6) {
-		return `${(value / 1e6).toFixed(1).replace(/\.0$/, '')}M`
-	}
-	if (Math.abs(value) >= 1e3) {
-		return `${(value / 1e3).toFixed(1).replace(/\.0$/, '')}K`
-	}
-	return value.toString()
-}
+import { getCountryCode, shortenSector, formatToHumanMonetary } from '../shared/utils'
 
 // Custom Tooltip Content Component
 const CustomTooltip = ({ active, payload, formatter }: any) => {

@@ -7,43 +7,9 @@ import { CategoryBadge } from '../shared/CategoryBadge'
 import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
 import { useTranslation } from 'react-i18next'
+import { getCountryCode, formatToHumanMonetary, labelForCategory } from '../shared/utils'
 
 countries.registerLocale(enLocale)
-
-function labelForCategory(val: string, t: (k: string) => string) {
-	return val === '1'
-		? t('companies.category.c1')
-		: val === '2'
-		? t('companies.category.c2')
-		: val === '3'
-		? t('companies.category.c3')
-		: val === '4'
-		? t('companies.category.c4')
-		: ''
-}
-
-const formatToHumanMonetary = (value: number) => {
-	if (Math.abs(value) >= 1e12) {
-		return `${(value / 1e12).toFixed(1).replace(/\.0$/, '')}Tn`
-	}
-	if (Math.abs(value) >= 1e9) {
-		return `${(value / 1e9).toFixed(1).replace(/\.0$/, '')}Bn`
-	}
-	if (Math.abs(value) >= 1e6) {
-		return `${(value / 1e6).toFixed(1).replace(/\.0$/, '')}M`
-	}
-	if (Math.abs(value) >= 1e3) {
-		return `${(value / 1e3).toFixed(1).replace(/\.0$/, '')}K`
-	}
-	return value.toString()
-}
-
-const getCountryCode = (countryName: string): string | undefined => {
-	if (countryName === 'United States') return 'US'
-	if (countryName === 'United Kingdom') return 'GB'
-	if (countryName.toLowerCase().includes('hong kong')) return 'HK'
-	return countries.getAlpha2Code(countryName, 'en')
-}
 
 const isDeepReportProfile = (
 	profile: DeepReport['companyProfile'] | ShallowReport['companyProfile'],
