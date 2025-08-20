@@ -52,19 +52,11 @@ function Breadcrumbs() {
 }
 
 export default function App() {
-	const [error, setError] = useState<string>('')
 	const [theme, toggleTheme] = useTheme()
-	const { t, i18n } = useTranslation()
+	const { t } = useTranslation()
 	const { loading: companiesLoading, error: companiesError } = useCompanyData()
 	const location = useLocation()
 	const isCompaniesPage = location.pathname.startsWith('/companies')
-
-	useEffect(() => {
-		// Health check is no longer needed, but we can check for data loading errors
-		if (companiesError) {
-			setError(companiesError.message)
-		}
-	}, [companiesError])
 
 	return (
 		<div className="min-h-screen bg-secondary text-gray-900 dark:bg-slate-950 dark:text-slate-100">
@@ -78,15 +70,23 @@ export default function App() {
 						<Breadcrumbs />
 					</div>
 					<div className="ml-auto text-sm text-white/90 flex items-center gap-2 md:gap-3">
-						<span
-							className={`hidden sm:inline-block px-2 py-0.5 rounded-full text-white text-xs ${
-								companiesLoading ? 'bg-yellow-500/50' : companiesError ? 'bg-red-500/50' : 'bg-accentGreen/20'
-							}`}
+						{companiesLoading && (
+							<span className="hidden sm:inline-block px-2 py-0.5 rounded-full text-white text-xs bg-yellow-500/50">
+								Loading data...
+							</span>
+						)}
+						{companiesError && (
+							<span
+								className="hidden sm:inline-block px-2 py-0.5 rounded-full text-white text-xs bg-red-500/50"
+								title={companiesError.message}
+							>
+								Data error
+							</span>
+						)}
+						<button
+							onClick={toggleTheme}
+							className="inline-flex items-center gap-1 rounded border border-white/30 bg-white/10 px-2 py-1 text-sm text-white hover:bg-white/20"
 						>
-							{companiesLoading ? 'Loading data...' : companiesError ? 'Data error' : 'Data loaded'}
-						</span>
-						{error && <span className="ml-3 text-red-200">Error: {error}</span>}
-						<button onClick={toggleTheme} className="inline-flex items-center gap-1 rounded border border-white/30 bg-white/10 px-2 py-1 text-sm text-white hover:bg-white/20">
 							{theme === 'dark' ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
 							<span className="hidden sm:inline">{theme === 'dark' ? 'Light' : 'Dark'}</span>
 						</button>

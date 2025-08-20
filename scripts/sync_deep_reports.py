@@ -1,7 +1,18 @@
 import os
 import json
-from google.cloud import datastore
+import argparse
+from google.cloud import datastore, storage
 from vertex_functions import vertex_generate_deep_report, load_pdf_bytes
+
+def upload_to_gcs(bucket_name, source_file_path, destination_blob_name):
+    """Uploads a file to the bucket."""
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+
+    blob.upload_from_filename(source_file_path)
+
+    print(f"File {source_file_path} uploaded to {destination_blob_name}.")
 
 def get_investment_by_id(client, company_id):
     """Fetches a single investment entity from Datastore by its ID."""
@@ -12,13 +23,14 @@ def update_investment(client, investment_entity):
     """Updates a single investment entity in Datastore."""
     client.put(investment_entity)
 
-def sync_deep_reports():
+def sync_deep_reports(force_gcs=False):
     """
     Scans a directory for PDF reports, checks which ones are missing a deep report
-    in Datastore, and generates them.
+    in Datastore, and generates them. Can also force upload all local PDFs to GCS.
     """
     reports_dir = 'frontend/public/reports'
     client = datastore.Client(database='investment-reports')
+    bucket_name = 'oljevakt-investments'
     
     if not os.path.isdir(reports_dir):
         print(f"Error: Reports directory not found at '{reports_dir}'")
@@ -26,6 +38,17 @@ def sync_deep_reports():
 
     pdf_files = [f for f in os.listdir(reports_dir) if f.endswith('.pdf')]
     print(f"Found {len(pdf_files)} PDF files in '{reports_dir}'.")
+
+    if force_gcs:
+        print("\n--- Force uploading all PDFs to GCS ---")
+        for pdf_file in pdf_files:
+            company_id = os.path.splitext(pdf_file)[0]
+            pdf_path = os.path.join(reports_dir, pdf_file)
+            try:
+                upload_to_gcs(bucket_name, pdf_path, f"{company_id}.pdf")
+            except Exception as e:
+                print(f"Error uploading {pdf_file}: {e}")
+        return
 
     for pdf_file in pdf_files:
         company_id = os.path.splitext(pdf_file)[0]
@@ -55,6 +78,9 @@ def sync_deep_reports():
             investment_entity['deepReport'] = deep_report_data
             investment_entity['state'] = 'done_deep'
             
+            print("Uploading report to GCS...")
+            upload_to_gcs(bucket_name, pdf_path, f"{company_id}.pdf")
+            
             print("Updating entity in Datastore...")
             update_investment(client, investment_entity)
             print(f"Successfully updated Datastore for '{company_id}'.")
@@ -66,4 +92,8 @@ def sync_deep_reports():
             print(f"Marked '{company_id}' with state 'error_deep'.")
 
 if __name__ == '__main__':
-    sync_deep_reports()
+    parser = argparse.ArgumentParser(description="Sync deep research reports with Datastore and GCS.")
+    parser.add_argument('--force-gcs', action='store_true', help='Force upload all local PDF reports to GCS.')
+    args = parser.parse_args()
+
+    sync_deep_reports(force_gcs=args.force_gcs)

@@ -336,7 +336,7 @@ export default function CompanyDetailPage() {
 							<p className="mb-4">A deep-dive AI analysis has been conducted for this company.</p>
 							<div className="flex justify-end">
 								<a
-									href={`/reports/${company.id}.pdf`}
+									href={`https://storage.googleapis.com/oljevakt-investments/${company.id}.pdf`}
 									target="_blank"
 									rel="noopener noreferrer"
 									className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-primary/80"
