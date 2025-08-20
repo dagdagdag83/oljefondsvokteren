@@ -14,18 +14,36 @@ export const shortenSector = (sector: string) => {
 	return sector === 'Consumer Discretionary' ? 'Consumer Disc.' : sector
 }
 
-export const formatToHumanMonetary = (value: number) => {
+export const formatToHumanMonetary = (value: number, lang: string) => {
+	const abbreviations =
+		lang === 'no'
+			? {
+					t: 'bill.', // Trillion -> Billion
+					b: 'mrd.', // Billion -> Milliard
+					m: 'mill.', // Million
+					k: 'K', // Thousand
+			  }
+			: {
+					t: 'Tn',
+					b: 'Bn',
+					m: 'M',
+					k: 'K',
+			  }
+
 	if (Math.abs(value) >= 1e12) {
-		return `${(value / 1e12).toFixed(1).replace(/\.0$/, '')}Tn`
+		const num = (value / 1e12).toFixed(1).replace(/\.0$/, '')
+		return lang === 'no' ? `${num} ${abbreviations.t}` : `${num}${abbreviations.t}`
 	}
 	if (Math.abs(value) >= 1e9) {
-		return `${(value / 1e9).toFixed(1).replace(/\.0$/, '')}Bn`
+		const num = (value / 1e9).toFixed(1).replace(/\.0$/, '')
+		return lang === 'no' ? `${num} ${abbreviations.b}` : `${num}${abbreviations.b}`
 	}
 	if (Math.abs(value) >= 1e6) {
-		return `${(value / 1e6).toFixed(1).replace(/\.0$/, '')}M`
+		const num = (value / 1e6).toFixed(1).replace(/\.0$/, '')
+		return lang === 'no' ? `${num} ${abbreviations.m}` : `${num}${abbreviations.m}`
 	}
 	if (Math.abs(value) >= 1e3) {
-		return `${(value / 1e3).toFixed(1).replace(/\.0$/, '')}K`
+		return `${(value / 1e3).toFixed(1).replace(/\.0$/, '')}${abbreviations.k}`
 	}
 	return value.toString()
 }

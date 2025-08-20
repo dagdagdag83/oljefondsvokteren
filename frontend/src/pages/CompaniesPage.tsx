@@ -8,7 +8,7 @@ import * as Flags from 'country-flag-icons/react/3x2'
 import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
 import { CategoryBadge } from '../shared/CategoryBadge'
-import { getCountryCode, shortenSector, truncate, labelForCategory as labelForCategoryUtil } from '../shared/utils'
+import { getCountryCode, shortenSector, truncate, labelForCategory } from '../shared/utils'
 
 countries.registerLocale(enLocale)
 
@@ -94,73 +94,85 @@ export default function CompaniesPage() {
 			<h2 className="text-2xl font-semibold tracking-tight">{t('app.companies')}</h2>
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
 				<div className="relative md:col-span-2">
-					<MagnifyingGlassIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-					<input
-						className="w-full rounded-md border-gray-300 bg-white pl-9 pr-3 py-2 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-						placeholder={t('companies.filters.search')}
-						value={q}
-						onChange={(e) => setQ(e.target.value)}
-					/>
+					<div className="relative">
+						<MagnifyingGlassIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+						<input
+							className="w-full rounded-md border-gray-300 bg-white py-2 pl-10 pr-3 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+							placeholder={t('companies.filters.search')}
+							value={q}
+							onChange={(e) => setQ(e.target.value)}
+						/>
+					</div>
 				</div>
 
-				<Combobox value={country || ''} onChange={(v) => setCountry(v || null)}>
+				<Listbox value={country} onChange={setCountry}>
 					<div className="relative">
-						<Combobox.Input
-							className="w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-							displayValue={(v: string) => v}
-							placeholder={t('companies.filters.country')}
-							onChange={(e) => setCountryQuery(e.target.value)}
-						/>
-						<Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-							<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-						</Combobox.Button>
-						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0" afterLeave={() => setCountryQuery('')}>
-							<Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-800 dark:ring-white/10">
-								{filteredCountries.length === 0 && countryQuery !== '' ? (
-									<div className="relative cursor-default select-none py-2 px-4 text-gray-700 dark:text-gray-200">Nothing found.</div>
-								) : (
-									filteredCountries.map((c) => (
-										<Combobox.Option key={c} value={c} className={({ active }) => `cursor-default select-none px-3 py-1 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}>
-											{c}
-										</Combobox.Option>
-									))
-								)}
-							</Combobox.Options>
+						<Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
+							<span className="block truncate">{country || t('companies.filters.country')}</span>
+							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+								<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+							</span>
+						</Listbox.Button>
+						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+							<Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-800 dark:ring-white/10">
+								<Listbox.Option value={null} className={({ active }) => `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}>
+									{t('companies.filters.country')}
+								</Listbox.Option>
+								{filteredCountries.map((c) => (
+									<Listbox.Option key={c} value={c} className={({ active }) => `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}>
+										{({ selected }) => (
+											<>
+												<span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{c}</span>
+												{selected ? (
+													<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-primary">
+														<CheckIcon className="h-5 w-5" aria-hidden="true" />
+													</span>
+												) : null}
+											</>
+										)}
+									</Listbox.Option>
+								))}
+							</Listbox.Options>
 						</Transition>
 					</div>
-				</Combobox>
+				</Listbox>
 
-				<Combobox value={sector || ''} onChange={(v) => setSector(v || null)}>
+				<Listbox value={sector} onChange={setSector}>
 					<div className="relative">
-						<Combobox.Input
-							className="w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-							displayValue={(v: string) => shortenSector(v)}
-							placeholder={t('companies.filters.sector')}
-							onChange={(e) => setSectorQuery(e.target.value)}
-						/>
-						<Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-							<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-						</Combobox.Button>
-						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0" afterLeave={() => setSectorQuery('')}>
-							<Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-800 dark:ring-white/10">
-								{filteredSectors.length === 0 && sectorQuery !== '' ? (
-									<div className="relative cursor-default select-none py-2 px-4 text-gray-700 dark:text-gray-200">Nothing found.</div>
-								) : (
-									filteredSectors.map((s) => (
-										<Combobox.Option key={s} value={s} className={({ active }) => `cursor-default select-none px-3 py-1 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}>
-											{shortenSector(s)}
-										</Combobox.Option>
-									))
-								)}
-							</Combobox.Options>
+						<Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
+							<span className="block truncate">{shortenSector(sector || '') || t('companies.filters.sector')}</span>
+							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+								<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+							</span>
+						</Listbox.Button>
+						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+							<Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-800 dark:ring-white/10">
+								<Listbox.Option value={null} className={({ active }) => `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}>
+									{t('companies.filters.sector')}
+								</Listbox.Option>
+								{filteredSectors.map((s) => (
+									<Listbox.Option key={s} value={s} className={({ active }) => `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}>
+										{({ selected }) => (
+											<>
+												<span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{shortenSector(s)}</span>
+												{selected ? (
+													<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-primary">
+														<CheckIcon className="h-5 w-5" aria-hidden="true" />
+													</span>
+												) : null}
+											</>
+										)}
+									</Listbox.Option>
+								))}
+							</Listbox.Options>
 						</Transition>
 					</div>
-				</Combobox>
+				</Listbox>
 
 				<Listbox value={category} onChange={(v: string) => setCategory(v)}>
 					<div className="relative">
 						<Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-8 text-left shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
-							<span className="block truncate">{labelForCategoryUtil(category, t)}</span>
+							<span className="block truncate">{labelForCategory(category, t) || t('companies.category.all')}</span>
 							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 								<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
 							</span>
@@ -198,8 +210,12 @@ export default function CompaniesPage() {
 
 				<Listbox value={reportType} onChange={setReportType}>
 					<div className="relative">
-						<Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-8 text-left shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
-							<span className="block truncate">{t(`companies.report_type.${reportType || 'all'}`)}</span>
+						<Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
+							<span className="block truncate">
+								{reportType
+									? t(`companies.report_type.${{ '0': 'none', '1': 'basic', '2': 'deep' }[reportType]}`)
+									: t('companies.report_type.all')}
+							</span>
 							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 								<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
 							</span>

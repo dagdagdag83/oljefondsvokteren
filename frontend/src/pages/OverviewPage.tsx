@@ -79,7 +79,7 @@ type Stats = {
 }
 
 export default function OverviewPage() {
-	const { t } = useTranslation()
+	const { t, i18n } = useTranslation()
 	const { companies, loading, error } = useCompanyData()
 	const [stats, setStats] = useState<Stats | null>(null)
 
@@ -165,7 +165,9 @@ export default function OverviewPage() {
 								<p className="text-sm uppercase tracking-wide text-white/80 mb-2">{t('landing.snapshot')}</p>
 								<div className="grid grid-cols-4 gap-4 text-center">
 									<div>
-										<p className="text-3xl font-semibold">{formatToHumanMonetary(stats?.totalValue ?? 0)}</p>
+										<p className="text-3xl font-semibold">
+											{formatToHumanMonetary(stats?.totalValue ?? 0, i18n.language)}
+										</p>
 										<p className="text-xs text-white/80">{t('landing.totalValue')}</p>
 									</div>
 									<div>
@@ -198,8 +200,8 @@ export default function OverviewPage() {
 						</div>
 						<div className="lg:col-span-2 flex flex-col gap-4">
 							<CategoryDonut title={t('charts.byCategoryRisk')} data={stats.by_category} />
-							<ValueDonut title="High-Risk Value by Sector" data={stats.high_risk_value_by_sector} />
-							<ValueDonut title="High-Risk Value by Country" data={stats.high_risk_value_by_country} />
+							<ValueDonut title={t('overview.high_risk_by_sector')} data={stats.high_risk_value_by_sector} />
+							<ValueDonut title={t('overview.high_risk_by_country')} data={stats.high_risk_value_by_country} />
 						</div>
 					</div>
 
@@ -223,6 +225,7 @@ export default function OverviewPage() {
 }
 
 function HighRiskSummary({ companies }: { companies: Company[] }) {
+	const { t, i18n } = useTranslation()
 	const topExclusionCandidates = companies
 		.filter((c) => c.category === 1)
 		.sort((a, b) => (b.marketValueNok || 0) - (a.marketValueNok || 0))
@@ -236,7 +239,7 @@ function HighRiskSummary({ companies }: { companies: Company[] }) {
 		<div className="rounded-lg border border-red-500/50 bg-red-50/50 dark:bg-red-900/10 p-4 h-full flex flex-col">
 			<div className="flex items-center gap-3 mb-3">
 				<FireIcon className="h-6 w-6 text-red-500" />
-				<h3 className="text-lg font-medium text-red-800 dark:text-red-200">Exclusion Candidate Spotlight: Top 10 by Market Value</h3>
+				<h3 className="text-lg font-medium text-red-800 dark:text-red-200">{t('overview.exclusion_candidate_spotlight')}</h3>
 			</div>
 			<div className="flex flex-col gap-3 flex-grow justify-around">
 				{topExclusionCandidates.map((c) => {
@@ -263,11 +266,13 @@ function HighRiskSummary({ companies }: { companies: Company[] }) {
 									</div>
 								</div>
 								<div className="flex items-center gap-3 ml-4">
-									<p className="text-lg font-bold text-right">{formatToHumanMonetary(c.marketValueNok)} NOK</p>
+									<p className="text-lg font-bold text-right">
+										{formatToHumanMonetary(c.marketValueNok, i18n.language)} NOK
+									</p>
 									<div className="flex items-center gap-2">
-										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title="Full AI Research Report" />}
-										{c.aiReportStatus === 1 && <DocumentIcon className="h-6 w-6 text-yellow-500" title="Basic AI Report" />}
-										{c.aiReportStatus === 0 && <DocumentMinusIcon className="h-6 w-6 text-gray-400" title="No AI Report" />}
+										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title={t('overview.full_report')} />}
+										{c.aiReportStatus === 1 && <DocumentIcon className="h-6 w-6 text-yellow-500" title={t('overview.basic_report')} />}
+										{c.aiReportStatus === 0 && <DocumentMinusIcon className="h-6 w-6 text-gray-400" title={t('overview.no_report')} />}
 										{c.category && <CategoryBadge n={c.category} />}
 									</div>
 								</div>
@@ -325,6 +330,7 @@ function ValueBars({
 	data: Record<string, number> | { name: string; value: number }[]
 	max?: number
 }) {
+	const { t, i18n } = useTranslation()
 	const theme = useTheme()
 	const breakpoint = useBreakpoint()
 	const tickColor = theme === 'dark' ? '#94a3b8' : '#64748b'
@@ -344,7 +350,7 @@ function ValueBars({
 			<div className="rounded-lg border border-white/40 bg-white/80 dark:bg-slate-900/70 p-4">
 				<h3 className="text-lg font-medium mb-2">{title}</h3>
 				<div className="h-96 flex items-center justify-center text-gray-500">
-					<p>No data available for this chart.</p>
+					<p>{t('overview.no_data')}</p>
 				</div>
 			</div>
 		)
@@ -357,14 +363,21 @@ function ValueBars({
 				<ResponsiveContainer width="100%" height="100%">
 					<BarChart data={chartData} layout="vertical" margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
 						<CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-						<XAxis type="number" tick={{ fontSize: 12, fill: tickColor }} tickFormatter={(value) => formatToHumanMonetary(value as number)} />
+						<XAxis
+							type="number"
+							tick={{ fontSize: 12, fill: tickColor }}
+							tickFormatter={(value) => formatToHumanMonetary(value as number, i18n.language)}
+						/>
 						<YAxis dataKey="name" type="category" width={isMobile ? 80 : 150} tick={{ fontSize: isMobile ? 10 : 12, fill: tickColor }} />
 						<Tooltip
 							cursor={{ fill: primaryColor, fillOpacity: 0.2 }}
 							content={
 								<CustomTooltip
 									formatter={(value: any, name: any, payload: any) =>
-										`${payload.name}: ${new Intl.NumberFormat('nb-NO').format(value)} NOK (${formatToHumanMonetary(value)})`
+										`${payload.name}: ${new Intl.NumberFormat('nb-NO').format(value)} NOK (${formatToHumanMonetary(
+											value,
+											i18n.language,
+										)})`
 									}
 								/>
 							}
@@ -430,7 +443,7 @@ function CategoryDonut({ title, data }: { title: string; data: Record<string, nu
 					</PieChart>
 				</ResponsiveContainer>
 				<div className="text-sm h-full overflow-y-auto">
-					<p className="text-xs text-gray-500">Total Analyzed</p>
+					<p className="text-xs text-gray-500">{t('overview.total_analyzed')}</p>
 					<p className="text-2xl font-semibold">{total}</p>
 					<ul className="mt-2 space-y-1">
 						{chartData.map((d) => (
@@ -444,7 +457,7 @@ function CategoryDonut({ title, data }: { title: string; data: Record<string, nu
 					</ul>
 					{acceptableCount > 0 && (
 						<p className="text-xs text-gray-500 mt-2 italic">
-							+ {acceptableCount} companies with acceptable risk not shown.
+							{t('overview.acceptable_risk_not_shown', { count: acceptableCount })}
 						</p>
 					)}
 				</div>
@@ -456,6 +469,7 @@ function CategoryDonut({ title, data }: { title: string; data: Record<string, nu
 const COLORS = ['#88A0A8', '#00A1B2', '#E2A400', '#B25D00', '#7E52A0', '#D90429', '#3A6B35', '#4363D8', '#FFE119', '#3CB44B'];
 
 function ValueDonut({ title, data }: { title: string; data: Record<string, number> }) {
+	const { t, i18n } = useTranslation()
 	const entries = Object.entries(data)
 		.sort(([, v1], [, v2]) => v2 - v1)
 		.slice(0, 7)
@@ -479,7 +493,10 @@ function ValueDonut({ title, data }: { title: string; data: Record<string, numbe
 							content={
 								<CustomTooltip
 									formatter={(value: any, name: any, payload: any) =>
-										`${payload.name}: ${new Intl.NumberFormat('nb-NO').format(value)} NOK (${formatToHumanMonetary(value)})`
+										`${payload.name}: ${new Intl.NumberFormat('nb-NO').format(value)} NOK (${formatToHumanMonetary(
+											value,
+											i18n.language,
+										)})`
 									}
 								/>
 							}
@@ -487,14 +504,14 @@ function ValueDonut({ title, data }: { title: string; data: Record<string, numbe
 					</PieChart>
 				</ResponsiveContainer>
 				<div className="text-sm h-full overflow-y-auto">
-					<p className="text-xs text-gray-500">Total High-Risk Value</p>
-					<p className="text-2xl font-semibold">{formatToHumanMonetary(total)}</p>
+					<p className="text-xs text-gray-500">{t('overview.total_high_risk_value')}</p>
+					<p className="text-2xl font-semibold">{formatToHumanMonetary(total, i18n.language)}</p>
 					<ul className="space-y-1 mt-2">
 						{chartData.map((d, index) => (
 							<li key={d.name} className="flex items-center gap-2">
 								<span className="inline-block h-3 w-3 rounded-sm" style={{ background: COLORS[index % COLORS.length] }} />
 								<span className="text-gray-700 dark:text-gray-200 truncate" title={d.name}>
-									{d.name}: {formatToHumanMonetary(d.value)}
+									{d.name}: {formatToHumanMonetary(d.value, i18n.language)}
 								</span>
 							</li>
 						))}
@@ -506,9 +523,10 @@ function ValueDonut({ title, data }: { title: string; data: Record<string, numbe
 }
 
 function TopInvestmentsList({ companies }: { companies: Company[] }) {
+	const { t, i18n } = useTranslation()
 	return (
 		<div className="rounded-lg border border-white/40 bg-white/80 dark:bg-slate-900/70 p-4">
-			<h3 className="text-lg font-medium mb-2">Top 10 Investments by Market Value (NOK)</h3>
+			<h3 className="text-lg font-medium mb-2">{t('charts.topInvestments')}</h3>
 			<div className="flex flex-col gap-3">
 				{companies.map((c) => {
 					const countryCode = getCountryCode(c.country)
@@ -534,11 +552,13 @@ function TopInvestmentsList({ companies }: { companies: Company[] }) {
 									</div>
 								</div>
 								<div className="flex items-center gap-3 ml-4">
-									<p className="text-lg font-bold text-right">{formatToHumanMonetary(c.marketValueNok)} NOK</p>
+									<p className="text-lg font-bold text-right">
+										{formatToHumanMonetary(c.marketValueNok, i18n.language)} NOK
+									</p>
 									<div className="flex items-center gap-2">
-										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title="Full AI Research Report" />}
-										{c.aiReportStatus === 1 && <DocumentIcon className="h-6 w-6 text-yellow-500" title="Basic AI Report" />}
-										{c.aiReportStatus === 0 && <DocumentMinusIcon className="h-6 w-6 text-gray-400" title="No AI Report" />}
+										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title={t('overview.full_report')} />}
+										{c.aiReportStatus === 1 && <DocumentIcon className="h-6 w-6 text-yellow-500" title={t('overview.basic_report')} />}
+										{c.aiReportStatus === 0 && <DocumentMinusIcon className="h-6 w-6 text-gray-400" title={t('overview.no_report')} />}
 										{c.category && <CategoryBadge n={c.category} />}
 									</div>
 								</div>

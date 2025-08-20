@@ -8,6 +8,7 @@ import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
 import { useTranslation } from 'react-i18next'
 import { getCountryCode, formatToHumanMonetary, labelForCategory } from '../shared/utils'
+import i18n from 'i18next'
 
 countries.registerLocale(enLocale)
 
@@ -36,6 +37,7 @@ const Section: React.FC<{ title: string; children: React.ReactNode; className?: 
 )
 
 const CompanyProfile: React.FC<{ company: Company }> = ({ company }) => {
+	const { t } = useTranslation()
 	const profile = company.deepReport?.companyProfile || company.shallowReport?.companyProfile
 	if (!profile) return null
 
@@ -48,10 +50,10 @@ const CompanyProfile: React.FC<{ company: Company }> = ({ company }) => {
 		: null
 
 	return (
-		<Section title="Company Profile" className="md:col-span-2">
+		<Section title={t('company.company_profile')} className="md:col-span-2">
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 dark:text-gray-300">
 				<DataPoint
-					label="Country"
+					label={t('company.country')}
 					value={
 						<span className="flex items-center">
 							{FlagComponent && <FlagComponent className="h-4 w-4 mr-2" />}
@@ -60,7 +62,7 @@ const CompanyProfile: React.FC<{ company: Company }> = ({ company }) => {
 					}
 				/>
 				<DataPoint
-					label="Incorporation Country"
+					label={t('company.incorporation_country')}
 					value={
 						<span className="flex items-center">
 							{IncorporationFlagComponent && <IncorporationFlagComponent className="h-4 w-4 mr-2" />}
@@ -68,32 +70,32 @@ const CompanyProfile: React.FC<{ company: Company }> = ({ company }) => {
 						</span>
 					}
 				/>
-				<DataPoint label="Sector" value={company.sector} />
-				<DataPoint label="Founded" value={profile.founded} />
+				<DataPoint label={t('company.sector')} value={company.sector} />
+				<DataPoint label={t('company.founded')} value={profile.founded} />
 			</div>
 			<div className="mt-4 space-y-4">
 				<div>
-					<h4 className="font-medium text-gray-900 dark:text-gray-100">Business Description</h4>
+					<h4 className="font-medium text-gray-900 dark:text-gray-100">{t('company.business_description')}</h4>
 					<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">{profile.businessDescription}</p>
 				</div>
 				{isDeepReportProfile(profile) && (
 					<>
 						<div>
-							<h4 className="font-medium text-gray-900 dark:text-gray-100">Business Model & Market Position</h4>
+							<h4 className="font-medium text-gray-900 dark:text-gray-100">{t('company.business_model')}</h4>
 							<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">
 								{profile.businessModelAndMarketPosition}
 							</p>
 						</div>
 						<div>
 							<h4 className="font-medium text-gray-900 dark:text-gray-100">
-								Global Footprint & Strategic Alliances
+								{t('company.global_footprint')}
 							</h4>
 							<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">
 								{profile.globalFootprintAndStrategicAlliances}
 							</p>
 						</div>
 						<div>
-							<h4 className="font-medium text-gray-900 dark:text-gray-100">Product Portfolio Analysis</h4>
+							<h4 className="font-medium text-gray-900 dark:text-gray-100">{t('company.product_portfolio')}</h4>
 							<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">
 								{profile.productPortfolioAnalysis}
 							</p>
@@ -112,10 +114,10 @@ const RiskAssessment: React.FC<{ report: ShallowReport | DeepReport }> = ({ repo
 	const categoryString = risk.category || ''
 
 	return (
-		<Section title="Risk Assessment" className="md:col-span-2">
+		<Section title={t('company.risk_assessment')} className="md:col-span-2">
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
 				<DataPoint
-					label="Category"
+					label={t('company.category')}
 					value={
 						category ? (
 							<span className="flex items-center gap-2">
@@ -127,31 +129,31 @@ const RiskAssessment: React.FC<{ report: ShallowReport | DeepReport }> = ({ repo
 						)
 					}
 				/>
-				<DataPoint label="Guidelines" value={risk.guidelines?.join(', ') || 'N/A'} />
+				<DataPoint label={t('company.guidelines')} value={risk.guidelines?.join(', ') || 'N/A'} />
 			</div>
 
 			<div className="space-y-4">
 				<div>
-					<h4 className="font-medium text-gray-900 dark:text-gray-100">Concerns</h4>
+					<h4 className="font-medium text-gray-900 dark:text-gray-100">{t('company.concerns')}</h4>
 					<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">{risk.concerns}</p>
 				</div>
 				<div>
-					<h4 className="font-medium text-gray-900 dark:text-gray-100">Rationale</h4>
+					<h4 className="font-medium text-gray-900 dark:text-gray-100">{t('company.rationale')}</h4>
 					<p className="text-gray-800 dark:text-gray-100 whitespace-pre-line">{risk.rationale}</p>
 				</div>
 
 				{'executiveSummary' in risk && (
 					<>
-						<h4 className="text-md font-medium mt-4 mb-1">Executive Summary</h4>
+						<h4 className="text-md font-medium mt-4 mb-1">{t('company.executive_summary')}</h4>
 						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
 							<p>
-								<strong>Purpose & Scope:</strong> {risk.executiveSummary.purposeAndScope}
+								<strong>{t('company.purpose_scope')}:</strong> {risk.executiveSummary.purposeAndScope}
 							</p>
 							<p>
-								<strong>Key Findings:</strong> {risk.executiveSummary.keyFindings}
+								<strong>{t('company.key_findings')}:</strong> {risk.executiveSummary.keyFindings}
 							</p>
 							<p>
-								<strong>Recommendation:</strong> {risk.executiveSummary.recommendation}
+								<strong>{t('company.recommendation')}:</strong> {risk.executiveSummary.recommendation}
 							</p>
 						</div>
 					</>
@@ -159,22 +161,22 @@ const RiskAssessment: React.FC<{ report: ShallowReport | DeepReport }> = ({ repo
 
 				{'productBasedAssessment' in risk && (
 					<>
-						<h4 className="text-md font-medium mt-4 mb-1">Product-Based Assessment</h4>
+						<h4 className="text-md font-medium mt-4 mb-1">{t('company.product_assessment')}</h4>
 						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
 							<p>
-								<strong>Summary:</strong> {risk.productBasedAssessment.summary}
+								<strong>{t('company.product_summary')}:</strong> {risk.productBasedAssessment.summary}
 							</p>
 							<p>
-								<strong>Weapons Violation Risk:</strong> {risk.productBasedAssessment.weaponsViolationRisk}
+								<strong>{t('company.weapons_violation')}:</strong> {risk.productBasedAssessment.weaponsViolationRisk}
 							</p>
 							<p>
-								<strong>Cannabis Risk:</strong> {risk.productBasedAssessment.cannabisRisk}
+								<strong>{t('company.cannabis_risk')}:</strong> {risk.productBasedAssessment.cannabisRisk}
 							</p>
 							<p>
-								<strong>Thermal Coal Risk:</strong> {risk.productBasedAssessment.thermalCoalRisk}
+								<strong>{t('company.thermal_coal_risk')}:</strong> {risk.productBasedAssessment.thermalCoalRisk}
 							</p>
 							<p>
-								<strong>Tobacco Production Risk:</strong> {risk.productBasedAssessment.tobaccoProductionRisk}
+								<strong>{t('company.tobacco_risk')}:</strong> {risk.productBasedAssessment.tobaccoProductionRisk}
 							</p>
 						</div>
 					</>
@@ -182,22 +184,22 @@ const RiskAssessment: React.FC<{ report: ShallowReport | DeepReport }> = ({ repo
 
 				{'conductBasedAssessment' in risk && (
 					<>
-						<h4 className="text-md font-medium mt-4 mb-1">Conduct-Based Assessment</h4>
+						<h4 className="text-md font-medium mt-4 mb-1">{t('company.conduct_assessment')}</h4>
 						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
 							<p>
-								<strong>Human Rights Violations:</strong> {risk.conductBasedAssessment.humanRightsViolations}
+								<strong>{t('company.human_rights')}:</strong> {risk.conductBasedAssessment.humanRightsViolations}
 							</p>
 							<p>
-								<strong>Rights in War or Conflict:</strong> {risk.conductBasedAssessment.rightsInWarOrConflict}
+								<strong>{t('company.rights_in_war')}:</strong> {risk.conductBasedAssessment.rightsInWarOrConflict}
 							</p>
 							<p>
-								<strong>Environmental Damage:</strong> {risk.conductBasedAssessment.environmentalDamage}
+								<strong>{t('company.env_damage')}:</strong> {risk.conductBasedAssessment.environmentalDamage}
 							</p>
 							<p>
-								<strong>Weapons Sales:</strong> {risk.conductBasedAssessment.weaponsSales}
+								<strong>{t('company.weapons_sales')}:</strong> {risk.conductBasedAssessment.weaponsSales}
 							</p>
 							<p>
-								<strong>Corruption & Ethical Norms:</strong> {risk.conductBasedAssessment.corruptionAndEthicalNorms}
+								<strong>{t('company.corruption')}:</strong> {risk.conductBasedAssessment.corruptionAndEthicalNorms}
 							</p>
 						</div>
 					</>
@@ -205,19 +207,19 @@ const RiskAssessment: React.FC<{ report: ShallowReport | DeepReport }> = ({ repo
 
 				{'geopoliticalRiskExposure' in risk && (
 					<>
-						<h4 className="text-md font-medium mt-4 mb-1">Geopolitical Risk Exposure</h4>
+						<h4 className="text-md font-medium mt-4 mb-1">{t('company.geopolitical_risk')}</h4>
 						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
 							<p>
-								<strong>Russia-Ukraine Conflict:</strong> {risk.geopoliticalRiskExposure.russiaUkraineConflict}
+								<strong>{t('company.russia_ukraine')}:</strong> {risk.geopoliticalRiskExposure.russiaUkraineConflict}
 							</p>
 							<p>
-								<strong>Israeli-Palestinian Conflict:</strong> {risk.geopoliticalRiskExposure.israeliPalestinianConflict}
+								<strong>{t('company.israel_palestine')}:</strong> {risk.geopoliticalRiskExposure.israeliPalestinianConflict}
 							</p>
 							<p>
-								<strong>Supply Chain (China) Exposure:</strong> {risk.geopoliticalRiskExposure.supplyChainChinaExposure}
+								<strong>{t('company.supply_chain_china')}:</strong> {risk.geopoliticalRiskExposure.supplyChainChinaExposure}
 							</p>
 							<p>
-								<strong>Inconsistent Ethical Postures:</strong> {risk.geopoliticalRiskExposure.inconsistentEthicalPostures}
+								<strong>{t('company.inconsistent_ethics')}:</strong> {risk.geopoliticalRiskExposure.inconsistentEthicalPostures}
 							</p>
 						</div>
 					</>
@@ -225,16 +227,16 @@ const RiskAssessment: React.FC<{ report: ShallowReport | DeepReport }> = ({ repo
 
 				{'finalRiskSynthesis' in risk && (
 					<>
-						<h4 className="text-md font-medium mt-4 mb-1">Final Risk Synthesis</h4>
+						<h4 className="text-md font-medium mt-4 mb-1">{t('company.final_risk')}</h4>
 						<div className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
 							<p>
-								<strong>Synthesis of Findings:</strong> {risk.finalRiskSynthesis.synthesisOfFindings}
+								<strong>{t('company.synthesis')}:</strong> {risk.finalRiskSynthesis.synthesisOfFindings}
 							</p>
 							<p>
-								<strong>Weighing of Factors:</strong> {risk.finalRiskSynthesis.weighingOfFactors}
+								<strong>{t('company.weighing_factors')}:</strong> {risk.finalRiskSynthesis.weighingOfFactors}
 							</p>
 							<p>
-								<strong>Final Categorization Justification:</strong>{' '}
+								<strong>{t('company.final_justification')}:</strong>{' '}
 								{risk.finalRiskSynthesis.finalCategorizationJustification}
 							</p>
 						</div>
@@ -254,7 +256,7 @@ export default function CompanyDetailPage() {
 
 	if (loading) return <p className="text-gray-500">Loading…</p>
 	if (error) return <p className="text-red-600">Error: {error.message}</p>
-	if (!company) return <p className="text-red-600">Company not found</p>
+	if (!company) return <p className="text-red-600">{t('company.not_found')}</p>
 
 	const report = company.deepReport || company.shallowReport
 	const profile = company.deepReport?.companyProfile || company.shallowReport?.companyProfile
@@ -263,7 +265,7 @@ export default function CompanyDetailPage() {
 		<div className="space-y-8">
 			<div className="flex justify-between items-center">
 				<Link className="text-blue-700 hover:underline dark:text-blue-400" to="/companies">
-					← Back to companies
+					{t('company.back_to_companies')}
 				</Link>
 			</div>
 
@@ -276,30 +278,31 @@ export default function CompanyDetailPage() {
 				</div>
 
 				<div className="space-y-4">
-					<Section title="Investment Snapshot">
+					<Section title={t('company.investment_snapshot')}>
 						<div className="space-y-4">
 							<DataPoint
-								label="Market Value (NOK)"
+								label={t('company.market_value')}
 								value={`${new Intl.NumberFormat('nb-NO').format(company.marketValueNok)} (${formatToHumanMonetary(
 									company.marketValueNok,
+									i18n.language,
 								)})`}
 							/>
 							<div className="grid grid-cols-2 gap-4">
-								<DataPoint label="Ownership %" value={`${company.ownership}%`} />
-								{company.voting && <DataPoint label="Voting %" value={`${company.voting}%`} />}
+								<DataPoint label={t('company.ownership')} value={`${company.ownership}%`} />
+								{company.voting && <DataPoint label={t('company.voting')} value={`${company.voting}%`} />}
 							</div>
 							{profile && (
 								<div className="grid grid-cols-2 gap-4">
-									<DataPoint label="Ticker" value={profile.ticker} />
-									<DataPoint label="Exchange" value={profile.exchange} />
+									<DataPoint label={t('company.ticker')} value={profile.ticker} />
+									<DataPoint label={t('company.exchange')} value={profile.exchange} />
 								</div>
 							)}
 						</div>
 					</Section>
 
 					{company.deepReport ? (
-						<Section title="Deep Research Report">
-							<p className="mb-4">A deep-dive AI analysis has been conducted for this company.</p>
+						<Section title={t('company.deep_research')}>
+							<p className="mb-4">{t('company.deep_research_text')}</p>
 							<div className="flex justify-end">
 								<a
 									href={`https://storage.googleapis.com/oljevakt-investments/${company.id}.pdf`}
@@ -307,7 +310,7 @@ export default function CompanyDetailPage() {
 									rel="noopener noreferrer"
 									className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-primary/80"
 								>
-									View Full Report (PDF)
+									{t('company.view_report')}
 								</a>
 							</div>
 						</Section>
@@ -319,10 +322,10 @@ export default function CompanyDetailPage() {
 								</div>
 								<div className="ml-3">
 									<h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
-										Deep AI Analysis Not Completed
+										{t('company.deep_analysis_pending')}
 									</h3>
 									<div className="mt-2 text-sm text-yellow-700 dark:text-yellow-100">
-										<p>A full analysis for this company is pending.</p>
+										<p>{t('company.deep_analysis_pending_text')}</p>
 									</div>
 								</div>
 							</div>
