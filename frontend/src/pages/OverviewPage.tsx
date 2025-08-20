@@ -2,10 +2,29 @@ import { useEffect, useState } from 'react'
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell } from 'recharts'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { InformationCircleIcon, ExclamationTriangleIcon, FireIcon } from '@heroicons/react/24/outline'
+import {
+	InformationCircleIcon,
+	ExclamationTriangleIcon,
+	FireIcon,
+	DocumentCheckIcon,
+	DocumentIcon,
+	DocumentMinusIcon,
+} from '@heroicons/react/24/outline'
 import { useCompanyData, Company } from '../shared/useCompanyData'
 import { useBreakpoint } from '../shared/useBreakpoint'
 import { CategoryBadge } from '../shared/CategoryBadge'
+import * as Flags from 'country-flag-icons/react/3x2'
+import countries from 'i18n-iso-countries'
+import enLocale from 'i18n-iso-countries/langs/en.json'
+
+countries.registerLocale(enLocale)
+
+const getCountryCode = (countryName: string): string | undefined => {
+	if (countryName === 'United States') return 'US'
+	if (countryName === 'United Kingdom') return 'GB'
+	if (countryName.toLowerCase().includes('hong kong')) return 'HK'
+	return countries.getAlpha2Code(countryName, 'en')
+}
 
 const shortenSector = (sector: string) => {
 	return sector === 'Consumer Discretionary' ? 'Consumer Disc.' : sector
@@ -83,10 +102,11 @@ type Stats = {
 	by_category: Record<string, number>
 	by_country: Record<string, number>
 	by_sector: Record<string, number>
-	top_investments: { name: string; value: number }[]
+	top_investments: Company[]
 	value_by_sector: Record<string, number>
 	value_by_country: Record<string, number>
 	high_risk_value_by_sector: Record<string, number>
+	high_risk_value_by_country: Record<string, number>
 }
 
 export default function OverviewPage() {
@@ -102,6 +122,7 @@ export default function OverviewPage() {
 			const valueBySector: Record<string, number> = {}
 			const valueByCountry: Record<string, number> = {}
 			const highRiskValueBySector: Record<string, number> = {}
+			const highRiskValueByCountry: Record<string, number> = {}
 			let totalValue = 0
 
 			for (const c of companies) {
@@ -117,6 +138,7 @@ export default function OverviewPage() {
 					valueByCountry[c.country] = (valueByCountry[c.country] || 0) + c.marketValueNok
 					if (c.category === 1 || c.category === 2) {
 						highRiskValueBySector[c.sector] = (highRiskValueBySector[c.sector] || 0) + c.marketValueNok
+						highRiskValueByCountry[c.country] = (highRiskValueByCountry[c.country] || 0) + c.marketValueNok
 					}
 				}
 			}
@@ -124,7 +146,6 @@ export default function OverviewPage() {
 			const topInvestments = [...companies]
 				.sort((a, b) => (b.marketValueNok || 0) - (a.marketValueNok || 0))
 				.slice(0, 10)
-				.map((c) => ({ name: c.name, value: c.marketValueNok || 0 }))
 
 			setStats({
 				total: companies.length,
@@ -136,6 +157,7 @@ export default function OverviewPage() {
 				value_by_sector: valueBySector,
 				value_by_country: valueByCountry,
 				high_risk_value_by_sector: highRiskValueBySector,
+				high_risk_value_by_country: highRiskValueByCountry,
 			})
 		}
 	}, [companies])
@@ -205,14 +227,15 @@ export default function OverviewPage() {
 						<div className="lg:col-span-3">
 							<HighRiskSummary companies={companies} />
 						</div>
-						<div className="lg:col-span-2 space-y-4">
+						<div className="lg:col-span-2 flex flex-col gap-4">
 							<CategoryDonut title={t('charts.byCategoryRisk')} data={stats.by_category} />
 							<ValueDonut title="High-Risk Value by Sector" data={stats.high_risk_value_by_sector} />
+							<ValueDonut title="High-Risk Value by Country" data={stats.high_risk_value_by_country} />
 						</div>
 					</div>
 
 					<div className="grid grid-cols-1 gap-6">
-						<ValueBars title={t('charts.topInvestments')} data={stats.top_investments} />
+						<TopInvestmentsList companies={stats.top_investments} />
 					</div>
 
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -231,17 +254,12 @@ export default function OverviewPage() {
 }
 
 function HighRiskSummary({ companies }: { companies: Company[] }) {
-	const topOverall = companies
+	const topExclusionCandidates = companies
 		.filter((c) => c.category === 1)
 		.sort((a, b) => (b.marketValueNok || 0) - (a.marketValueNok || 0))
-		.slice(0, 5)
+		.slice(0, 10)
 
-	const topWithDeepReport = companies
-		.filter((c) => c.category === 1 && c.aiReportStatus === 2)
-		.sort((a, b) => (b.marketValueNok || 0) - (a.marketValueNok || 0))
-		.slice(0, 5)
-
-	if (topOverall.length === 0) {
+	if (topExclusionCandidates.length === 0) {
 		return null
 	}
 
@@ -249,55 +267,45 @@ function HighRiskSummary({ companies }: { companies: Company[] }) {
 		<div className="rounded-lg border border-red-500/50 bg-red-50/50 dark:bg-red-900/10 p-4 h-full flex flex-col">
 			<div className="flex items-center gap-3 mb-3">
 				<FireIcon className="h-6 w-6 text-red-500" />
-				<h3 className="text-lg font-medium text-red-800 dark:text-red-200">Exclusion Candidate Spotlight</h3>
+				<h3 className="text-lg font-medium text-red-800 dark:text-red-200">Exclusion Candidate Spotlight: Top 10 by Market Value</h3>
 			</div>
-			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 flex-grow">
-				<div>
-					<h4 className="font-semibold mb-2 text-center text-gray-700 dark:text-gray-200">Top 5 by Market Value</h4>
-					<div className="flex flex-col gap-3">
-						{topOverall.map((c) => (
-							<Link
-								key={c.id}
-								to={`/companies/${encodeURIComponent(c.id)}`}
-								className="block rounded-md p-3 bg-white/50 dark:bg-slate-800/20 hover:bg-white dark:hover:bg-slate-800/60 transition-colors"
-							>
-								<div className="flex justify-between items-center">
+			<div className="flex flex-col gap-3 flex-grow justify-around">
+				{topExclusionCandidates.map((c) => {
+					const countryCode = getCountryCode(c.country)
+					const FlagComponent = countryCode ? Flags[countryCode as keyof typeof Flags] : null
+
+					return (
+						<Link
+							key={c.id}
+							to={`/companies/${encodeURIComponent(c.id)}`}
+							className="block rounded-md p-3 bg-white/50 dark:bg-slate-800/20 hover:bg-white dark:hover:bg-slate-800/60 transition-colors"
+						>
+							<div className="flex justify-between items-center">
+								<div className="flex-1 min-w-0">
 									<p className="font-semibold text-primary dark:text-blue-300 text-sm truncate" title={c.name}>
 										{c.name}
 									</p>
-									{c.category && <CategoryBadge n={c.category} />}
+									<div className="text-xs text-gray-600 dark:text-gray-300 flex items-center gap-3 mt-1">
+										<span className="flex items-center gap-1.5">
+											{FlagComponent && <FlagComponent className="h-3 w-3" />}
+											{c.country}
+										</span>
+										<span>{shortenSector(c.sector)}</span>
+									</div>
 								</div>
-								<p className="text-lg font-bold mt-1">{formatToHumanMonetary(c.marketValueNok)} NOK</p>
-							</Link>
-						))}
-					</div>
-				</div>
-				<div>
-					<h4 className="font-semibold mb-2 text-center text-gray-700 dark:text-gray-200">Top 5 with Deep Research</h4>
-					<div className="flex flex-col gap-3">
-						{topWithDeepReport.length > 0 ? (
-							topWithDeepReport.map((c) => (
-								<Link
-									key={c.id}
-									to={`/companies/${encodeURIComponent(c.id)}`}
-									className="block rounded-md p-3 bg-white/50 dark:bg-slate-800/20 hover:bg-white dark:hover:bg-slate-800/60 transition-colors"
-								>
-									<div className="flex justify-between items-center">
-										<p className="font-semibold text-primary dark:text-blue-300 text-sm truncate" title={c.name}>
-											{c.name}
-										</p>
+								<div className="flex items-center gap-3 ml-4">
+									<p className="text-lg font-bold text-right">{formatToHumanMonetary(c.marketValueNok)} NOK</p>
+									<div className="flex items-center gap-2">
+										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title="Full AI Research Report" />}
+										{c.aiReportStatus === 1 && <DocumentIcon className="h-6 w-6 text-yellow-500" title="Basic AI Report" />}
+										{c.aiReportStatus === 0 && <DocumentMinusIcon className="h-6 w-6 text-gray-400" title="No AI Report" />}
 										{c.category && <CategoryBadge n={c.category} />}
 									</div>
-									<p className="text-lg font-bold mt-1">{formatToHumanMonetary(c.marketValueNok)} NOK</p>
-								</Link>
-							))
-						) : (
-							<div className="flex items-center justify-center h-full text-gray-500 italic">
-								No companies with deep research reports in this category.
+								</div>
 							</div>
-						)}
-					</div>
-				</div>
+						</Link>
+					)
+				})}
 			</div>
 		</div>
 	)
@@ -487,9 +495,9 @@ function ValueDonut({ title, data }: { title: string; data: Record<string, numbe
 	const total = entries.reduce((s, [, v]) => s + v, 0)
 
 	return (
-		<div className="rounded-lg border border-white/40 bg-white/80 dark:bg-slate-900/70 p-4">
+		<div className="rounded-lg border border-white/40 bg-white/80 dark:bg-slate-900/70 p-4 flex-1 flex flex-col">
 			<h3 className="text-lg font-medium mb-2">{title}</h3>
-			<div className="h-56 grid grid-cols-2 items-center gap-2">
+			<div className="h-56 grid grid-cols-2 items-center gap-2 flex-grow">
 				<ResponsiveContainer width="100%" height="100%">
 					<PieChart>
 						<Pie data={chartData} dataKey="value" nameKey="name" innerRadius="60%" outerRadius="80%" paddingAngle={2} cornerRadius={4}>
@@ -523,6 +531,52 @@ function ValueDonut({ title, data }: { title: string; data: Record<string, numbe
 						))}
 					</ul>
 				</div>
+			</div>
+		</div>
+	)
+}
+
+function TopInvestmentsList({ companies }: { companies: Company[] }) {
+	return (
+		<div className="rounded-lg border border-white/40 bg-white/80 dark:bg-slate-900/70 p-4">
+			<h3 className="text-lg font-medium mb-2">Top 10 Investments by Market Value (NOK)</h3>
+			<div className="flex flex-col gap-3">
+				{companies.map((c) => {
+					const countryCode = getCountryCode(c.country)
+					const FlagComponent = countryCode ? Flags[countryCode as keyof typeof Flags] : null
+
+					return (
+						<Link
+							key={c.id}
+							to={`/companies/${encodeURIComponent(c.id)}`}
+							className="block rounded-md p-3 bg-white/50 dark:bg-slate-800/20 hover:bg-white dark:hover:bg-slate-800/60 transition-colors"
+						>
+							<div className="flex justify-between items-center">
+								<div className="flex-1 min-w-0">
+									<p className="font-semibold text-primary dark:text-blue-300 text-sm truncate" title={c.name}>
+										{c.name}
+									</p>
+									<div className="text-xs text-gray-600 dark:text-gray-300 flex items-center gap-3 mt-1">
+										<span className="flex items-center gap-1.5">
+											{FlagComponent && <FlagComponent className="h-3 w-3" />}
+											{c.country}
+										</span>
+										<span>{shortenSector(c.sector)}</span>
+									</div>
+								</div>
+								<div className="flex items-center gap-3 ml-4">
+									<p className="text-lg font-bold text-right">{formatToHumanMonetary(c.marketValueNok)} NOK</p>
+									<div className="flex items-center gap-2">
+										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title="Full AI Research Report" />}
+										{c.aiReportStatus === 1 && <DocumentIcon className="h-6 w-6 text-yellow-500" title="Basic AI Report" />}
+										{c.aiReportStatus === 0 && <DocumentMinusIcon className="h-6 w-6 text-gray-400" title="No AI Report" />}
+										{c.category && <CategoryBadge n={c.category} />}
+									</div>
+								</div>
+							</div>
+						</Link>
+					)
+				})}
 			</div>
 		</div>
 	)

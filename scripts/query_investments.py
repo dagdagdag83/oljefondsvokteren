@@ -92,6 +92,20 @@ def show_stats(client):
     if stats['other'] > 0:
         print(f"  - Other/Unknown: {stats['other']}")
 
+def query_no_reports(client):
+    """Finds investments missing both a shallow and a deep report field."""
+    print("Fetching all investments to check for missing reports...")
+    query = client.query(kind='Investment')
+    all_investments = list(query.fetch())
+    
+    missing_both_reports_count = 0
+
+    for entity in all_investments:
+        if 'shallowReport' not in entity and 'deepReport' not in entity:
+            missing_both_reports_count += 1
+            
+    print(f"\nFound {missing_both_reports_count} investments missing both a shallowReport and deepReport.")
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -99,10 +113,11 @@ if __name__ == '__main__':
                     'Modes:\n'
                     '  stats (default):  Show statistics about the processing state of investments.\n'
                     '  random:           Fetch one or more random investments, optionally filtering by category.\n'
-                    '  highest-no-deep:  Find the highest market value investments in Category 1 that are missing a deep report.',
+                    '  highest-no-deep:  Find the highest market value investments in Category 1 that are missing a deep report.\n'
+                    '  no-reports:       List investments that are missing a shallow or deep report field.',
         formatter_class=argparse.RawTextHelpFormatter
     )
-    parser.add_argument('mode', nargs='?', default='stats', choices=['stats', 'random', 'highest-no-deep'], 
+    parser.add_argument('mode', nargs='?', default='stats', choices=['stats', 'random', 'highest-no-deep', 'no-reports'], 
                         help='The query mode to execute. Defaults to "stats".')
     parser.add_argument('--cat', type=int, choices=[1, 2, 3, 4], 
                         help='Category to filter by for "random" mode.')
@@ -121,3 +136,5 @@ if __name__ == '__main__':
     elif args.mode == 'highest-no-deep':
         num = args.num if args.num is not None else 5
         query_highest_no_deep(client, num)
+    elif args.mode == 'no-reports':
+        query_no_reports(client)
