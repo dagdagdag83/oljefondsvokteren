@@ -69,17 +69,17 @@ export default function App() {
 	return (
 		<div className="min-h-screen bg-secondary text-gray-900 dark:bg-slate-950 dark:text-slate-100">
 			<header className="bg-primary shadow-md">
-				<div className="container py-3 flex items-center">
+				<div className="container py-3 flex flex-wrap items-center justify-between gap-y-2">
 					<Link to="/" className="flex items-center gap-3">
-						<img src={`${import.meta.env.BASE_URL}ov_logo.png`} alt="Oljefondsvokteren" className="h-16 object-contain" />
-						<span className="text-xl font-semibold tracking-tight text-white">{t('app.title')}</span>
+						<img src={`${import.meta.env.BASE_URL}ov_logo.png`} alt="Oljefondsvokteren" className="h-12 md:h-16 object-contain" />
+						<span className="text-lg md:text-xl font-semibold tracking-tight text-white">{t('app.title')}</span>
 					</Link>
-					<div className="ml-6">
+					<div className="hidden md:flex ml-6">
 						<Breadcrumbs />
 					</div>
-					<div className="ml-auto text-sm text-white/90 flex items-center gap-3">
+					<div className="ml-auto text-sm text-white/90 flex items-center gap-2 md:gap-3">
 						<span
-							className={`px-2 py-0.5 rounded-full text-white ${
+							className={`hidden sm:inline-block px-2 py-0.5 rounded-full text-white text-xs ${
 								companiesLoading ? 'bg-yellow-500/50' : companiesError ? 'bg-red-500/50' : 'bg-accentGreen/20'
 							}`}
 						>
@@ -88,14 +88,14 @@ export default function App() {
 						{error && <span className="ml-3 text-red-200">Error: {error}</span>}
 						<button onClick={toggleTheme} className="inline-flex items-center gap-1 rounded border border-white/30 bg-white/10 px-2 py-1 text-sm text-white hover:bg-white/20">
 							{theme === 'dark' ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
-							{theme === 'dark' ? 'Light' : 'Dark'}
+							<span className="hidden sm:inline">{theme === 'dark' ? 'Light' : 'Dark'}</span>
 						</button>
 						<LanguageSelector />
 					</div>
 				</div>
 			</header>
 
-			<main className={`${isCompaniesPage ? '' : 'container'} py-6 text-gray-900 dark:text-slate-100`}>
+			<main className="container py-6 text-gray-900 dark:text-slate-100">
 				<Outlet />
 			</main>
 

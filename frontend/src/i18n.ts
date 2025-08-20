@@ -19,6 +19,7 @@ const resources = {
 			landing: {
 				lead: "A platform for AI-driven analyses of the Norwegian Government Pension Fund Global (Oljefondet) investments. Each portfolio company is assessed through a Gemini Deep Research analysis in accordance with the fund's ethical guidelines. The service identifies potential risks related to environmental, social, and corporate governance (ESG).",
 				snapshot: 'Portfolio at a glance',
+				totalValue: 'Total Value',
 				companies: 'Companies',
 				sectors: 'Sectors',
 				countries: 'Countries',
@@ -28,9 +29,10 @@ const resources = {
 				},
 			},
 			companies: {
-				filters: { search: 'Search…', country: 'Country', sector: 'Sector', category: 'All categories' },
+				filters: { search: 'Search…', country: 'Country', sector: 'Sector', category: 'All categories', report_type: 'Report Type' },
 				columns: { name: 'Name', country: 'Country', sector: 'Sector', category: 'Category', guideline: 'Guideline', concerns: 'Concerns', ai_report: 'AI Report' },
-				category: { all: 'All categories', c4: 'Exclusion Candidate', c3: 'High Risk', c2: 'Moderate Risk', c1: 'Clear' },
+				category: { all: 'All categories', c1: 'Exclusion Candidate', c2: 'High Risk', c3: 'Moderate Risk', c4: 'Acceptable Risk' },
+				report_type: { all: 'All Reports', none: 'None', basic: 'Basic', deep: 'Deep' },
 				paging: { prev: 'Prev', next: 'Next' },
 			},
 			charts: {
@@ -81,6 +83,7 @@ const resources = {
 			landing: {
 				lead: "En plattform for AI-drevne analyser av Oljefondets investeringer. Hvert porteføljeselskap blir vurdert gjennom en Gemini Deep Research-analyse i henhold til fondets etiske retningslinjer. Tjenesten identifiserer potensielle risikoer knyttet til miljø, sosiale forhold og selskapsstyring (ESG).",
 				snapshot: 'Øyeblikksbilde',
+				totalValue: 'Total Verdi',
 				companies: 'Selskaper',
 				sectors: 'Sektorer',
 				countries: 'Land',
@@ -90,9 +93,10 @@ const resources = {
 				},
 			},
 			companies: {
-				filters: { search: 'Søk…', country: 'Land', sector: 'Sektor', category: 'Alle kategorier' },
+				filters: { search: 'Søk…', country: 'Land', sector: 'Sektor', category: 'Alle kategorier', report_type: 'Rapporttype' },
 				columns: { name: 'Navn', country: 'Land', sector: 'Sektor', category: 'Kategori', guideline: 'Retningslinje', concerns: 'Bekymringer', ai_report: 'AI-rapport' },
-				category: { all: 'Alle kategorier', c4: 'Kandidat for utelukkelse', c3: 'Høy Risiko', c2: 'Moderat Risiko', c1: 'Akseptabel' },
+				category: { all: 'Alle kategorier', c1: 'Kandidat for utelukkelse', c2: 'Høy Risiko', c3: 'Moderat Risiko', c4: 'Akseptabel Risiko' },
+				report_type: { all: 'Alle Rapporter', none: 'Ingen', basic: 'Grunnleggende', deep: 'Dybde' },
 				paging: { prev: 'Forrige', next: 'Neste' },
 			},
 			charts: {

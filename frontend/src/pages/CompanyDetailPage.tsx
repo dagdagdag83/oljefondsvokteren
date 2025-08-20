@@ -3,12 +3,24 @@ import { Link, useParams } from 'react-router-dom'
 import * as Flags from 'country-flag-icons/react/3x2'
 import { InformationCircleIcon } from '@heroicons/react/24/outline'
 import { Company, useCompanyData, ShallowReport, DeepReport } from '../shared/useCompanyData'
-import { Badge } from './CompaniesPage.tsx'
+import { CategoryBadge } from '../shared/CategoryBadge'
 import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
 import { useTranslation } from 'react-i18next'
 
 countries.registerLocale(enLocale)
+
+function labelForCategory(val: string, t: (k: string) => string) {
+	return val === '1'
+		? t('companies.category.c1')
+		: val === '2'
+		? t('companies.category.c2')
+		: val === '3'
+		? t('companies.category.c3')
+		: val === '4'
+		? t('companies.category.c4')
+		: ''
+}
 
 const formatToHumanMonetary = (value: number) => {
 	if (Math.abs(value) >= 1e12) {
@@ -131,11 +143,24 @@ const RiskAssessment: React.FC<{ report: ShallowReport | DeepReport }> = ({ repo
 	const { t } = useTranslation()
 	const risk = report.riskAssessment
 	const category = risk.category ? parseInt(risk.category, 10) : undefined
+	const categoryString = risk.category || ''
 
 	return (
 		<Section title="Risk Assessment" className="md:col-span-2">
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-				<DataPoint label="Category" value={category ? <Badge n={category} /> : '-'} />
+				<DataPoint
+					label="Category"
+					value={
+						category ? (
+							<span className="flex items-center gap-2">
+								<CategoryBadge n={category} className="h-8 w-8" />
+								<span>{labelForCategory(categoryString, t)}</span>
+							</span>
+						) : (
+							'-'
+						)
+					}
+				/>
 				<DataPoint label="Guidelines" value={risk.guidelines?.join(', ') || 'N/A'} />
 			</div>
 
@@ -269,7 +294,7 @@ export default function CompanyDetailPage() {
 	const profile = company.deepReport?.companyProfile || company.shallowReport?.companyProfile
 
 	return (
-		<div className="space-y-8 px-8 sm:px-12 lg:px-16">
+		<div className="space-y-8">
 			<div className="flex justify-between items-center">
 				<Link className="text-blue-700 hover:underline dark:text-blue-400" to="/companies">
 					← Back to companies

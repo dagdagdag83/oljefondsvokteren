@@ -5,7 +5,8 @@ create a json response based on the linked report. make sure to generate an id, 
 
 # Deep research prompt
 
-The norwegian oljefondet has invested in company COMPANY_NAME in COUNTRY. Provide a comprehensive risk assessment report using the attached guidelines - focus on product-based and conduct-based risk as well as key geopolitical conflicts risk exposure. You must provide a final risk category from the following: 1 - Exclusion Candidate, 2 - high risk, 3 - moderate risk 4 - acceptable risk.
+The Norwegian oljefondet has invested in company COMPANY_NAME in COUNTRY. Provide a comprehensive risk assessment report using the attached guidelines - focus on product-based and conduct-based risk as well as key geopolitical conflicts risk exposure. You must provide a final risk category from the following: 1 - Exclusion Candidate, 2 - high risk, 3 - moderate risk 4 - acceptable risk.
+
 
 
 # Logo prompt

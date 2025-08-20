@@ -7,8 +7,13 @@ import { Company, useCompanyData } from '../shared/useCompanyData'
 import * as Flags from 'country-flag-icons/react/3x2'
 import countries from 'i18n-iso-countries'
 import enLocale from 'i18n-iso-countries/langs/en.json'
+import { CategoryBadge } from '../shared/CategoryBadge'
 
 countries.registerLocale(enLocale)
+
+const shortenSector = (sector: string) => {
+	return sector === 'Consumer Discretionary' ? 'Consumer Disc.' : sector
+}
 
 function uniqueSorted(values: string[]): string[] {
 	return Array.from(new Set(values.filter(Boolean))).sort((a, b) => a.localeCompare(b))
@@ -23,14 +28,14 @@ const getCountryCode = (countryName: string): string | undefined => {
 
 function labelForCategory(val: string, t?: (k: string) => string) {
 	const tr = t ?? ((k: string) => k)
-	return val === '4'
-		? tr('companies.category.c4')
-		: val === '3'
-		? tr('companies.category.c3')
+	return val === '1'
+		? tr('companies.category.c1')
 		: val === '2'
 		? tr('companies.category.c2')
-		: val === '1'
-		? tr('companies.category.c1')
+		: val === '3'
+		? tr('companies.category.c3')
+		: val === '4'
+		? tr('companies.category.c4')
 		: tr('companies.category.all')
 }
 
@@ -52,6 +57,7 @@ export default function CompaniesPage() {
 	const [sector, setSector] = useState(searchParams.get('sector') || '')
 	const [sectorQuery, setSectorQuery] = useState('')
 	const [category, setCategory] = useState(searchParams.get('category') || '')
+	const [reportType, setReportType] = useState(searchParams.get('reportType') || '')
 	const [page, setPage] = useState(parseInt(searchParams.get('page') || '1', 10))
 
 	const countries = useMemo(() => uniqueSorted(companies.map((c) => c.country)), [companies])
@@ -73,7 +79,8 @@ export default function CompaniesPage() {
 					(c.name.toLowerCase().includes(searchLower) || concernsMatch || rationaleMatch) &&
 					(!country || c.country.toLowerCase() === country.toLowerCase()) &&
 					(!sector || c.sector.toLowerCase() === sector.toLowerCase()) &&
-					(!category || (c.category && c.category.toString() === category))
+					(!category || (c.category && c.category.toString() === category)) &&
+					(!reportType || c.aiReportStatus.toString() === reportType)
 				)
 			})
 			.sort((a, b) => {
@@ -90,7 +97,7 @@ export default function CompaniesPage() {
 				// 3. Sort by name alphabetically
 				return a.name.localeCompare(b.name)
 			})
-	}, [companies, q, country, sector, category])
+	}, [companies, q, country, sector, category, reportType])
 
 	const ITEMS_PER_PAGE = 50
 	const pageCount = Math.ceil(filteredCompanies.length / ITEMS_PER_PAGE)
@@ -103,19 +110,20 @@ export default function CompaniesPage() {
 		if (country) params.set('country', country)
 		if (sector) params.set('sector', sector)
 		if (category) params.set('category', category)
+		if (reportType) params.set('reportType', reportType)
 		if (page > 1) params.set('page', page.toString())
 		setSearchParams(params)
-	}, [q, country, sector, category, page, setSearchParams])
+	}, [q, country, sector, category, reportType, page, setSearchParams])
 
 	useEffect(() => {
 		setPage(1)
-	}, [q, country, sector, category])
+	}, [q, country, sector, category, reportType])
 
 	return (
-		<div className="grid gap-6 px-8 sm:px-12 lg:px-16">
+		<div className="grid gap-6">
 			<h2 className="text-2xl font-semibold tracking-tight">{t('app.companies')}</h2>
-			<div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-				<div className="relative">
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
+				<div className="relative md:col-span-2">
 					<MagnifyingGlassIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
 					<input
 						className="w-full rounded-md border-gray-300 bg-white pl-9 pr-3 py-2 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
@@ -156,7 +164,7 @@ export default function CompaniesPage() {
 					<div className="relative">
 						<Combobox.Input
 							className="w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-gray-900 shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-							displayValue={(v: string) => v}
+							displayValue={(v: string) => shortenSector(v)}
 							placeholder={t('companies.filters.sector')}
 							onChange={(e) => setSectorQuery(e.target.value)}
 						/>
@@ -170,7 +178,7 @@ export default function CompaniesPage() {
 								) : (
 									filteredSectors.map((s) => (
 										<Combobox.Option key={s} value={s} className={({ active }) => `cursor-default select-none px-3 py-1 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}>
-											{s}
+											{shortenSector(s)}
 										</Combobox.Option>
 									))
 								)}
@@ -191,10 +199,48 @@ export default function CompaniesPage() {
 							<Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-800 dark:ring-white/10">
 								{[
 									['', t('companies.category.all')],
-									['4', t('companies.category.c4')],
-									['3', t('companies.category.c3')],
-									['2', t('companies.category.c2')],
 									['1', t('companies.category.c1')],
+									['2', t('companies.category.c2')],
+									['3', t('companies.category.c3')],
+									['4', t('companies.category.c4')],
+								].map(([val, label]) => (
+									<Listbox.Option
+										key={val}
+										value={val}
+										className={({ active }) => `relative cursor-default select-none py-2 pl-8 pr-4 ${active ? 'bg-secondary text-gray-900 dark:bg-slate-700 dark:text-slate-100' : 'text-gray-900 dark:text-slate-100'}`}
+									>
+										{({ selected }) => (
+											<>
+												<span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{label}</span>
+												{selected ? (
+													<span className="absolute inset-y-0 left-0 flex items-center pl-2 text-primary">
+														<CheckIcon className="h-5 w-5" aria-hidden="true" />
+													</span>
+												) : null}
+											</>
+										)}
+									</Listbox.Option>
+								))}
+							</Listbox.Options>
+						</Transition>
+					</div>
+				</Listbox>
+
+				<Listbox value={reportType} onChange={setReportType}>
+					<div className="relative">
+						<Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-8 text-left shadow-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
+							<span className="block truncate">{t(`companies.report_type.${reportType || 'all'}`)}</span>
+							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+								<ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+							</span>
+						</Listbox.Button>
+						<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+							<Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-800 dark:ring-white/10">
+								{[
+									['', t('companies.report_type.all')],
+									['2', t('companies.report_type.deep')],
+									['1', t('companies.report_type.basic')],
+									['0', t('companies.report_type.none')],
 								].map(([val, label]) => (
 									<Listbox.Option
 										key={val}
@@ -222,56 +268,42 @@ export default function CompaniesPage() {
 			{error && <p className="text-red-600">Error: {error.message}</p>}
 			{loading && <p className="text-gray-500">Loading…</p>}
 			{!loading && !error && (
-				<div className="rounded-lg border border-white/40 overflow-hidden bg-white/70 backdrop-blur dark:bg-slate-900/70">
-					<table className="w-full border-collapse">
-						<thead className="text-left">
-							<tr className="bg-white/60 dark:bg-slate-900/60">
-								<th className={th}>{t('companies.columns.name')}</th>
-								<th className={th}>{t('companies.columns.country')}</th>
-								<th className={th}>{t('companies.columns.sector')}</th>
-								<th className={th}>{t('companies.columns.category')}</th>
-								<th className={th}>{t('companies.columns.guideline')}</th>
-								<th className={th}>{t('companies.columns.concerns')}</th>
-								<th className={th}>{t('companies.columns.ai_report')}</th>
-							</tr>
-						</thead>
-						<tbody>
-							{paginatedCompanies.map((c, idx) => (
-								<tr key={c.id} className={idx % 2 === 0 ? 'bg-white/60 dark:bg-slate-900/60' : ''}>
-									<td className={td}>
-										<Link className="hover:underline text-primary dark:text-blue-300" to={`/companies/${encodeURIComponent(c.id)}`}>
-											{c.name}
-										</Link>
-									</td>
-									<td className={td}>
-										<span className="flex items-center">
-											{React.createElement(Flags[getCountryCode(c.country) as keyof typeof Flags], {
-												className: 'h-4 w-4 mr-2',
-											})}
-											{c.country}
-										</span>
-									</td>
-									<td className={td}>{c.sector}</td>
-									<td className={td}>{c.category ? <Badge n={c.category} /> : '-'}</td>
-									<td className={td}>
-										{truncate(
-											(c.deepReport?.riskAssessment?.guidelines || c.shallowReport?.riskAssessment?.guidelines)?.join(', ') || '-',
-											200,
-										)}
-									</td>
-									<td className={td}>
-										{truncate(c.deepReport?.riskAssessment?.concerns || c.shallowReport?.riskAssessment?.concerns || '-', 200)}
-									</td>
-									<td className={td}>
+				<div>
+					{/* Responsive Card Layout */}
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+						{paginatedCompanies.map((c) => (
+							<Link to={`/companies/${encodeURIComponent(c.id)}`} key={c.id} className="block rounded-lg border border-white/40 bg-white/70 p-4 shadow-sm dark:bg-slate-900/70 hover:shadow-lg transition-shadow">
+								<div className="flex justify-between items-start">
+									<h3 className="font-semibold text-primary dark:text-blue-300">{c.name}</h3>
+									<div className="flex items-center gap-2 flex-shrink-0">
+										{c.category ? <CategoryBadge n={c.category} /> : null}
 										{c.aiReportStatus === 2 && <DocumentCheckIcon className="h-6 w-6 text-accentGreen" title="Full AI Research Report" />}
 										{c.aiReportStatus === 1 && <DocumentIcon className="h-6 w-6 text-yellow-500" title="Basic AI Report" />}
 										{c.aiReportStatus === 0 && <DocumentMinusIcon className="h-6 w-6 text-gray-400" title="No AI Report" />}
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-					<div className="flex items-center justify-between p-3">
+									</div>
+								</div>
+								<div className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+									<div className="flex items-center">
+										{React.createElement(Flags[getCountryCode(c.country) as keyof typeof Flags], {
+											className: 'h-4 w-4 mr-2',
+										})}
+										{c.country}
+									</div>
+									<div>{shortenSector(c.sector)}</div>
+								</div>
+								{(c.deepReport?.riskAssessment?.concerns || c.shallowReport?.riskAssessment?.concerns) && (
+									<div className="mt-2">
+										<p className="text-xs font-semibold uppercase text-gray-500 dark:text-gray-400">Concerns</p>
+										<p className="text-sm text-gray-700 dark:text-gray-200">
+											{truncate(c.deepReport?.riskAssessment?.concerns || c.shallowReport?.riskAssessment?.concerns || '', 100)}
+										</p>
+									</div>
+								)}
+							</Link>
+						))}
+					</div>
+
+					<div className="flex items-center justify-between p-3 mt-4">
 						<button className="px-3 py-1.5 rounded bg-primary text-white disabled:opacity-40" disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>
 							{t('companies.paging.prev')}
 						</button>
@@ -286,19 +318,6 @@ export default function CompaniesPage() {
 			)}
 		</div>
 	)
-}
-
-export function Badge({ n }: { n: number }) {
-	const base = 'inline-flex items-center justify-center h-6 w-6 rounded-full text-sm font-semibold'
-	const cls =
-		n === 1
-			? `${base} bg-red-400 text-white`
-			: n === 2
-			? `${base} bg-orange-400 text-white`
-			: n === 3
-			? `${base} bg-yellow-400 text-gray-900`
-			: `${base} bg-green-400 text-white`
-	return <span className={cls}>{n}</span>
 }
 
 const th = 'text-left px-3 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 border-b border-primary/20'

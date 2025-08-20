@@ -174,7 +174,8 @@ def main(num_items):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Create shallow investment reports using Vertex AI.")
-    parser.add_argument('num_items', type=int, nargs='?', default=None, help='The number of investments to process.')
+    parser.add_argument('num_items', type=int, nargs='?', default=None, 
+                        help='The total number of investments to process. Defaults to the value set in the script (currently 250).')
     args = parser.parse_args()
     
     main(args.num_items)
