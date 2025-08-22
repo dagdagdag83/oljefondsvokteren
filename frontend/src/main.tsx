@@ -7,26 +7,33 @@ import CompanyDetailPage from './pages/CompanyDetailPage.tsx'
 import OverviewPage from './pages/OverviewPage'
 import './index.css'
 import './i18n'
+import { CompanyProvider } from './contexts/CompanyDataContext'
+import MainLayout from './layouts/MainLayout'
 
-const router = createBrowserRouter(
-	[
-		{
-			path: '/',
-			element: <App />,
-			children: [
-				{ index: true, element: <OverviewPage /> },
-				{ path: 'companies', element: <CompaniesPage /> },
-				{ path: 'companies/:id', element: <CompanyDetailPage /> },
-			],
-		},
-	]
-)
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <App />,
+		children: [
+			{
+				element: <MainLayout />,
+				children: [
+					{ index: true, element: <OverviewPage /> },
+					{ path: 'companies', element: <CompaniesPage /> },
+					{ path: 'companies/:id', element: <CompanyDetailPage /> },
+				],
+			},
+		],
+	},
+])
 
 const container = document.getElementById('root')!
 const root = createRoot(container)
 root.render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<CompanyProvider>
+			<RouterProvider router={router} />
+		</CompanyProvider>
 	</React.StrictMode>
 )
 
